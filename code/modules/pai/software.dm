@@ -125,7 +125,7 @@
 		if("Newscaster")
 			newscaster = new(src)
 		if("Photography Module")
-			aicamera = new /obj/item/camera/siliconcam/pai_camera(src)
+			camera = new(src)
 		if("Remote Signaler")
 			signaler = new(src)
 	return TRUE
@@ -180,7 +180,7 @@
 /mob/living/silicon/pai/proc/grant_languages()
 	if(languages_granted)
 		return FALSE
-	grant_all_languages(source = LANGUAGE_SOFTWARE)
+	grant_all_languages(TRUE, TRUE, TRUE, LANGUAGE_SOFTWARE)
 	languages_granted = TRUE
 	return TRUE
 

@@ -7,8 +7,7 @@
 
 	school = SCHOOL_EVOCATION
 	cooldown_time = 5 SECONDS
-	cooldown_reduction_per_rank = 2 SECONDS
-	spell_max_level = 3
+	cooldown_reduction_per_rank = 1 SECONDS
 
 	invocation = "Sigi'lu M'Fan 'Tasia!"
 	invocation_type = INVOCATION_SHOUT

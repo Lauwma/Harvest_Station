@@ -9,13 +9,13 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 /obj/machinery/keycard_auth
 	name = "Keycard Authentication Device"
 	desc = "This device is used to trigger station functions, which require more than one ID card to authenticate, or to give the Janitor access to a department."
-	icon = 'icons/obj/machines/wallmounts.dmi'
+	icon = 'icons/obj/monitors.dmi'
 	icon_state = "auth_off"
 	power_channel = AREA_USAGE_ENVIRON
 	req_access = list(ACCESS_KEYCARD_AUTH)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
-	var/datum/callback/activated
+	var/datum/callback/ev
 	var/event = ""
 	var/obj/machinery/keycard_auth/event_source
 	var/mob/triggerer = null
@@ -27,11 +27,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/keycard_auth, 26)
 
 /obj/machinery/keycard_auth/Initialize(mapload)
 	. = ..()
-	activated = GLOB.keycard_events.addEvent("triggerEvent", CALLBACK(src, PROC_REF(triggerEvent)))
+	ev = GLOB.keycard_events.addEvent("triggerEvent", CALLBACK(src, PROC_REF(triggerEvent)))
 
 /obj/machinery/keycard_auth/Destroy()
-	GLOB.keycard_events.clearEvent("triggerEvent", activated)
-	activated = null
+	GLOB.keycard_events.clearEvent("triggerEvent", ev)
+	QDEL_NULL(ev)
 	return ..()
 
 /obj/machinery/keycard_auth/ui_state(mob/user)
@@ -55,10 +55,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/keycard_auth, 26)
 /obj/machinery/keycard_auth/ui_status(mob/user)
 	if(isdrone(user))
 		return UI_CLOSE
-	if(!isanimal_or_basicmob(user))
+	if(!isanimal(user))
 		return ..()
-	if(!HAS_TRAIT(user, TRAIT_CAN_HOLD_ITEMS))
-		balloon_alert(user, "no hands!")
+	var/mob/living/simple_animal/A = user
+	if(!A.dextrous)
+		to_chat(user, span_warning("You are too primitive to use this device!"))
 		return UI_CLOSE
 	return ..()
 

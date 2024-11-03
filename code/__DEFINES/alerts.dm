@@ -23,7 +23,6 @@
 #define ALERT_IRRADIATED "irradiated"
 #define ALERT_EMBEDDED_OBJECT "embeddedobject"
 #define ALERT_SHOES_KNOT "shoealert"
-#define ALERT_RADIOACTIVE_AREA "radioactive_area"
 
 //antag related
 #define ALERT_HYPNOSIS "hypnosis"
@@ -32,6 +31,10 @@
 //ethereal alerts
 #define ALERT_ETHEREAL_CHARGE "ethereal_charge"
 #define ALERT_ETHEREAL_OVERCHARGE "ethereal_overcharge"
+
+//drone alerts
+#define ALERT_DRONE_CHARGE "ethereal_charge"
+#define ALERT_DRONE_OVERCHARGE "ethereal_overcharge"
 
 /** Alien related */
 #define ALERT_XENO_FIRE "alien_fire"
@@ -61,12 +64,3 @@
 #define ALERT_TEMPERATURE "temp"
 #define ALERT_TEMPERATURE_HOT "temphot"
 #define ALERT_TEMPERATURE_COLD "tempcold"
-
-/** Bitrunning */
-#define ALERT_BITRUNNER_CROWBAR "bitrunning_crowbar"
-#define ALERT_BITRUNNER_COMPLETED "bitrunning_complete"
-#define ALERT_BITRUNNER_INTEGRITY "bitrunning_integrity"
-#define ALERT_BITRUNNER_SHUTDOWN "bitrunning_shutdown"
-#define ALERT_BITRUNNER_RESET "bitrunning_reset"
-#define ALERT_BITRUNNER_SPAWN_CYBERCOP "bitrunning_spawn_cybercop"
-#define ALERT_BITRUNNER_THREAT "bitrunning_threat"

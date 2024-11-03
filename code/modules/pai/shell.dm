@@ -9,7 +9,10 @@
 
 /mob/living/silicon/pai/update_resting()
 	. = ..()
-	update_appearance(UPDATE_ICON_STATE)
+	if(resting)
+		icon_state = "[chassis]_rest"
+	else
+		icon_state = "[chassis]"
 	if(loc != card)
 		visible_message(span_notice("[src] [resting? "lays down for a moment..." : "perks up from the ground."]"))
 
@@ -74,11 +77,11 @@
 		addtimer(VARSET_CALLBACK(src, holochassis_ready, TRUE), HOLOCHASSIS_COOLDOWN)
 	else
 		addtimer(VARSET_CALLBACK(src, holochassis_ready, TRUE), HOLOCHASSIS_OVERLOAD_COOLDOWN)
-	set_resting(FALSE, silent = TRUE, instant = TRUE)
+	icon_state = "[chassis]"
 	if(!holoform)
 		. = fold_out(force)
 		return FALSE
-	visible_message(span_notice("[src] dematerialises!"))
+	visible_message(span_notice("[src] deactivates its holochassis emitter and folds back into a compact card!"))
 	stop_pulling()
 	if(ispickedupmob(loc))
 		var/obj/item/clothing/head/mob_holder/mob_head = loc
@@ -86,11 +89,11 @@
 	if(client)
 		client.perspective = EYE_PERSPECTIVE
 		client.set_eye(card)
-	if (isturf(loc))
-		new /obj/effect/temp_visual/guardian/phase/out(loc)
+	var/turf/target = drop_location()
+	card.forceMove(target)
 	forceMove(card)
 	add_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED), PAI_FOLDED)
-	ADD_TRAIT(src, TRAIT_UNDENSE, PAI_FOLDED)
+	set_density(FALSE)
 	set_light_on(FALSE)
 	holoform = FALSE
 	set_resting(resting)
@@ -121,14 +124,25 @@
 	addtimer(VARSET_CALLBACK(src, holochassis_ready, TRUE), HOLOCHASSIS_COOLDOWN)
 	REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, PAI_FOLDED)
 	REMOVE_TRAIT(src, TRAIT_HANDS_BLOCKED, PAI_FOLDED)
-	REMOVE_TRAIT(src, TRAIT_UNDENSE, PAI_FOLDED)
+	set_density(TRUE)
+	if(istype(card.loc, /obj/item/modular_computer))
+		var/obj/item/modular_computer/pc = card.loc
+		pc.inserted_pai = null
+		pc.visible_message(span_notice("[src] ejects itself from [pc]!"))
+	if(isliving(card.loc))
+		var/mob/living/living_holder = card.loc
+		if(!living_holder.temporarilyRemoveItemFromInventory(card))
+			balloon_alert(src, "unable to expand")
+			return FALSE
 	forceMove(get_turf(card))
+	card.forceMove(src)
 	if(client)
 		client.perspective = EYE_PERSPECTIVE
 		client.set_eye(src)
 	set_light_on(FALSE)
-	update_appearance(UPDATE_ICON_STATE)
-	visible_message(span_boldnotice("[src] appears in a flash of light!"))
+	icon_state = "[chassis]"
+	held_state = "[chassis]"
+	visible_message(span_boldnotice("[src] folds out its holochassis emitter and forms a holoshell around itself!"))
 	holoform = TRUE
 	return TRUE
 
@@ -143,7 +157,9 @@
 	if(!choice)
 		return FALSE
 	chassis = choice
-	update_appearance(UPDATE_DESC | UPDATE_ICON_STATE)
+	icon_state = "[chassis]"
+	held_state = "[chassis]"
+	desc = "A pAI mobile hard-light holographics emitter. This one appears in the form of a [chassis]."
 	return TRUE
 
 /**

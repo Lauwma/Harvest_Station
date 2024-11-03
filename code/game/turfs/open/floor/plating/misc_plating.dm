@@ -17,7 +17,9 @@
 	tiled_dirt = FALSE
 	// Not actually broken, just should never break...yeah.
 	broken = TRUE
-	damaged_dmi = null
+
+/turf/open/floor/plating/abductor/broken_states()
+	return list("alienpod1")
 
 /turf/open/floor/plating/abductor/Initialize(mapload)
 	. = ..()
@@ -28,7 +30,6 @@
 	icon_state = "alienplating"
 	base_icon_state = "alienplating"
 	tiled_dirt = FALSE
-	damaged_dmi = null
 
 /turf/open/floor/plating/abductor2/break_tile()
 	return //unbreakable
@@ -55,7 +56,7 @@
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 
 /turf/open/floor/plating/snowed/cavern
-	initial_gas_mix = BURNING_COLD
+	initial_gas_mix = "n2=82;plasma=24;TEMP=120"
 
 /turf/open/floor/plating/snowed/icemoon
 	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
@@ -74,9 +75,12 @@
 
 // When you want real, genuine snowed plating in your kitchen's cold room.
 /turf/open/floor/plating/snowed/coldroom
-	initial_gas_mix = KITCHEN_COLDROOM_ATMOS
 	planetary_atmos = FALSE
 	temperature = COLD_ROOM_TEMP
+
+/turf/open/floor/plating/snowed/coldroom/Initialize(mapload)
+	initial_gas_mix = KITCHEN_COLDROOM_ATMOS
+	return ..()
 
 //Used in SnowCabin.dm
 /turf/open/floor/plating/snowed/snow_cabin

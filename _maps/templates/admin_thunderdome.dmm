@@ -7,14 +7,12 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ac" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ad" = (
@@ -23,7 +21,6 @@
 	name = "Heavy Supply"
 	},
 /obj/effect/turf_decal/loading_area,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ae" = (
@@ -31,7 +28,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "af" = (
@@ -47,7 +43,6 @@
 	},
 /obj/effect/landmark/thunderdome/two,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ah" = (
@@ -60,7 +55,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ai" = (
@@ -68,18 +62,24 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
-/obj/effect/light_emitter/thunderdome,
+/turf/open/floor/iron,
+/area/template_noop)
+"aj" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/template_noop)
 "ak" = (
 /obj/effect/turf_decal/loading_area{
 	dir = 4
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "al" = (
-/obj/effect/light_emitter/thunderdome,
 /turf/closed/indestructible/fakeglass,
 /area/template_noop)
 "am" = (
@@ -90,20 +90,17 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 4
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "an" = (
 /obj/effect/turf_decal/loading_area{
 	dir = 8
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ao" = (
 /obj/effect/landmark/thunderdome/two,
 /obj/effect/turf_decal/stripes/line,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ap" = (
@@ -111,13 +108,11 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aq" = (
 /obj/effect/landmark/thunderdome/one,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ar" = (
@@ -128,23 +123,19 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 8
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "as" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "at" = (
 /obj/effect/turf_decal/tile/green,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "au" = (
 /obj/effect/landmark/thunderdome/one,
 /obj/effect/turf_decal/stripes/line,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "av" = (
@@ -160,7 +151,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ax" = (
@@ -168,7 +158,13 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
-/obj/effect/light_emitter/thunderdome,
+/turf/open/floor/iron,
+/area/template_noop)
+"ay" = (
+/obj/effect/turf_decal/tile/green,
+/obj/effect/turf_decal/tile/green{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/template_noop)
 "az" = (
@@ -182,7 +178,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aA" = (
@@ -190,7 +185,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aB" = (
@@ -201,7 +195,6 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 8
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aC" = (
@@ -209,7 +202,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aD" = (
@@ -223,7 +215,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aE" = (
@@ -231,20 +222,26 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aF" = (
 /obj/effect/landmark/thunderdome/two,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/effect/light_emitter/thunderdome,
+/turf/open/floor/iron,
+/area/template_noop)
+"aG" = (
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/template_noop)
 "aH" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 4
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aI" = (
@@ -252,7 +249,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aJ" = (
@@ -261,7 +257,6 @@
 	},
 /obj/effect/landmark/thunderdome/one,
 /obj/effect/turf_decal/delivery,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aK" = (
@@ -269,7 +264,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aL" = (
@@ -277,7 +271,13 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
-/obj/effect/light_emitter/thunderdome,
+/turf/open/floor/iron,
+/area/template_noop)
+"aM" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/template_noop)
 "aN" = (
@@ -286,18 +286,15 @@
 	},
 /obj/effect/landmark/thunderdome/two,
 /obj/effect/turf_decal/delivery,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aO" = (
 /obj/machinery/igniter/on,
 /obj/effect/turf_decal/delivery,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aP" = (
 /obj/effect/turf_decal/delivery,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aQ" = (
@@ -307,12 +304,10 @@
 /turf/open/floor/circuit/green,
 /area/template_noop)
 "aR" = (
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aS" = (
 /obj/effect/turf_decal/bot,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aT" = (
@@ -320,7 +315,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aU" = (
@@ -333,7 +327,6 @@
 	},
 /obj/effect/landmark/thunderdome/one,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aV" = (
@@ -341,7 +334,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aW" = (
@@ -349,7 +341,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aX" = (
@@ -367,42 +358,36 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 4
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "aZ" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "ib" = (
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 4
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "nu" = (
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 8
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "SV" = (
 /obj/effect/turf_decal/tile/green/half/contrasted{
 	dir = 4
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 "XQ" = (
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 8
 	},
-/obj/effect/light_emitter/thunderdome,
 /turf/open/floor/iron,
 /area/template_noop)
 

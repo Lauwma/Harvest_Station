@@ -12,7 +12,7 @@
 	instability = 20
 	icon_dead = "wheat-dead"
 	mutatelist = list(/obj/item/seeds/wheat/oat, /obj/item/seeds/wheat/meat)
-	reagents_add = list(/datum/reagent/consumable/nutriment = 0.12)
+	reagents_add = list(/datum/reagent/consumable/nutriment = 0.04)
 
 /obj/item/food/grown/wheat
 	seed = /obj/item/seeds/wheat
@@ -97,8 +97,7 @@
 /obj/item/food/grown/meatwheat/attack_self(mob/living/user)
 	user.visible_message(span_notice("[user] crushes [src] into meat."), span_notice("You crush [src] into something that resembles meat."))
 	playsound(user, 'sound/effects/blobattack.ogg', 50, TRUE)
-	var/obj/item/food/meat/slab/meatwheat/meaties = new(null)
-	meaties.reagents.set_all_reagents_purity(seed.get_reagent_purity())
+	var/obj/item/food/meat/slab/meatwheat/M = new
 	qdel(src)
-	user.put_in_hands(meaties)
-	return TRUE
+	user.put_in_hands(M)
+	return 1

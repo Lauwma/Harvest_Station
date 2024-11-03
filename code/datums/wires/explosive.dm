@@ -10,9 +10,7 @@
 /datum/wires/explosive/on_pulse(index)
 	explode()
 
-/datum/wires/explosive/on_cut(index, mend, source)
-	if (!isnull(source))
-		log_combat(source, holder, "cut the detonation wire for")
+/datum/wires/explosive/on_cut(index, mend)
 	explode()
 
 /datum/wires/explosive/proc/explode()
@@ -36,7 +34,7 @@
 		return
 	. = ..()
 
-/datum/wires/explosive/chem_grenade/on_cut(index, mend, source)
+/datum/wires/explosive/chem_grenade/on_cut(index, mend)
 	var/obj/item/grenade/chem_grenade/grenade = holder
 	if(grenade.stage != GRENADE_READY)
 		return
@@ -129,7 +127,7 @@
 		else // Boom
 			explode()
 
-/datum/wires/explosive/pizza/on_cut(wire, mend, source)
+/datum/wires/explosive/pizza/on_cut(wire, mend)
 	var/obj/item/pizzabox/P = holder
 	switch(wire)
 		if(WIRE_DISARM) // Disarm and untrap the box.
@@ -137,10 +135,16 @@
 				P.bomb_defused = TRUE
 		else
 			if(!mend && !P.bomb_defused)
-				if (!isnull(source))
-					log_combat(source, holder, "cut the detonation wire for")
 				explode()
 
 /datum/wires/explosive/pizza/explode()
 	var/obj/item/pizzabox/P = holder
 	P.bomb.detonate()
+
+
+/datum/wires/explosive/gibtonite
+	holder_type = /obj/item/gibtonite
+
+/datum/wires/explosive/gibtonite/explode()
+	var/obj/item/gibtonite/P = holder
+	P.GibtoniteReaction(null, 2)

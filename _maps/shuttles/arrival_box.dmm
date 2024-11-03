@@ -46,9 +46,9 @@
 /area/shuttle/arrival)
 "l" = (
 /obj/machinery/requests_console/directional/north{
-	department = "Arrival shuttle";
-	name = "Arrival Shuttle Requests Console"
+	department = "Arrival shuttle"
 	},
+/obj/machinery/light/directional/north,
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/arrival)
 "m" = (
@@ -119,6 +119,11 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/arrival)
+"z" = (
+/obj/item/radio/intercom/directional/south,
+/obj/machinery/light/directional/south,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/arrival)
 "A" = (
 /obj/machinery/power/shuttle_engine/propulsion/burst/left{
 	dir = 4
@@ -127,10 +132,6 @@
 /area/shuttle/arrival)
 "S" = (
 /turf/open/floor/mineral/titanium,
-/area/shuttle/arrival)
-"U" = (
-/obj/item/radio/intercom/directional/south,
-/turf/open/floor/mineral/titanium/blue,
 /area/shuttle/arrival)
 
 (1,1,1) = {"
@@ -193,7 +194,7 @@ g
 f
 f
 f
-U
+y
 b
 "}
 (8,1,1) = {"
@@ -238,7 +239,7 @@ l
 r
 r
 r
-y
+z
 b
 "}
 (13,1,1) = {"

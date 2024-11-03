@@ -85,7 +85,9 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "bc" = (
-/obj/item/kirbyplants/organic/plant22,
+/obj/item/kirbyplants{
+	icon_state = "plant-22"
+	},
 /obj/item/radio/intercom/directional/north,
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
@@ -234,7 +236,9 @@
 /turf/closed/wall,
 /area/shuttle/escape)
 "do" = (
-/obj/item/kirbyplants/organic/plant22,
+/obj/item/kirbyplants{
+	icon_state = "plant-22"
+	},
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/machinery/airalarm/directional/north,
 /obj/structure/cable,
@@ -539,7 +543,9 @@
 	},
 /obj/item/storage/crayons,
 /obj/structure/table/wood,
-/obj/structure/sign/poster/official/soft_cap_pop_art/directional/north,
+/obj/structure/sign/poster/official/soft_cap_pop_art{
+	pixel_y = 32
+	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "iI" = (
@@ -967,19 +973,12 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
-"oD" = (
-/obj/structure/closet,
-/obj/machinery/light/small/directional/south,
-/obj/item/book/bible,
-/obj/item/book/bible,
-/obj/item/book/bible,
-/turf/open/floor/carpet,
-/area/shuttle/escape)
 "oH" = (
 /obj/structure/sign/picture_frame/portrait{
 	pixel_y = 28
 	},
-/obj/item/kirbyplants/organic/plant21{
+/obj/item/kirbyplants{
+	icon_state = "plant-21";
 	pixel_y = 3
 	},
 /turf/open/floor/iron/dark,
@@ -1078,6 +1077,20 @@
 /area/shuttle/escape)
 "pS" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/dark,
+/area/shuttle/escape)
+"qe" = (
+/obj/item/radio/intercom/directional/north,
+/obj/machinery/requests_console/directional/west{
+	department = "Chapel";
+	supplies_requestable = 1
+	},
+/obj/structure/closet,
+/obj/item/storage/backpack/cultpack,
+/obj/item/clothing/head/chaplain/nun_hood,
+/obj/item/clothing/suit/chaplainsuit/nun,
+/obj/item/clothing/suit/chaplainsuit/holidaypriest,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "qi" = (
@@ -1265,12 +1278,6 @@
 	},
 /turf/open/floor/carpet,
 /area/shuttle/escape)
-"sv" = (
-/obj/item/book/bible,
-/obj/structure/cable,
-/obj/structure/altar_of_gods,
-/turf/open/floor/carpet,
-/area/shuttle/escape)
 "sz" = (
 /obj/machinery/light/small/directional/north,
 /obj/machinery/camera/directional/north{
@@ -1410,7 +1417,9 @@
 /turf/open/floor/iron/grimy,
 /area/shuttle/escape)
 "vj" = (
-/obj/item/kirbyplants/organic/plant21,
+/obj/item/kirbyplants{
+	icon_state = "plant-21"
+	},
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 5
@@ -1464,7 +1473,8 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "vU" = (
-/obj/item/kirbyplants/organic/plant21{
+/obj/item/kirbyplants{
+	icon_state = "plant-21";
 	pixel_y = 3
 	},
 /turf/open/floor/iron/dark,
@@ -1489,7 +1499,9 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "vY" = (
-/obj/item/kirbyplants/organic/plant10,
+/obj/item/kirbyplants{
+	icon_state = "plant-10"
+	},
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 6
@@ -1516,7 +1528,9 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "xd" = (
-/obj/item/kirbyplants/organic/plant21,
+/obj/item/kirbyplants{
+	icon_state = "plant-21"
+	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 10
 	},
@@ -1536,7 +1550,9 @@
 /turf/open/floor/iron/showroomfloor,
 /area/shuttle/escape)
 "xt" = (
-/obj/item/kirbyplants/organic/plant22,
+/obj/item/kirbyplants{
+	icon_state = "plant-22"
+	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "xw" = (
@@ -1592,6 +1608,14 @@
 "yq" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark,
+/area/shuttle/escape)
+"yr" = (
+/obj/structure/closet,
+/obj/machinery/light/small/directional/south,
+/obj/item/storage/book/bible,
+/obj/item/storage/book/bible,
+/obj/item/storage/book/bible,
+/turf/open/floor/carpet,
 /area/shuttle/escape)
 "yu" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
@@ -1991,7 +2015,9 @@
 	},
 /obj/structure/table/wood,
 /obj/item/soap/nanotrasen,
-/obj/structure/sign/poster/official/fruit_bowl/directional/north,
+/obj/structure/sign/poster/official/fruit_bowl{
+	pixel_y = 32
+	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "Dr" = (
@@ -2009,6 +2035,12 @@
 "Dt" = (
 /obj/structure/flora/bush,
 /turf/open/misc/asteroid,
+/area/shuttle/escape)
+"Dv" = (
+/obj/item/storage/book/bible,
+/obj/structure/cable,
+/obj/structure/altar_of_gods,
+/turf/open/floor/carpet,
 /area/shuttle/escape)
 "Dw" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -2382,7 +2414,9 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "IL" = (
-/obj/item/kirbyplants/organic/plant22,
+/obj/item/kirbyplants{
+	icon_state = "plant-22"
+	},
 /obj/machinery/camera/directional/north{
 	c_tag = "Monastery Archives Fore";
 	network = list("ss13","monastery")
@@ -2443,7 +2477,7 @@
 /area/shuttle/escape)
 "Ju" = (
 /obj/structure/rack{
-	icon = 'icons/obj/fluff/general.dmi';
+	icon = 'icons/obj/stationobjs.dmi';
 	icon_state = "minibar";
 	name = "skeletal minibar"
 	},
@@ -2560,7 +2594,9 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "KH" = (
-/obj/item/kirbyplants/organic/plant8,
+/obj/item/kirbyplants{
+	icon_state = "plant-08"
+	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "KK" = (
@@ -2797,21 +2833,6 @@
 /area/shuttle/escape)
 "NS" = (
 /obj/machinery/newscaster/directional/east,
-/turf/open/floor/iron/dark,
-/area/shuttle/escape)
-"NV" = (
-/obj/item/radio/intercom/directional/north,
-/obj/machinery/requests_console/directional/west{
-	department = "Chapel";
-	name = "Monastery Requests Console"
-	},
-/obj/effect/mapping_helpers/requests_console/supplies,
-/obj/structure/closet,
-/obj/item/storage/backpack/cultpack,
-/obj/item/clothing/head/chaplain/nun_hood,
-/obj/item/clothing/suit/chaplainsuit/nun,
-/obj/item/clothing/suit/chaplainsuit/holidaypriest,
-/obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "NX" = (
@@ -3188,6 +3209,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
 /area/shuttle/escape)
+"Si" = (
+/obj/structure/table/wood/fancy,
+/obj/item/storage/book/bible,
+/turf/open/floor/carpet,
+/area/shuttle/escape)
 "Sj" = (
 /obj/structure/extinguisher_cabinet/directional/west,
 /obj/machinery/light/small/directional/south,
@@ -3504,11 +3530,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
-"VB" = (
-/obj/structure/table/wood/fancy,
-/obj/item/book/bible,
-/turf/open/floor/carpet,
-/area/shuttle/escape)
 "VE" = (
 /obj/machinery/power/shuttle_engine/propulsion,
 /turf/open/floor/plating,
@@ -3618,14 +3639,16 @@
 /area/shuttle/escape)
 "Xb" = (
 /obj/structure/table/wood,
-/obj/item/kirbyplants/organic/plant22{
+/obj/item/kirbyplants{
+	icon_state = "plant-22";
 	pixel_y = 8
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "Xk" = (
 /obj/structure/table/wood,
-/obj/item/kirbyplants/organic/plant5{
+/obj/item/kirbyplants{
+	icon_state = "plant-05";
 	pixel_y = 10
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -3804,7 +3827,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/escape/brig)
 "Zj" = (
-/mob/living/basic/butterfly,
+/mob/living/simple_animal/butterfly,
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "Zl" = (
@@ -3967,7 +3990,7 @@ JG
 JG
 nr
 nr
-NV
+qe
 PY
 rA
 nr
@@ -4382,7 +4405,7 @@ BG
 eW
 rX
 eQ
-oD
+yr
 nr
 yO
 Ab
@@ -4724,7 +4747,7 @@ Pz
 kw
 oa
 eQ
-VB
+Si
 Ti
 RM
 Xs
@@ -5771,7 +5794,7 @@ ZZ
 ZZ
 ZZ
 ZZ
-sv
+Dv
 sm
 jx
 iS

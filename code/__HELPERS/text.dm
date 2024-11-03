@@ -191,7 +191,7 @@
 
 			// 0  .. 9
 			if(48 to 57) //Numbers
-				if(!allow_numbers) //allow name to start with number if AI/Borg
+				if(last_char_group == NO_CHARS_DETECTED || !allow_numbers) //suppress at start of string
 					if(strict)
 						return
 					continue
@@ -355,11 +355,6 @@
 	if(t)
 		. = t[1]
 		return uppertext(.) + copytext(t, 1 + length(.))
-
-///Returns a string with the first letter of each word capitialized
-/proc/full_capitalize(input)
-	var/regex/first_letter = new(@"[^A-z]*?([A-z]*)", "g")
-	return replacetext(input, first_letter, /proc/capitalize)
 
 /proc/stringmerge(text,compare,replace = "*")
 //This proc fills in all spaces with the "replace" var (* by default) with whatever
@@ -792,34 +787,34 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 	switch(macro)
 		//prefixes/agnostic
 		if("the")
-			rest = "\the [rest]"
+			rest = text("\the []", rest)
 		if("a")
-			rest = "\a [rest]"
+			rest = text("\a []", rest)
 		if("an")
-			rest = "\an [rest]"
+			rest = text("\an []", rest)
 		if("proper")
-			rest = "\proper [rest]"
+			rest = text("\proper []", rest)
 		if("improper")
-			rest = "\improper [rest]"
+			rest = text("\improper []", rest)
 		if("roman")
-			rest = "\roman [rest]"
+			rest = text("\roman []", rest)
 		//postfixes
 		if("th")
-			base = "[rest]\th"
+			base = text("[]\th", rest)
 		if("s")
-			base = "[rest]\s"
+			base = text("[]\s", rest)
 		if("he")
-			base = "[rest]\he"
+			base = text("[]\he", rest)
 		if("she")
-			base = "[rest]\she"
+			base = text("[]\she", rest)
 		if("his")
-			base = "[rest]\his"
+			base = text("[]\his", rest)
 		if("himself")
-			base = "[rest]\himself"
+			base = text("[]\himself", rest)
 		if("herself")
-			base = "[rest]\herself"
+			base = text("[]\herself", rest)
 		if("hers")
-			base = "[rest]\hers"
+			base = text("[]\hers", rest)
 		else // Someone fucked up, if you're not a macro just go home yeah?
 			// This does technically break parsing, but at least it's better then what it used to do
 			return base
@@ -1048,8 +1043,27 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
  * * For pressure conversion, use proc/siunit_pressure() below
  */
 /proc/siunit(value, unit, maxdecimals=1)
-	var/si_isolated = siunit_isolated(value, unit, maxdecimals)
-	return "[si_isolated[SI_COEFFICIENT]][si_isolated[SI_UNIT]]"
+	var/static/list/prefixes = list("f","p","n","μ","m","","k","M","G","T","P")
+
+	// We don't have prefixes beyond this point
+	// and this also captures value = 0 which you can't compute the logarithm for
+	// and also byond numbers are floats and doesn't have much precision beyond this point anyway
+	if(abs(value) <= 1e-18)
+		return "0 [unit]"
+
+	var/exponent = clamp(log(10, abs(value)), -15, 15) // Calculate the exponent and clamp it so we don't go outside the prefix list bounds
+	var/divider = 10 ** (round(exponent / 3) * 3) // Rounds the exponent to nearest SI unit and power it back to the full form
+	var/coefficient = round(value / divider, 10 ** -maxdecimals) // Calculate the coefficient and round it to desired decimals
+	var/prefix_index = round(exponent / 3) + 6 // Calculate the index in the prefixes list for this exponent
+
+	// An edge case which happens if we round 999.9 to 0 decimals for example, which gets rounded to 1000
+	// In that case, we manually swap up to the next prefix if there is one available
+	if(coefficient >= 1000 && prefix_index < 11)
+		coefficient /= 1e3
+		prefix_index++
+
+	var/prefix = prefixes[prefix_index]
+	return "[coefficient] [prefix][unit]"
 
 
 /** The game code never uses Pa, but kPa, since 1 Pa is too small to reasonably handle
@@ -1179,20 +1193,3 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 /proc/sanitize_css_class_name(name)
 	var/static/regex/regex = new(@"[^a-zA-Z0-9]","g")
 	return replacetext(name, regex, "")
-
-/// Converts a semver string into a list of numbers
-/proc/semver_to_list(semver_string)
-	var/static/regex/semver_regex = regex(@"(\d+)\.(\d+)\.(\d+)", "")
-	if(!semver_regex.Find(semver_string))
-		return null
-
-	return list(
-		text2num(semver_regex.group[1]),
-		text2num(semver_regex.group[2]),
-		text2num(semver_regex.group[3]),
-	)
-
-/// Returns TRUE if the input_text ends with the ending
-/proc/endswith(input_text, ending)
-	var/input_length = LAZYLEN(ending)
-	return !!findtext(input_text, ending, -input_length)

@@ -1,14 +1,12 @@
 /**
  * Blow up the mob into giblets
  *
- * drop_bitflags: (see code/__DEFINES/blood.dm)
- * * DROP_BRAIN - Gibbed mob will drop a brain
- * * DROP_ORGANS - Gibbed mob will drop organs
- * * DROP_BODYPARTS - Gibbed mob will drop bodyparts (arms, legs, etc.)
- * * DROP_ITEMS - Gibbed mob will drop carried items (otherwise they get deleted)
- * * DROP_ALL_REMAINS - Gibbed mob will drop everything
-**/
-/mob/living/proc/gib(drop_bitflags=NONE)
+ * Arguments:
+ * * no_brain - Should the mob NOT drop a brain?
+ * * no_organs - Should the mob NOT drop organs?
+ * * no_bodyparts - Should the mob NOT drop bodyparts?
+*/
+/mob/living/proc/gib(no_brain, no_organs, no_bodyparts)
 	var/prev_lying = lying_angle
 	if(stat != DEAD)
 		death(TRUE)
@@ -16,47 +14,25 @@
 	if(!prev_lying)
 		gib_animation()
 
-	ghostize()
-	spill_organs(drop_bitflags)
+	spill_organs(no_brain, no_organs, no_bodyparts)
 
-	if(drop_bitflags & DROP_BODYPARTS)
-		spread_bodyparts(drop_bitflags)
+	if(!no_bodyparts)
+		spread_bodyparts(no_brain, no_organs)
 
-	spawn_gibs(drop_bitflags)
-	SEND_SIGNAL(src, COMSIG_LIVING_GIBBED, drop_bitflags)
+	spawn_gibs(no_bodyparts)
+	SEND_SIGNAL(src, COMSIG_LIVING_GIBBED, no_brain, no_organs, no_bodyparts)
 	qdel(src)
 
 /mob/living/proc/gib_animation()
 	return
 
-/**
- * Spawn bloody gib mess on the floor
- *
- * drop_bitflags: (see code/__DEFINES/blood.dm)
- * * DROP_BODYPARTS - Gibs will spawn with bodypart limbs present
-**/
-/mob/living/proc/spawn_gibs(drop_bitflags=NONE)
+/mob/living/proc/spawn_gibs()
 	new /obj/effect/gibspawner/generic(drop_location(), src, get_static_viruses())
 
-/**
- * Drops a mob's organs on the floor
- *
- * drop_bitflags: (see code/__DEFINES/blood.dm)
- * * DROP_BRAIN - Mob will drop a brain
- * * DROP_ORGANS - Mob will drop organs
- * * DROP_BODYPARTS - Mob will drop bodyparts (arms, legs, etc.)
- * * DROP_ALL_REMAINS - Mob will drop everything
-**/
-/mob/living/proc/spill_organs(drop_bitflags=NONE)
+/mob/living/proc/spill_organs()
 	return
 
-/**
- * Launches all bodyparts away from the mob
- *
- * drop_bitflags: (see code/__DEFINES/blood.dm)
- * * DROP_BRAIN - Detaches the head from the mob and launches it away from the body
-**/
-/mob/living/proc/spread_bodyparts(drop_bitflags=NONE)
+/mob/living/proc/spread_bodyparts()
 	return
 
 /**
@@ -69,9 +45,6 @@
  * * force - Should this mob be FORCABLY dusted?
 */
 /mob/living/proc/dust(just_ash, drop_items, force)
-	if(body_position == STANDING_UP)
-		// keep us upright so the animation fits.
-		ADD_TRAIT(src, TRAIT_FORCED_STANDING, TRAIT_GENERIC)
 	death(TRUE)
 
 	if(drop_items)
@@ -82,7 +55,6 @@
 
 	dust_animation()
 	spawn_dust(just_ash)
-	ghostize()
 	QDEL_IN(src,5) // since this is sometimes called in the middle of movement, allow half a second for movement to finish, ghosting to happen and animation to play. Looks much nicer and doesn't cause multiple runtimes.
 
 /mob/living/proc/dust_animation()
@@ -101,13 +73,10 @@
 	if(stat == DEAD)
 		return FALSE
 
-	if(!gibbed && (death_sound || death_message))
-		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob, emote), "deathgasp")
-
 	set_stat(DEAD)
 	unset_machine()
 	timeofdeath = world.time
-	station_timestamp_timeofdeath = station_time_timestamp()
+	tod = station_time_timestamp()
 	var/turf/death_turf = get_turf(src)
 	var/area/death_area = get_area(src)
 	// Display a death message if the mob is a player mob (has an active mind)
@@ -135,6 +104,8 @@
 
 	if (client)
 		client.move_delay = initial(client.move_delay)
-		client.player_details.time_of_death = timeofdeath
+
+	if(!gibbed && (death_sound || death_message))
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob, emote), "deathgasp")
 
 	return TRUE

@@ -29,12 +29,12 @@
 	desc = "A hook."
 	projectile_type = /obj/projectile/hook
 	caliber = CALIBER_HOOK
-	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect
+	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect/energy
 
 /obj/projectile/hook
 	name = "hook"
 	icon_state = "hook"
-	icon = 'icons/obj/mining_zones/artefacts.dmi'
+	icon = 'icons/obj/lavaland/artefacts.dmi'
 	pass_flags = PASSTABLE
 	damage = 20
 	stamina = 20
@@ -50,7 +50,7 @@
 	..()
 	//TODO: root the firer until the chain returns
 
-/obj/projectile/hook/on_hit(atom/target, blocked = 0, pierce_hit)
+/obj/projectile/hook/on_hit(atom/target)
 	. = ..()
 	if(ismovable(target))
 		var/atom/movable/A = target

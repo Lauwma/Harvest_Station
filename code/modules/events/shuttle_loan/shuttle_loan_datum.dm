@@ -17,8 +17,6 @@
 	. = ..()
 	if(!logging_desc)
 		stack_trace("No logging blurb set for [src.type]!")
-	if(HAS_TRAIT(SSstation, STATION_TRAIT_LOANER_SHUTTLE))
-		bonus_points *= 1.15
 
 /// Spawns paths added to `spawn_list`, and passes empty shuttle turfs so you can spawn more complicated things like dead bodies.
 /datum/shuttle_loan_situation/proc/spawn_items(list/spawn_list, list/empty_shuttle_turfs)
@@ -88,12 +86,12 @@
 	var/datum/supply_pack/pack = SSshuttle.supply_packs[/datum/supply_pack/imports/specialops]
 	pack.generate(pick_n_take(empty_shuttle_turfs))
 
-	spawn_list.Add(/mob/living/basic/trooper/syndicate/ranged/infiltrator)
-	spawn_list.Add(/mob/living/basic/trooper/syndicate/ranged/infiltrator)
+	spawn_list.Add(/mob/living/basic/syndicate/ranged/infiltrator)
+	spawn_list.Add(/mob/living/basic/syndicate/ranged/infiltrator)
 	if(prob(75))
-		spawn_list.Add(/mob/living/basic/trooper/syndicate/ranged/infiltrator)
+		spawn_list.Add(/mob/living/basic/syndicate/ranged/infiltrator)
 	if(prob(50))
-		spawn_list.Add(/mob/living/basic/trooper/syndicate/ranged/infiltrator)
+		spawn_list.Add(/mob/living/basic/syndicate/ranged/infiltrator)
 
 /datum/shuttle_loan_situation/lots_of_bees
 	sender = "CentCom Janitorial Division"
@@ -120,7 +118,7 @@
 	spawn_list.Add(/obj/structure/closet/crate/hydroponics)
 
 	for(var/i in 1 to 8)
-		spawn_list.Add(/mob/living/basic/bee/toxin)
+		spawn_list.Add(/mob/living/simple_animal/hostile/bee/toxin)
 
 	for(var/i in 1 to 5)
 		var/decal = pick(/obj/effect/decal/cleanable/blood, /obj/effect/decal/cleanable/insectguts)
@@ -180,13 +178,13 @@
 	var/datum/supply_pack/pack = SSshuttle.supply_packs[/datum/supply_pack/service/party]
 	pack.generate(pick_n_take(empty_shuttle_turfs))
 
-	spawn_list.Add(/mob/living/basic/trooper/russian)
-	spawn_list.Add(/mob/living/basic/trooper/russian/ranged) //drops a mateba
-	spawn_list.Add(/mob/living/basic/bear/russian)
+	spawn_list.Add(/mob/living/basic/syndicate/russian)
+	spawn_list.Add(/mob/living/basic/syndicate/russian/ranged) //drops a mateba
+	spawn_list.Add(/mob/living/simple_animal/hostile/bear/russian)
 	if(prob(75))
-		spawn_list.Add(/mob/living/basic/trooper/russian)
+		spawn_list.Add(/mob/living/basic/syndicate/russian)
 	if(prob(50))
-		spawn_list.Add(/mob/living/basic/bear/russian)
+		spawn_list.Add(/mob/living/simple_animal/hostile/bear/russian)
 
 /datum/shuttle_loan_situation/spider_gift
 	sender = "CentCom Diplomatic Corps"
@@ -198,11 +196,11 @@
 	var/datum/supply_pack/pack = SSshuttle.supply_packs[/datum/supply_pack/imports/specialops]
 	pack.generate(pick_n_take(empty_shuttle_turfs))
 
-	spawn_list.Add(/mob/living/basic/spider/giant)
-	spawn_list.Add(/mob/living/basic/spider/giant)
-	spawn_list.Add(/mob/living/basic/spider/giant/nurse)
+	spawn_list.Add(/mob/living/basic/giant_spider)
+	spawn_list.Add(/mob/living/basic/giant_spider)
+	spawn_list.Add(/mob/living/basic/giant_spider/nurse)
 	if(prob(50))
-		spawn_list.Add(/mob/living/basic/spider/giant/hunter)
+		spawn_list.Add(/mob/living/basic/giant_spider/hunter)
 
 	var/turf/victim_turf = pick_n_take(empty_shuttle_turfs)
 

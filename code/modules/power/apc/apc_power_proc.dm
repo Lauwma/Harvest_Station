@@ -7,11 +7,10 @@
 	if(terminal)
 		terminal.connect_to_network()
 
-/obj/machinery/power/apc/proc/make_terminal(terminal_cable_layer = cable_layer)
+/obj/machinery/power/apc/proc/make_terminal()
 	// create a terminal object at the same position as original turf loc
 	// wires will attach to this
 	terminal = new/obj/machinery/power/terminal(loc)
-	terminal.cable_layer = terminal_cable_layer
 	terminal.setDir(dir)
 	terminal.master = src
 
@@ -42,11 +41,8 @@
 	if(!is_operational || failure_timer)
 		return
 	operating = !operating
-	if (user)
-		var/enabled_or_disabled = operating ? "enabled" : "disabled"
-		balloon_alert(user, "power [enabled_or_disabled]")
-		user.log_message("turned [enabled_or_disabled] the [src]", LOG_GAME)
-		add_hiddenprint(user)
+	add_hiddenprint(user)
+	user.log_message("turned [operating ? "on" : "off"] the [src]", LOG_GAME)
 	update()
 	update_appearance()
 

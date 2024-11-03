@@ -2,7 +2,6 @@ import { useBackend } from '../backend';
 import { Box, Section, Stack } from '../components';
 import { BooleanLike } from 'common/react';
 import { Window } from '../layouts';
-import { ObjectivePrintout, Objective } from './common/Objectives';
 
 const jauntstyle = {
   color: 'lightblue',
@@ -10,6 +9,15 @@ const jauntstyle = {
 
 const injurestyle = {
   color: 'yellow',
+};
+
+type Objective = {
+  count: number;
+  name: string;
+  explanation: string;
+  complete: BooleanLike;
+  was_uncompleted: BooleanLike;
+  reward: number;
 };
 
 type Info = {
@@ -40,11 +48,7 @@ export const AntagInfoDemon = (props, context) => {
                       {fluff}
                     </Stack.Item>
                     <Stack.Item>
-                      <ObjectivePrintout
-                        titleMessage="It is in your nature to accomplish these goals:"
-                        objectiveTextSize="20px"
-                        objectives={objectives}
-                      />
+                      <ObjectivePrintout />
                     </Stack.Item>
                   </Stack>
                 </Section>
@@ -81,6 +85,26 @@ export const AntagInfoDemon = (props, context) => {
         </Stack>
       </Window.Content>
     </Window>
+  );
+};
+
+const ObjectivePrintout = (props, context) => {
+  const { data } = useBackend<Info>(context);
+  const { objectives } = data;
+  return (
+    <Stack vertical>
+      <Stack.Item bold>
+        It is in your nature to accomplish these goals:
+      </Stack.Item>
+      <Stack.Item>
+        {(!objectives && 'None!') ||
+          objectives.map((objective) => (
+            <Stack.Item fontSize="20px" key={objective.count}>
+              #{objective.count}: {objective.explanation}
+            </Stack.Item>
+          ))}
+      </Stack.Item>
+    </Stack>
   );
 };
 

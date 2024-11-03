@@ -42,7 +42,7 @@
 	visual = FALSE
 	item_flags = NOBLUDGEON
 	slot = ORGAN_SLOT_MONSTER_CORE
-	organ_flags = ORGAN_ORGANIC
+	organ_flags = NONE
 	force = 0
 	/// Set to true if this organ has decayed into uselessness.
 	var/inert = FALSE
@@ -183,9 +183,9 @@
  * Utility proc to find the associated monster organ action and trigger it.
  * Call this instead of on_triggered_internal() if the action needs to trigger automatically, or the cooldown won't happen.
  */
-/obj/item/organ/internal/monster_core/proc/trigger_organ_action(trigger_flags)
+/obj/item/organ/internal/monster_core/proc/trigger_organ_action()
 	var/datum/action/cooldown/monster_core_action/action = locate() in actions
-	action?.Trigger(trigger_flags = trigger_flags)
+	action?.Trigger()
 
 /**
  * Called when activated while implanted inside someone.

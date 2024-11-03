@@ -30,10 +30,9 @@ have ways of interacting with a specific mob and control it.
 	idle_behavior = /datum/idle_behavior/idle_monkey
 
 /datum/ai_controller/monkey/New(atom/new_pawn)
-	var/static/list/control_examine = list(
+	AddElement(/datum/element/ai_control_examine, list(
 		ORGAN_SLOT_EYES = span_monkey("eyes have a primal look in them."),
-	)
-	AddElement(/datum/element/ai_control_examine, control_examine)
+	))
 	return ..()
 
 /datum/ai_controller/monkey/pun_pun
@@ -53,9 +52,7 @@ have ways of interacting with a specific mob and control it.
 	. = ..()
 	if(. & AI_CONTROLLER_INCOMPATIBLE)
 		return
-	pawn = new_pawn
 	set_blackboard_key(BB_MONKEY_AGGRESSIVE, TRUE) //Angry cunt
-	set_trip_mode(mode = FALSE)
 
 /datum/ai_controller/monkey/TryPossessPawn(atom/new_pawn)
 	if(!isliving(new_pawn))

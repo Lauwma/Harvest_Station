@@ -66,6 +66,13 @@
 	},
 /turf/open/floor/mineral/gold,
 /area/shuttle/escape)
+"n" = (
+/obj/structure/table/wood/poker,
+/obj/item/storage/box/drinkingglasses,
+/obj/item/reagent_containers/cup/glass/bottle/whiskey,
+/obj/machinery/light/directional/south,
+/turf/open/floor/mineral/gold,
+/area/shuttle/escape)
 "o" = (
 /obj/machinery/computer/communications{
 	dir = 8
@@ -76,6 +83,13 @@
 /obj/machinery/door/airlock/gold,
 /obj/effect/mapping_helpers/airlock/access/all/command/general,
 /turf/open/floor/mineral/gold,
+/area/shuttle/escape)
+"q" = (
+/obj/structure/statue/plasma/scientist{
+	anchored = 1;
+	custom_materials = list(/datum/material/plasma = 100000)
+	},
+/turf/open/floor/light/colour_cycle/dancefloor_b,
 /area/shuttle/escape)
 "r" = (
 /turf/open/floor/mineral/plasma/disco,
@@ -179,6 +193,11 @@
 /obj/item/reagent_containers/cup/glass/bottle/lizardwine,
 /turf/open/floor/wood,
 /area/shuttle/escape)
+"M" = (
+/obj/machinery/power/shuttle_engine/heater,
+/obj/structure/window/reinforced/plasma/spawner/directional/north,
+/turf/open/floor/plating/airless,
+/area/shuttle/escape)
 "N" = (
 /obj/machinery/power/shuttle_engine/propulsion,
 /turf/open/floor/plating/airless,
@@ -186,30 +205,8 @@
 "O" = (
 /turf/closed/wall/mineral/plastitanium/nodiagonal,
 /area/shuttle/escape)
-"P" = (
-/obj/structure/statue/plasma/scientist{
-	anchored = 1;
-	custom_materials = list(/datum/material/plasma=100000)
-	},
-/turf/open/floor/light/colour_cycle/dancefloor_b,
-/area/shuttle/escape)
 "R" = (
 /turf/open/floor/light/colour_cycle/dancefloor_b,
-/area/shuttle/escape)
-"U" = (
-/obj/structure/table/wood/poker,
-/obj/item/storage/box/drinkingglasses,
-/obj/item/reagent_containers/cup/glass/bottle/whiskey,
-/turf/open/floor/mineral/gold,
-/area/shuttle/escape)
-"X" = (
-/obj/machinery/power/shuttle_engine/heater,
-/obj/structure/window/reinforced/plasma/spawner/directional/north,
-/turf/open/floor/plating/airless,
-/area/shuttle/escape)
-"Y" = (
-/obj/machinery/light/floor,
-/turf/open/floor/mineral/gold,
 /area/shuttle/escape)
 
 (1,1,1) = {"
@@ -242,7 +239,7 @@ b
 b
 b
 O
-P
+q
 r
 r
 r
@@ -252,7 +249,7 @@ r
 r
 r
 r
-P
+q
 c
 x
 C
@@ -281,7 +278,7 @@ c
 x
 D
 D
-X
+M
 N
 "}
 (4,1,1) = {"
@@ -305,7 +302,7 @@ c
 x
 x
 x
-X
+M
 N
 "}
 (5,1,1) = {"
@@ -329,14 +326,14 @@ c
 y
 E
 y
-X
+M
 N
 "}
 (6,1,1) = {"
 c
 f
-Y
-U
+j
+n
 c
 r
 j
@@ -353,7 +350,7 @@ c
 z
 F
 J
-X
+M
 N
 "}
 (7,1,1) = {"
@@ -377,7 +374,7 @@ c
 y
 G
 y
-X
+M
 N
 "}
 (8,1,1) = {"
@@ -401,7 +398,7 @@ c
 x
 x
 x
-X
+M
 N
 "}
 (9,1,1) = {"
@@ -425,7 +422,7 @@ c
 A
 x
 K
-X
+M
 N
 "}
 (10,1,1) = {"
@@ -434,7 +431,7 @@ b
 b
 b
 O
-P
+q
 r
 r
 r
@@ -444,7 +441,7 @@ r
 r
 r
 r
-P
+q
 c
 B
 H

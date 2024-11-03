@@ -62,7 +62,6 @@ export const Canister = (props, context) => {
                     content="Relabel"
                     onClick={() => act('relabel')}
                   />
-                  <Button icon="palette" onClick={() => act('recolor')} />
                 </>
               }>
               <LabeledControls>

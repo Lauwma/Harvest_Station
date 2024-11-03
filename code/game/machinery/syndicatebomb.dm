@@ -61,7 +61,7 @@
 		..()
 
 /obj/machinery/syndicatebomb/ex_act(severity, target)
-	return FALSE
+	return
 
 /obj/machinery/syndicatebomb/process()
 	if(!active)
@@ -99,7 +99,7 @@
 
 /obj/machinery/syndicatebomb/Initialize(mapload)
 	. = ..()
-	set_wires(new /datum/wires/syndicatebomb(src))
+	wires = new /datum/wires/syndicatebomb(src)
 	if(payload)
 		payload = new payload(src)
 	update_appearance()
@@ -183,11 +183,11 @@
 	if(payload || !wires.is_all_cut() || !open_panel)
 		return FALSE
 
-	if(!tool.tool_start_check(user, amount=1))
+	if(!tool.tool_start_check(user, amount=5))  //uses up 5 fuel
 		return TRUE
 
 	to_chat(user, span_notice("You start to cut [src] apart..."))
-	if(tool.use_tool(src, user, 20, volume=50))
+	if(tool.use_tool(src, user, 20, volume=50, amount=5)) // uses up 5 fuel
 		to_chat(user, span_notice("You cut [src] apart."))
 		new /obj/item/stack/sheet/plasteel(loc, 5)
 		qdel(src)
@@ -321,7 +321,6 @@
 
 /obj/item/bombcore/ex_act(severity, target) // Little boom can chain a big boom.
 	detonate()
-	return TRUE
 
 /obj/item/bombcore/burn()
 	detonate()
@@ -347,7 +346,7 @@
 	desc = "After a string of unwanted detonations, this payload has been specifically redesigned to not explode unless triggered electronically by a bomb shell."
 
 /obj/item/bombcore/syndicate/ex_act(severity, target)
-	return FALSE
+	return
 
 /obj/item/bombcore/syndicate/burn()
 	return ..()
@@ -392,7 +391,9 @@
 		attempts++
 		defusals++
 		holder.loc.visible_message(span_notice("[icon2html(holder, viewers(holder))] Alert: Bomb has been defused. Your score is now [defusals] for [attempts]! Resetting wires in 5 seconds..."))
-		addtimer(CALLBACK(src, PROC_REF(reset)), 5 SECONDS) //Just in case someone is trying to remove the bomb core this gives them a little window to crowbar it out
+		sleep(5 SECONDS) //Just in case someone is trying to remove the bomb core this gives them a little window to crowbar it out
+		if(istype(holder))
+			reset()
 
 /obj/item/bombcore/badmin
 	name = "badmin payload"
@@ -409,14 +410,12 @@
 
 /obj/item/bombcore/badmin/summon/detonate()
 	var/obj/machinery/syndicatebomb/B = loc
-	spawn_and_random_walk(summon_path, src, amt_summon, walk_chance=50, admin_spawn=TRUE, cardinals_only = FALSE)
+	spawn_and_random_walk(summon_path, src, amt_summon, walk_chance=50, admin_spawn=TRUE)
 	qdel(B)
 	qdel(src)
 
 /obj/item/bombcore/badmin/summon/clown
-	name = "bananium payload"
-	desc = "Clowns delivered fast and cheap!"
-	summon_path = /mob/living/basic/clown
+	summon_path = /mob/living/simple_animal/hostile/retaliate/clown
 	amt_summon = 50
 
 /obj/item/bombcore/badmin/summon/clown/defuse()
@@ -597,7 +596,7 @@
 
 /obj/item/syndicatedetonator/attack_self(mob/user)
 	if(timer < world.time)
-		for(var/obj/machinery/syndicatebomb/B as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/syndicatebomb))
+		for(var/obj/machinery/syndicatebomb/B in GLOB.machines)
 			if(B.active)
 				B.detonation_timer = world.time + BUTTON_DELAY
 				detonated++

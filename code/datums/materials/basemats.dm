@@ -6,10 +6,7 @@
 	greyscale_colors = "#878687"
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/iron
-	value_per_unit = 5 / SHEET_MATERIAL_AMOUNT
-	minimum_value_override = 0
-	tradable = TRUE
-	tradable_base_quantity = MATERIAL_QUANTITY_COMMON
+	value_per_unit = 0.0025
 
 /datum/material/iron/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD, wound_bonus = 5)
@@ -21,32 +18,20 @@
 	desc = "Glass forged by melting sand."
 	color = "#88cdf1"
 	greyscale_colors = "#88cdf196"
+	starlight_color = COLOR_STARLIGHT
 	alpha = 150
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	integrity_modifier = 0.1
 	sheet_type = /obj/item/stack/sheet/glass
 	shard_type = /obj/item/shard
 	debris_type = /obj/effect/decal/cleanable/glass
-	value_per_unit = 5 / SHEET_MATERIAL_AMOUNT
-	minimum_value_override = 0
-	tradable = TRUE
-	tradable_base_quantity = MATERIAL_QUANTITY_COMMON
+	value_per_unit = 0.0025
 	beauty_modifier = 0.05
 	armor_modifiers = list(MELEE = 0.2, BULLET = 0.2, ENERGY = 1, BIO = 0.2, FIRE = 1, ACID = 0.2)
 
 /datum/material/glass/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD, wound_bonus = 5, sharpness = TRUE) //cronch
 	return TRUE
-
-/datum/material/glass/on_applied_obj(atom/source, amount, material_flags)
-	. = ..()
-	if(!isstack(source))
-		source.AddElement(/datum/element/shatters_when_thrown, shard_type, round(amount / SHEET_MATERIAL_AMOUNT), SFX_SHATTER)
-
-/datum/material/glass/on_removed(atom/source, amount, material_flags)
-	. = ..()
-
-	source.RemoveElement(/datum/element/shatters_when_thrown, shard_type)
 
 /*
 Color matrices are like regular colors but unlike with normal colors, you can go over 255 on a channel.
@@ -61,9 +46,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#e3f1f8"
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/silver
-	value_per_unit = 50 / SHEET_MATERIAL_AMOUNT
-	tradable = TRUE
-	tradable_base_quantity = MATERIAL_QUANTITY_UNCOMMON
+	value_per_unit = 0.025
 	beauty_modifier = 0.075
 
 /datum/material/silver/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
@@ -79,9 +62,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	strength_modifier = 1.2
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/gold
-	value_per_unit = 125 / SHEET_MATERIAL_AMOUNT
-	tradable = TRUE
-	tradable_base_quantity = MATERIAL_QUANTITY_RARE
+	value_per_unit = 0.0625
 	beauty_modifier = 0.15
 	armor_modifiers = list(MELEE = 1.1, BULLET = 1.1, LASER = 1.15, ENERGY = 1.15, BOMB = 1, BIO = 1, FIRE = 0.7, ACID = 1.1)
 
@@ -99,9 +80,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	sheet_type = /obj/item/stack/sheet/mineral/diamond
 	alpha = 132
 	starlight_color = COLOR_BLUE_LIGHT
-	value_per_unit = 500 / SHEET_MATERIAL_AMOUNT
-	tradable = TRUE
-	tradable_base_quantity = MATERIAL_QUANTITY_EXOTIC
+	value_per_unit = 0.25
 	beauty_modifier = 0.3
 	armor_modifiers = list(MELEE = 1.3, BULLET = 1.3, LASER = 0.6, ENERGY = 1, BOMB = 1.2, BIO = 1, FIRE = 1, ACID = 1)
 
@@ -117,9 +96,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = rgb(48, 237, 26)
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/uranium
-	value_per_unit = 100 / SHEET_MATERIAL_AMOUNT
-	tradable = TRUE
-	tradable_base_quantity = MATERIAL_QUANTITY_RARE
+	value_per_unit = 0.05
 	beauty_modifier = 0.3 //It shines so beautiful
 	armor_modifiers = list(MELEE = 1.5, BULLET = 1.4, LASER = 0.5, ENERGY = 0.5, FIRE = 1, ACID = 1)
 
@@ -154,7 +131,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#c162ec"
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/plasma
-	value_per_unit = 200 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.1
 	beauty_modifier = 0.15
 	armor_modifiers = list(MELEE = 1.4, BULLET = 0.7, ENERGY = 1.2, BIO = 1.2, ACID = 0.5)
 
@@ -162,6 +139,8 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	. = ..()
 	if(ismovable(source))
 		source.AddElement(/datum/element/firestacker, amount=1)
+		// Ideally exploding plasma objects should delete themselves but we still have the flooder and SSexplosions to rely on deleting it asynchronously so it's not that bad.
+		source.AddComponent(/datum/component/explodable, 0, 0, amount / 2500, 0, amount / 1250, delete_after = EXPLODABLE_NO_DELETE)
 	source.AddComponent(/datum/component/combustible_flooder, "plasma", amount*0.05) //Empty temp arg, fully dependent on whatever ignited it.
 
 /datum/material/plasma/on_removed(atom/source, amount, material_flags)
@@ -186,9 +165,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_ITEM_MATERIAL = TRUE)
 	beauty_modifier = 0.5
 	sheet_type = /obj/item/stack/sheet/bluespace_crystal
-	value_per_unit = 300 / SHEET_MATERIAL_AMOUNT
-	tradable = TRUE
-	tradable_base_quantity = MATERIAL_QUANTITY_EXOTIC
+	value_per_unit = 0.15
 
 /datum/material/bluespace/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.reagents.add_reagent(/datum/reagent/bluespace, rand(5, 8))
@@ -203,7 +180,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#ffff00"
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/bananium
-	value_per_unit = 1000 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.5
 	beauty_modifier = 0.5
 	armor_modifiers = list(BOMB = 100, FIRE = 10) //Clowns cant be blown away.
 
@@ -231,9 +208,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	strength_modifier = 1.3
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/titanium
-	value_per_unit = 125 / SHEET_MATERIAL_AMOUNT
-	tradable = TRUE
-	tradable_base_quantity = MATERIAL_QUANTITY_UNCOMMON
+	value_per_unit = 0.0625
 	beauty_modifier = 0.05
 	armor_modifiers = list(MELEE = 1.35, BULLET = 1.3, LASER = 1.3, ENERGY = 1.25, BOMB = 1.25, BIO = 1, FIRE = 0.7, ACID = 1)
 
@@ -249,7 +224,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	strength_modifier = 1.3
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/runite
-	value_per_unit = 600 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.3
 	beauty_modifier = 0.5
 	armor_modifiers = list(MELEE = 1.35, BULLET = 2, LASER = 0.5, ENERGY = 1.25, BOMB = 1.25, BIO = 1, FIRE = 1.4, ACID = 1) //rune is weak against magic lasers but strong against bullets. This is the combat triangle.
 
@@ -266,7 +241,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	strength_modifier = 0.85
 	sheet_type = /obj/item/stack/sheet/plastic
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
-	value_per_unit = 25 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.0125
 	beauty_modifier = -0.01
 	armor_modifiers = list(MELEE = 1.5, BULLET = 1.1, LASER = 0.3, ENERGY = 0.5, BOMB = 1, BIO = 1, FIRE = 1.1, ACID = 1)
 
@@ -282,7 +257,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	color = "#735b4d"
 	greyscale_colors = "#735b4d"
 	strength_modifier = 0.8
-	value_per_unit = 50 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.025
 
 /datum/material/wood
 	name = "wood"
@@ -292,7 +267,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	strength_modifier = 0.5
 	sheet_type = /obj/item/stack/sheet/mineral/wood
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
-	value_per_unit = 20 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.01
 	beauty_modifier = 0.1
 	armor_modifiers = list(MELEE = 1.1, BULLET = 1.1, LASER = 0.4, ENERGY = 0.4, BOMB = 1, BIO = 0.2, ACID = 0.3)
 	texture_layer_icon_state = "woodgrain"
@@ -325,7 +300,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	strength_modifier = 1.5
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/adamantine
-	value_per_unit = 500 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.25
 	beauty_modifier = 0.4
 	armor_modifiers = list(MELEE = 1.5, BULLET = 1.5, LASER = 1.3, ENERGY = 1.3, BOMB = 1, BIO = 1, FIRE = 2.5, ACID = 1)
 
@@ -341,7 +316,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#f2d5d7"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/mythril
-	value_per_unit = 1500 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.75
 	strength_modifier = 1.2
 	armor_modifiers = list(MELEE = 1.5, BULLET = 1.5, LASER = 1.5, ENERGY = 1.5, BOMB = 1.5, BIO = 1.5, FIRE = 1.5, ACID = 1.5)
 	beauty_modifier = 0.5
@@ -350,12 +325,10 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	. = ..()
 	if(isitem(source))
 		source.AddComponent(/datum/component/fantasy)
-		ADD_TRAIT(source, TRAIT_INNATELY_FANTASTICAL_ITEM, REF(src)) // DO THIS LAST OR WE WILL NEVER GET OUR BONUSES!!!
 
 /datum/material/mythril/on_removed_obj(atom/source, amount, material_flags)
 	. = ..()
 	if(isitem(source))
-		REMOVE_TRAIT(source, TRAIT_INNATELY_FANTASTICAL_ITEM, REF(src)) // DO THIS FIRST OR WE WILL NEVER GET OUR BONUSES DELETED!!!
 		qdel(source.GetComponent(/datum/component/fantasy))
 
 /datum/material/mythril/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
@@ -372,7 +345,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	starlight_color = COLOR_BLUE_LIGHT
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/hot_ice
-	value_per_unit = 400 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.2
 	beauty_modifier = 0.2
 
 /datum/material/hot_ice/on_applied(atom/source, amount, material_flags)
@@ -397,7 +370,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	starlight_color = COLOR_MODERATE_BLUE
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/metal_hydrogen
-	value_per_unit = 700 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.35
 	beauty_modifier = 0.35
 	strength_modifier = 1.2
 	armor_modifiers = list(MELEE = 1.35, BULLET = 1.3, LASER = 1.3, ENERGY = 1.25, BOMB = 0.7, BIO = 1, FIRE = 1.3, ACID = 1)
@@ -414,7 +387,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#EDC9AF"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/sandblock
-	value_per_unit = 2 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.001
 	strength_modifier = 0.5
 	integrity_modifier = 0.1
 	armor_modifiers = list(MELEE = 0.25, BULLET = 0.25, LASER = 1.25, ENERGY = 0.25, BOMB = 0.25, BIO = 0.25, FIRE = 1.5, ACID = 1.5)
@@ -434,7 +407,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#B77D31"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/sandstone
-	value_per_unit = 5 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.0025
 	armor_modifiers = list(MELEE = 0.5, BULLET = 0.5, LASER = 1.25, ENERGY = 0.5, BOMB = 0.5, BIO = 0.25, FIRE = 1.5, ACID = 1.5)
 	beauty_modifier = 0.3
 	turf_sound_override = FOOTSTEP_WOOD
@@ -447,7 +420,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#FFFFFF"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/snow
-	value_per_unit = 5 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.0025
 	armor_modifiers = list(MELEE = 0.25, BULLET = 0.25, LASER = 0.25, ENERGY = 0.25, BOMB = 0.25, BIO = 0.25, FIRE = 0.25, ACID = 1.5)
 	beauty_modifier = 0.3
 	turf_sound_override = FOOTSTEP_SAND
@@ -464,7 +437,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#3C3434"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/runed_metal
-	value_per_unit = 1500 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.75
 	armor_modifiers = list(MELEE = 1.2, BULLET = 1.2, LASER = 1, ENERGY = 1, BOMB = 1.2, BIO = 1.2, FIRE = 1.5, ACID = 1.5)
 	beauty_modifier = -0.15
 	texture_layer_icon_state = "runed"
@@ -481,7 +454,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#92661A"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/bronze
-	value_per_unit = 50 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.025
 	armor_modifiers = list(MELEE = 1, BULLET = 1, LASER = 1, ENERGY = 1, BOMB = 1, BIO = 1, FIRE = 1.5, ACID = 1.5)
 	beauty_modifier = 0.2
 
@@ -492,7 +465,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#E5DCD5"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/paperframes
-	value_per_unit = 5 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.0025
 	armor_modifiers = list(MELEE = 0.1, BULLET = 0.1, LASER = 0.1, ENERGY = 0.1, BOMB = 0.1, BIO = 0.1, ACID = 1.5)
 	beauty_modifier = 0.3
 	turf_sound_override = FOOTSTEP_SAND
@@ -518,7 +491,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#5F625C"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/cardboard
-	value_per_unit = 6 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.003
 	armor_modifiers = list(MELEE = 0.25, BULLET = 0.25, LASER = 0.25, ENERGY = 0.25, BOMB = 0.25, BIO = 0.25, ACID = 1.5)
 	beauty_modifier = -0.1
 
@@ -542,7 +515,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#e3dac9"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/bone
-	value_per_unit = 100 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.05
 	armor_modifiers = list(MELEE = 1.2, BULLET = 0.75, LASER = 0.75, ENERGY = 1.2, BOMB = 1, BIO = 1, FIRE = 1.5, ACID = 1.5)
 	beauty_modifier = -0.2
 
@@ -553,7 +526,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = "#87a852"
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/bamboo
-	value_per_unit = 5 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.0025
 	armor_modifiers = list(MELEE = 0.5, BULLET = 0.5, LASER = 0.5, ENERGY = 0.5, BOMB = 0.5, BIO = 0.51, FIRE = 0.5, ACID = 1.5)
 	beauty_modifier = 0.2
 	turf_sound_override = FOOTSTEP_WOOD
@@ -566,7 +539,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	greyscale_colors = COLOR_ALMOST_BLACK
 	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/zaukerite
-	value_per_unit = 900 / SHEET_MATERIAL_AMOUNT
+	value_per_unit = 0.45
 	armor_modifiers = list(MELEE = 0.9, BULLET = 0.9, LASER = 1.75, ENERGY = 1.75, BOMB = 0.5, BIO = 1, FIRE = 0.1, ACID = 1)
 	beauty_modifier = 0.001
 

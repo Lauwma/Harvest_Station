@@ -5,6 +5,7 @@
 	icon_state = "bileworm"
 	icon_living = "bileworm"
 	icon_dead = "bileworm_dead"
+	mob_size = MOB_SIZE_LARGE
 	mob_biotypes = MOB_BUG
 	maxHealth = 100
 	health = 100
@@ -12,8 +13,6 @@
 	verb_ask = "spittles questioningly"
 	verb_exclaim = "splutters and gurgles"
 	verb_yell = "splutters and gurgles"
-	crusher_loot = /obj/item/crusher_trophy/bileworm_spewlet
-	crusher_drop_chance = 15
 	butcher_results = list(/obj/item/food/meat/slab/bugmeat = 4)
 	guaranteed_butcher_results = list(
 		/obj/effect/gibspawner/generic = 1,
@@ -21,7 +20,6 @@
 		/obj/item/stack/ore/gold = 2,
 	)
 	death_message = "seizes up and falls limp, slowly receeding into its burrow with a dying gurgle..."
-	throw_blocked_message = "is absorbed by the spongy hide of"
 
 	//it can't be dragged, just butcher it
 	move_resist = INFINITY
@@ -43,6 +41,7 @@
 
 	if(ispath(evolve_path))
 		AddComponent(/datum/component/evolutionary_leap, 30 MINUTES, evolve_path)
+	AddElement(/datum/element/crusher_loot, /obj/item/crusher_trophy/bileworm_spewlet, 15)
 	AddElement(/datum/element/content_barfer)
 
 	//setup mob abilities

@@ -4,7 +4,6 @@
 	icon_state = "ectoplasm"
 	aSignal = /obj/item/assembly/signaler/anomaly/ectoplasm
 	lifespan = ANOMALY_COUNTDOWN_TIMER + 2 SECONDS //This one takes slightly longer, because it can run away.
-	immobile = TRUE //prevents it from moving around so ghosts can actually move it with decent accuracy
 
 	///Blocks the anomaly from updating ghost count. Used in case an admin wants to rig the anomaly to be a certain size or intensity.
 	var/override_ghosts = FALSE
@@ -130,7 +129,7 @@
 /obj/structure/ghost_portal
 	name = "Spooky Portal"
 	desc = "A portal between our dimension and who-knows-where? It's emitting an absolutely ungodly wailing sound."
-	icon = 'icons/obj/anomaly.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "anom"
 	anchored = TRUE
 	var/static/list/spooky_noises = list(

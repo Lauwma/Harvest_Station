@@ -63,10 +63,14 @@
 	UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND_SECONDARY)
 
 /datum/component/tippable/Destroy()
-	pre_tipped_callback = null
-	post_tipped_callback = null
-	post_untipped_callback = null
-	roleplay_callback = null
+	if(pre_tipped_callback)
+		QDEL_NULL(pre_tipped_callback)
+	if(post_tipped_callback)
+		QDEL_NULL(post_tipped_callback)
+	if(post_untipped_callback)
+		QDEL_NULL(post_untipped_callback)
+	if(roleplay_callback)
+		QDEL_NULL(roleplay_callback)
 	return ..()
 
 /**
@@ -100,7 +104,7 @@
  * tipper - the mob tipping the tipped_mob
  */
 /datum/component/tippable/proc/try_tip(mob/living/tipped_mob, mob/tipper)
-	if(tipped_mob.stat != CONSCIOUS && !HAS_TRAIT(tipped_mob, TRAIT_FORCED_STANDING))
+	if(tipped_mob.stat != CONSCIOUS)
 		return
 
 	if(pre_tipped_callback?.Invoke(tipper))
@@ -133,8 +137,6 @@
 /datum/component/tippable/proc/do_tip(mob/living/tipped_mob, mob/tipper)
 	if(QDELETED(tipped_mob))
 		CRASH("Tippable component: do_tip() called with QDELETED tipped_mob!")
-	if (is_tipped) // sanity check in case multiple people try to tip at the same time
-		return
 
 	to_chat(tipper, span_warning("You tip over [tipped_mob]."))
 	if (!isnull(tipped_mob.client))
@@ -186,8 +188,6 @@
  */
 /datum/component/tippable/proc/do_untip(mob/living/tipped_mob, mob/untipper)
 	if(QDELETED(tipped_mob))
-		return
-	if (!is_tipped) // sanity check in case multiple people try to untip at the same time
 		return
 
 	to_chat(untipper, span_notice("You right [tipped_mob]."))

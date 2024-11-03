@@ -14,6 +14,13 @@
 	},
 /turf/open/floor/plating/airless,
 /area/ruin/space/massdriverhub)
+"cj" = (
+/obj/structure/cable,
+/obj/machinery/light/directional/east,
+/turf/open/floor/catwalk_floor{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/ruin/space/massdriverhub)
 "cE" = (
 /obj/machinery/conveyor/inverted{
 	dir = 9;
@@ -184,6 +191,12 @@
 /obj/structure/disposalpipe/broken,
 /turf/open/floor/plating/airless,
 /area/ruin/space/massdriverhub)
+"CJ" = (
+/obj/machinery/light/directional/west,
+/turf/open/floor/catwalk_floor{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/ruin/space/massdriverhub)
 "CX" = (
 /obj/item/stack/rods,
 /turf/template_noop,
@@ -191,7 +204,6 @@
 "DZ" = (
 /obj/machinery/power/rtg/advanced,
 /obj/structure/cable,
-/obj/machinery/light/directional/south,
 /turf/open/floor/catwalk_floor{
 	initial_gas_mix = "TEMP=2.7"
 	},
@@ -208,7 +220,6 @@
 "EO" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
-/obj/machinery/light/directional/north,
 /turf/open/floor/catwalk_floor{
 	initial_gas_mix = "TEMP=2.7"
 	},
@@ -219,6 +230,14 @@
 	dir = 4;
 	id = "zaza"
 	},
+/turf/open/floor/plating/airless,
+/area/ruin/space/massdriverhub)
+"FV" = (
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "zaza"
+	},
+/obj/machinery/light/directional/north,
 /turf/open/floor/plating/airless,
 /area/ruin/space/massdriverhub)
 "FY" = (
@@ -326,6 +345,10 @@
 /turf/open/floor/plating/airless,
 /area/ruin/space/massdriverhub)
 "Rm" = (
+/turf/open/floor/plating/airless,
+/area/ruin/space/massdriverhub)
+"Rp" = (
+/obj/machinery/light/directional/south,
 /turf/open/floor/plating/airless,
 /area/ruin/space/massdriverhub)
 "Rz" = (
@@ -469,11 +492,11 @@ FY
 "}
 (6,1,1) = {"
 FY
-hV
+FV
 EN
 hV
 qH
-No
+cj
 No
 GT
 mr
@@ -503,13 +526,13 @@ AA
 Rm
 hV
 tm
-tm
+CJ
 Bv
 zn
 uW
 Rm
 Rm
-Rm
+Rp
 FY
 "}
 (9,1,1) = {"

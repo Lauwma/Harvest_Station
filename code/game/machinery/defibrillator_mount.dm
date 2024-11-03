@@ -23,21 +23,19 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 /obj/machinery/defibrillator_mount/loaded/Initialize(mapload) //loaded subtype for mapping use
 	. = ..()
 	defib = new/obj/item/defibrillator/loaded(src)
-	find_and_hang_on_wall()
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 
 /obj/machinery/defibrillator_mount/Destroy()
-	QDEL_NULL(defib)
-	return ..()
-
-/obj/machinery/defibrillator_mount/Exited(atom/movable/gone, direction)
+	if(defib)
+		QDEL_NULL(defib)
 	. = ..()
-	if(gone == defib)
-		// Make sure processing ends before the defib is nulled
-		end_processing()
+
+/obj/machinery/defibrillator_mount/handle_atom_del(atom/A)
+	if(A == defib)
 		defib = null
-		update_appearance()
+		end_processing()
+	return ..()
 
 /obj/machinery/defibrillator_mount/examine(mob/user)
 	. = ..()
@@ -173,6 +171,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 		user.visible_message(span_notice("[user] unhooks [defib] from [src]."), \
 		span_notice("You slide out [defib] from [src] and unhook the charging cables."))
 	playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+	// Make sure processing ends before the defib is nulled
+	end_processing()
+	defib = null
+	update_appearance()
 
 /obj/machinery/defibrillator_mount/charging
 	name = "PENLITE defibrillator mount"
@@ -210,7 +212,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 	desc = "A frame for a defibrillator mount. Once placed, it can be removed with a wrench."
 	icon = 'icons/obj/machines/defib_mount.dmi'
 	icon_state = "defibrillator_mount"
-	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 3, /datum/material/glass = SMALL_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/iron = 300, /datum/material/glass = 100)
 	w_class = WEIGHT_CLASS_BULKY
 	result_path = /obj/machinery/defibrillator_mount
 	pixel_shift = 28
@@ -219,5 +221,5 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 	name = "unhooked PENLITE defibrillator mount"
 	desc = "A frame for a PENLITE defibrillator mount. Unlike the normal mount, it can passively recharge the unit inside."
 	icon_state = "penlite_mount"
-	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 3, /datum/material/glass = SMALL_MATERIAL_AMOUNT, /datum/material/silver = SMALL_MATERIAL_AMOUNT * 0.5)
+	custom_materials = list(/datum/material/iron = 300, /datum/material/glass = 100, /datum/material/silver = 50)
 	result_path = /obj/machinery/defibrillator_mount/charging

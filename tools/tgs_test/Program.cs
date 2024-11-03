@@ -227,19 +227,22 @@ try
 		default);
 
 	Console.WriteLine("Uploading EventScripts...");
+	var configurationUploadTasks = new List<Task<ConfigurationFileResponse>>();
 	foreach (var scriptDownloadKvp in scriptDownloadTasks)
 	{
 		var scriptContent = await scriptDownloadKvp.Value;
 
 		var memoryStream = new MemoryStream(scriptContent);
-		await instanceClient.Configuration.Write(
-			new ConfigurationFileRequest
+		configurationUploadTasks.Add(
+			instanceClient.Configuration.Write(new ConfigurationFileRequest
 			{
 				Path = $"EventScripts/{scriptDownloadKvp.Key}"
 			},
 			memoryStream,
-			default);
+			default));
 	}
+
+	await Task.WhenAll(configurationUploadTasks);
 
 	Console.WriteLine("Creating GameStaticFiles structure...");
 	var staticFileDownloadTasks = new Dictionary<string, Dictionary<string, Task<byte[]>>>();

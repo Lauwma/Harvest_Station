@@ -5,7 +5,7 @@
  */
 /mob/living/circuit_drone
 	name = "drone"
-	icon = 'icons/obj/science/circuits.dmi'
+	icon = 'icons/obj/wiremod.dmi'
 	icon_state = "setup_medium_med"
 	maxHealth = 300
 	health = 300
@@ -32,7 +32,7 @@
 /mob/living/circuit_drone/updatehealth()
 	. = ..()
 	if(health < 0)
-		gib()
+		gib(no_brain = TRUE, no_organs = TRUE, no_bodyparts = TRUE)
 
 /mob/living/circuit_drone/welder_act(mob/living/user, obj/item/tool)
 	. = ..()

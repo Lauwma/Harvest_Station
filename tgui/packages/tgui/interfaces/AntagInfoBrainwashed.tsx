@@ -1,15 +1,22 @@
 import { useBackend } from '../backend';
-import { Box, Icon, Section, Stack } from '../components';
+import { Icon, Section, Stack } from '../components';
+import { BooleanLike } from 'common/react';
 import { Window } from '../layouts';
-import { ObjectivePrintout, Objective } from './common/Objectives';
 
-type Data = {
+type Objective = {
+  count: number;
+  name: string;
+  explanation: string;
+  complete: BooleanLike;
+  was_uncompleted: BooleanLike;
+  reward: number;
+};
+
+type Info = {
   objectives: Objective[];
 };
 
-export const AntagInfoBrainwashed = (porps, context) => {
-  const { data } = useBackend<Data>(context);
-
+export const AntagInfoBrainwashed = () => {
   return (
     <Window width={400} height={400} theme="abductor">
       <Window.Content backgroundColor="#722e7d">
@@ -33,15 +40,7 @@ export const AntagInfoBrainwashed = (porps, context) => {
               It is focusing on a single purpose...
             </Stack.Item>
             <Stack.Item mt={3.5} grow>
-              <ObjectivePrintout
-                fill
-                objectives={data.objectives}
-                objectiveFollowup={
-                  <Box bold textColor="red">
-                    This Directive must be followed.
-                  </Box>
-                }
-              />
+              <ObjectivePrintout />
             </Stack.Item>
             <Stack.Item fontSize="20px" textColor="#61e4b9">
               Follow the directives at any cost!
@@ -53,5 +52,30 @@ export const AntagInfoBrainwashed = (porps, context) => {
         </Section>
       </Window.Content>
     </Window>
+  );
+};
+
+const ObjectivePrintout = (props, context) => {
+  const { data } = useBackend<Info>(context);
+  const { objectives } = data;
+  return (
+    <Stack fill vertical>
+      <Stack.Item bold textColor="#61e4b9">
+        Your current objectives:
+      </Stack.Item>
+      <Stack.Item textAlign="left">
+        {(!objectives && 'None!') ||
+          objectives.map((objective) => (
+            <>
+              <Stack.Item key={objective.count}>
+                {objective.count}. {objective.explanation}
+              </Stack.Item>
+              <Stack.Item bold textColor="red">
+                This Directive must be followed.
+              </Stack.Item>
+            </>
+          ))}
+      </Stack.Item>
+    </Stack>
   );
 };

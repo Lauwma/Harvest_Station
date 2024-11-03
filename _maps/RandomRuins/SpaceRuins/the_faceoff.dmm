@@ -16,19 +16,23 @@
 	},
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space)
+"am" = (
+/obj/structure/sign/poster/contraband/random/directional/east,
+/turf/closed/wall/mineral/plastitanium/nodiagonal,
+/area/ruin/space)
 "ap" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/fuel_pool,
 /obj/structure/cable,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "as" = (
 /obj/effect/mapping_helpers/burnt_floor,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/textured/airless,
 /area/ruin/space)
 "az" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
@@ -42,8 +46,8 @@
 /turf/open/floor/iron/dark/smooth_large/airless,
 /area/ruin/space)
 "bz" = (
-/turf/template_noop,
-/area/template_noop)
+/turf/open/space/basic,
+/area/space)
 "bM" = (
 /obj/item/ammo_casing/a357/spent{
 	dir = 1;
@@ -100,7 +104,7 @@
 /turf/open/floor/mineral/titanium/tiled/blue/airless,
 /area/ruin/space)
 "cA" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
@@ -147,15 +151,15 @@
 /area/ruin/space)
 "eh" = (
 /obj/effect/spawner/random/maintenance,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/full,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "eo" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/full,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
@@ -163,7 +167,7 @@
 /turf/closed/wall/mineral/titanium,
 /area/ruin/space)
 "eH" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/fuel_pool,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
@@ -173,7 +177,7 @@
 	pixel_x = -1;
 	pixel_y = 5
 	},
-/mob/living/basic/trooper/syndicate/melee/space,
+/mob/living/basic/syndicate/melee/space,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "eU" = (
@@ -181,9 +185,10 @@
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space)
-"fa" = (
-/obj/structure/sign/poster/contraband/interdyne_gene_clinics,
-/turf/closed/wall/mineral/plastitanium/nodiagonal,
+"fl" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/iron/dark/smooth_large/airless,
 /area/ruin/space)
 "fO" = (
 /obj/structure/table/reinforced/plastitaniumglass,
@@ -191,8 +196,8 @@
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "fR" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/toilet{
 	dir = 1
 	},
@@ -200,7 +205,7 @@
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "ga" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/spawner/random/structure/chair_flipped{
 	dir = 8
 	},
@@ -208,7 +213,7 @@
 /turf/open/floor/iron/dark/textured/airless,
 /area/ruin/space)
 "gh" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/oil/slippery,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
@@ -231,8 +236,18 @@
 /obj/effect/decal/remains/human,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
+"gy" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/closed/wall/mineral/plastitanium/nodiagonal,
+/area/ruin/space)
 "gN" = (
 /turf/open/floor/mineral/plastitanium/red/airless,
+/area/ruin/space)
+"gR" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/closed/wall/mineral/plastitanium/nodiagonal,
 /area/ruin/space)
 "hl" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -264,7 +279,7 @@
 /area/ruin/space)
 "ii" = (
 /obj/effect/decal/remains/human,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/fuel_pool,
 /obj/structure/cable,
 /obj/effect/decal/cleanable/blood,
@@ -329,19 +344,20 @@
 	},
 /turf/open/floor/mineral/plastitanium/red/airless,
 /area/ruin/space)
-"jZ" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/item/stack/sheet/mineral/wood/fifty,
-/obj/machinery/light/dim/directional/west,
-/turf/open/floor/iron/dark/airless,
-/area/ruin/space)
 "kC" = (
 /obj/structure/cable,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
+"ll" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/dim{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/airless,
+/area/ruin/space)
 "lX" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/engineering,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
@@ -373,22 +389,8 @@
 /area/ruin/space)
 "oe" = (
 /obj/effect/spawner/random/maintenance,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/item/flashlight/lantern,
-/turf/open/floor/iron/dark/airless,
-/area/ruin/space)
-"ou" = (
-/obj/structure/closet/syndicate,
-/obj/item/clothing/under/syndicate,
-/obj/item/pickaxe,
-/obj/effect/decal/cleanable/fuel_pool,
-/obj/effect/decal/cleanable/fuel_pool,
-/obj/item/flashlight/lantern,
-/obj/item/clothing/suit/hooded/explorer/syndicate{
-	pixel_x = 8;
-	pixel_y = -2
-	},
-/obj/item/clothing/mask/gas/syndicate,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "pl" = (
@@ -405,7 +407,7 @@
 /turf/open/floor/iron/dark/textured/airless,
 /area/ruin/space)
 "pL" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
@@ -416,8 +418,14 @@
 /area/ruin/space)
 "pN" = (
 /obj/effect/mapping_helpers/burnt_floor,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/misc/asteroid/basalt/airless,
+/area/ruin/space)
+"qL" = (
+/obj/machinery/light/dim{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "qO" = (
 /obj/structure/reagent_dispensers/fueltank,
@@ -426,7 +434,7 @@
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "qT" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/corner{
 	dir = 1
 	},
@@ -449,10 +457,6 @@
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space)
-"rG" = (
-/obj/structure/sign/poster/official/moth_meth,
-/turf/closed/wall/mineral/plastitanium/nodiagonal,
-/area/ruin/space)
 "rU" = (
 /obj/effect/mapping_helpers/broken_floor,
 /obj/item/ammo_casing/a357/spent{
@@ -466,8 +470,8 @@
 /turf/closed/wall/mineral/titanium,
 /area/ruin/space)
 "sk" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
@@ -477,7 +481,7 @@
 "so" = (
 /obj/structure/sink/directional/north,
 /obj/structure/mirror/directional/south,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "su" = (
@@ -504,13 +508,18 @@
 /obj/effect/turf_decal/stripes/red/full,
 /turf/open/floor/iron/dark/smooth_large/airless,
 /area/ruin/space)
+"td" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/sign/poster/official/moth_meth,
+/turf/closed/wall/mineral/plastitanium/nodiagonal,
+/area/ruin/space)
 "tm" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/gun/energy/laser/chameleon,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "tK" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/table/reinforced/plastitaniumglass,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
@@ -535,9 +544,13 @@
 	},
 /turf/open/floor/mineral/plastitanium/red/airless,
 /area/ruin/space)
+"uq" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/closed/wall/mineral/plastitanium/nodiagonal,
+/area/ruin/space)
 "vl" = (
 /obj/effect/mapping_helpers/broken_floor,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "vA" = (
@@ -573,7 +586,7 @@
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space)
 "wW" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/corner{
 	dir = 1
 	},
@@ -606,8 +619,8 @@
 /obj/effect/mapping_helpers/broken_floor,
 /obj/effect/mob_spawn/corpse/human/nanotrasensoldier,
 /obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/blood/gibs/limb,
 /obj/item/gun/energy/e_gun/mini,
+/obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/iron/dark/smooth_large/airless,
 /area/ruin/space)
 "xT" = (
@@ -628,7 +641,7 @@
 /area/ruin/space)
 "yx" = (
 /obj/machinery/shower/directional/west,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/item/pickaxe,
 /obj/effect/turf_decal/stripes/full,
 /obj/item/storage/belt/mining,
@@ -659,15 +672,21 @@
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space)
 "Az" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/spawner/random/structure/chair_flipped{
 	dir = 8
 	},
 /obj/effect/gibspawner/human,
 /turf/open/floor/iron/dark/textured/airless,
 /area/ruin/space)
+"AE" = (
+/obj/machinery/light/dim{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/airless,
+/area/ruin/space)
 "AV" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
@@ -680,20 +699,28 @@
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "BV" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/airless,
+/area/ruin/space)
+"Cf" = (
+/turf/open/space/basic,
 /area/ruin/space)
 "Ck" = (
 /obj/effect/spawner/random/maintenance,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 10
 	},
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
+"Cp" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/sign/poster/contraband/interdyne_gene_clinics,
+/turf/closed/wall/mineral/plastitanium/nodiagonal,
+/area/ruin/space)
 "Cv" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/end{
 	dir = 8
 	},
@@ -720,23 +747,23 @@
 /turf/open/floor/iron/dark/textured/airless,
 /area/ruin/space)
 "Df" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "Dm" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/item/ammo_casing/a357/spent{
 	pixel_x = 5;
 	pixel_y = 12
 	},
 /obj/effect/mob_spawn/corpse/human/russian,
 /obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/full,
-/mob/living/basic/mining_drone,
 /obj/item/grenade/c4,
+/mob/living/simple_animal/hostile/mining_drone,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "Do" = (
@@ -781,7 +808,7 @@
 /area/ruin/space)
 "Fk" = (
 /obj/effect/mapping_helpers/broken_floor,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/full,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
@@ -794,12 +821,27 @@
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "FV" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/cable,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
+"Gf" = (
+/obj/structure/closet/syndicate,
+/obj/item/clothing/suit/space/syndicate/black/red{
+	pixel_y = -2;
+	pixel_x = 8
+	},
+/obj/item/clothing/mask/gas/syndicate,
+/obj/item/clothing/under/syndicate,
+/obj/item/clothing/head/helmet/space/syndicate/black/red,
+/obj/item/pickaxe,
+/obj/effect/decal/cleanable/fuel_pool,
+/obj/effect/decal/cleanable/fuel_pool,
+/obj/item/flashlight/lantern,
+/turf/open/floor/iron/dark/airless,
+/area/ruin/space)
 "Gi" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/portable_atmospherics/canister/air,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
@@ -835,17 +877,16 @@
 /area/ruin/space)
 "HI" = (
 /obj/structure/closet/syndicate,
+/obj/item/clothing/mask/gas/syndicate,
 /obj/item/clothing/under/syndicate,
+/obj/item/clothing/suit/space/syndicate/black/red{
+	pixel_y = -4
+	},
 /obj/item/clothing/head/helmet/space/syndicate/black/red,
 /obj/item/pickaxe,
 /obj/effect/decal/cleanable/fuel_pool,
 /obj/effect/decal/cleanable/fuel_pool,
 /obj/item/flashlight/lantern,
-/obj/item/clothing/suit/hooded/explorer/syndicate{
-	pixel_y = -2;
-	pixel_x = 8
-	},
-/obj/item/clothing/mask/gas/syndicate,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "IF" = (
@@ -854,7 +895,7 @@
 /turf/open/floor/mineral/plastitanium/red/airless,
 /area/ruin/space)
 "IP" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/item/pickaxe,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
@@ -871,13 +912,9 @@
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "Ju" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/human,
 /obj/structure/cable,
-/turf/open/floor/mineral/plastitanium/airless,
-/area/ruin/space)
-"JF" = (
-/obj/machinery/light/dim/directional/east,
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space)
 "JP" = (
@@ -960,7 +997,7 @@
 /area/ruin/space)
 "Md" = (
 /obj/effect/mapping_helpers/broken_floor,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/fuel_pool,
 /obj/effect/decal/cleanable/fuel_pool,
 /obj/structure/cable,
@@ -969,7 +1006,7 @@
 /area/ruin/space)
 "Mo" = (
 /obj/effect/mapping_helpers/broken_floor,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/mineral/plastitanium/red/airless,
 /area/ruin/space)
 "Nc" = (
@@ -988,15 +1025,25 @@
 /turf/open/floor/iron/dark/textured/airless,
 /area/ruin/space)
 "OC" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/textured/airless,
 /area/ruin/space)
 "OF" = (
 /obj/structure/barricade/wooden,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
+"Pb" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/blood,
+/turf/closed/wall/mineral/titanium,
+/area/ruin/space)
+"Ph" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/closed/mineral/asteroid,
+/area/ruin/space)
 "Pi" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "Qn" = (
@@ -1005,8 +1052,10 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space)
-"Qx" = (
-/turf/open/floor/iron/dark/smooth_large/airless,
+"QN" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/sign/poster/contraband/soviet_propaganda,
+/turf/closed/wall/mineral/plastitanium/nodiagonal,
 /area/ruin/space)
 "Rt" = (
 /obj/item/wallframe/firealarm,
@@ -1027,7 +1076,7 @@
 /area/ruin/space)
 "SY" = (
 /obj/effect/decal/remains/human,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/gibspawner,
 /turf/open/floor/iron/dark/airless,
@@ -1037,13 +1086,8 @@
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
-"Ts" = (
-/obj/effect/mapping_helpers/broken_floor,
-/obj/structure/girder,
-/turf/open/floor/iron/dark/smooth_large/airless,
-/area/ruin/space)
 "Tu" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "TH" = (
@@ -1054,7 +1098,7 @@
 /turf/open/floor/iron/dark/textured/airless,
 /area/ruin/space)
 "Ue" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/stack/sticky_tape/pointy/super,
 /obj/structure/cable,
@@ -1088,7 +1132,7 @@
 /turf/open/floor/mineral/plastitanium/red/airless,
 /area/ruin/space)
 "UQ" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/corner{
 	dir = 1
 	},
@@ -1096,10 +1140,18 @@
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "US" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/paperplane/syndicate,
 /turf/open/floor/mineral/plastitanium/airless,
+/area/ruin/space)
+"UV" = (
+/obj/item/ammo_casing/a357/spent{
+	dir = 8;
+	pixel_x = 2;
+	pixel_y = 1
+	},
+/turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "Vn" = (
 /obj/item/ammo_casing/a357/spent{
@@ -1158,6 +1210,12 @@
 	},
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space)
+"VQ" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/stack/sheet/mineral/wood/fifty,
+/obj/machinery/light/dim,
+/turf/open/floor/iron/dark/airless,
+/area/ruin/space)
 "VX" = (
 /obj/structure/sign/poster/contraband/bountyhunters,
 /turf/closed/wall/mineral/plastitanium/nodiagonal,
@@ -1175,7 +1233,7 @@
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "XQ" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/corner{
 	dir = 1
 	},
@@ -1193,7 +1251,7 @@
 /turf/open/floor/iron/dark/smooth_large/airless,
 /area/ruin/space)
 "YJ" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/full,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
@@ -1258,21 +1316,18 @@
 "ZO" = (
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space)
-"ZP" = (
-/obj/item/ammo_casing/a357/spent{
-	dir = 8;
-	pixel_x = 2;
-	pixel_y = 1
-	},
-/obj/machinery/light/dim/directional/east,
-/turf/open/floor/iron/dark/airless,
-/area/ruin/space)
 "ZS" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
 /turf/open/misc/asteroid/basalt/airless,
+/area/ruin/space)
+"ZZ" = (
+/obj/machinery/light/dim{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/textured/airless,
 /area/ruin/space)
 
 (1,1,1) = {"
@@ -1389,34 +1444,34 @@ bz
 (4,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1426,34 +1481,34 @@ bz
 (5,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1463,34 +1518,34 @@ bz
 (6,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
-bz
-bz
-bz
+Cf
+Cf
+Cf
 Er
 Er
 Er
 Er
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1500,21 +1555,21 @@ bz
 (7,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
 Er
 Er
-bz
+Cf
 Er
 Er
 Er
@@ -1524,10 +1579,10 @@ Er
 Er
 Er
 Er
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1537,14 +1592,14 @@ bz
 (8,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
@@ -1558,13 +1613,13 @@ Er
 Er
 Er
 Er
+uq
 ED
-ED
 Er
 Er
-bz
-bz
-bz
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1574,13 +1629,13 @@ bz
 (9,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
@@ -1596,12 +1651,12 @@ YJ
 eh
 eo
 so
-ED
+uq
 ED
 Er
-bz
-bz
-bz
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1611,12 +1666,12 @@ bz
 (10,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 ED
 Er
@@ -1625,20 +1680,20 @@ cA
 pL
 az
 qT
-jZ
+VQ
 ED
-ED
-ED
+zx
+gR
 Fk
 vl
 oe
 Ck
 fR
-xT
+QN
 Er
-bz
-bz
-bz
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1648,10 +1703,10 @@ bz
 (11,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
@@ -1673,9 +1728,9 @@ yx
 Dm
 Er
 Er
-bz
-bz
-bz
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1685,9 +1740,9 @@ bz
 (12,1,1) = {"
 bz
 bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
 Er
 Er
 ED
@@ -1706,13 +1761,13 @@ UM
 UM
 gq
 ED
-rG
-ED
-ED
+td
+uq
+uq
 Er
-bz
-bz
-bz
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1722,14 +1777,14 @@ bz
 (13,1,1) = {"
 bz
 bz
-bz
+Cf
 Er
 Er
 Er
 ED
 ED
-ED
-Tu
+uq
+ll
 BV
 Tu
 Tu
@@ -1747,9 +1802,9 @@ Er
 Er
 Er
 Er
-bz
-bz
-bz
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1763,7 +1818,7 @@ Er
 Er
 Er
 Er
-ED
+gy
 lX
 xm
 ZC
@@ -1782,11 +1837,11 @@ vZ
 xT
 Er
 Er
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1798,7 +1853,7 @@ bz
 bz
 Er
 Er
-Er
+Ph
 sk
 XQ
 Gi
@@ -1818,12 +1873,12 @@ je
 ZC
 ED
 Er
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1833,9 +1888,9 @@ bz
 (16,1,1) = {"
 bz
 bz
-bz
+Cf
 Er
-Er
+Ph
 AV
 SY
 ap
@@ -1857,10 +1912,10 @@ ij
 Er
 Er
 Er
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1870,13 +1925,13 @@ bz
 (17,1,1) = {"
 bz
 bz
-bz
+Cf
 Er
 ED
 wW
 eH
 ii
-ED
+uq
 Jh
 wY
 zi
@@ -1895,9 +1950,9 @@ ED
 ED
 ED
 Er
-bz
-bz
-bz
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -1907,13 +1962,13 @@ bz
 (18,1,1) = {"
 bz
 bz
-bz
+Cf
 Er
 ED
-fa
+Cp
 HI
 Md
-ED
+uq
 rj
 ZC
 ZO
@@ -1933,8 +1988,8 @@ ch
 ED
 Er
 Er
-bz
-bz
+Cf
+Cf
 bz
 bz
 bz
@@ -1944,11 +1999,11 @@ bz
 (19,1,1) = {"
 bz
 bz
-bz
-bz
+Cf
+Cf
 Er
 ED
-ou
+Gf
 qO
 ED
 FV
@@ -1970,8 +2025,8 @@ ZC
 HG
 ED
 Er
-bz
-bz
+Cf
+Cf
 bz
 bz
 bz
@@ -1981,14 +2036,14 @@ bz
 (20,1,1) = {"
 bz
 bz
-bz
-bz
+Cf
+Cf
 Er
 ED
 ED
+uq
 ED
-ED
-ZC
+qL
 CT
 Tu
 pD
@@ -2008,7 +2063,7 @@ ZC
 ED
 ED
 Er
-bz
+Cf
 bz
 bz
 bz
@@ -2018,9 +2073,9 @@ bz
 (21,1,1) = {"
 bz
 bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
 Er
 Er
 Er
@@ -2055,10 +2110,10 @@ bz
 (22,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 ED
@@ -2092,17 +2147,17 @@ bz
 (23,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
 ED
-kC
+Jh
 pl
 Vn
 GA
@@ -2129,18 +2184,18 @@ bz
 (24,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 ED
 LX
-ZP
+UV
 zv
 ds
 zi
@@ -2155,7 +2210,7 @@ ZO
 Ef
 Ef
 GX
-eA
+Pb
 Er
 bz
 bz
@@ -2166,21 +2221,21 @@ bz
 (25,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 ED
 mG
-ED
 Rt
 ED
-ds
+zx
+ZZ
 Tp
 ds
 ZC
@@ -2192,7 +2247,7 @@ Ef
 hA
 YI
 YI
-Qx
+fl
 Er
 bz
 bz
@@ -2203,14 +2258,14 @@ bz
 (26,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
@@ -2230,7 +2285,7 @@ xI
 sa
 Ds
 eA
-bz
+Cf
 bz
 bz
 bz
@@ -2240,18 +2295,18 @@ bz
 (27,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 ED
 ED
@@ -2267,7 +2322,7 @@ YI
 eA
 Ds
 eA
-bz
+Cf
 bz
 bz
 bz
@@ -2277,34 +2332,34 @@ bz
 (28,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
 Er
 ED
 ED
-JF
+AE
 Ef
 Ef
 YI
-Ts
-Ts
+YI
+YI
 nl
 cq
 nl
-bz
+Cf
 bz
 bz
 bz
@@ -2314,21 +2369,21 @@ bz
 (29,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 ED
@@ -2336,12 +2391,12 @@ ED
 sZ
 ED
 Er
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -2351,34 +2406,34 @@ bz
 (30,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 ED
-ED
+am
 ED
 Er
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz
@@ -2388,34 +2443,34 @@ bz
 (31,1,1) = {"
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 Er
 Er
 Er
 Er
-bz
-bz
-bz
-bz
-bz
-bz
+Cf
+Cf
+Cf
+Cf
+Cf
+Cf
 bz
 bz
 bz

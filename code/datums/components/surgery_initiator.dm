@@ -61,7 +61,7 @@
 	var/list/available_surgeries = get_available_surgeries(user, target)
 
 	if(!length(available_surgeries))
-		if (target.body_position == LYING_DOWN || !(target.mobility_flags & MOBILITY_LIEDOWN))
+		if (target.body_position == LYING_DOWN)
 			target.balloon_alert(user, "no surgeries available!")
 		else
 			target.balloon_alert(user, "make them lie down!")
@@ -99,7 +99,7 @@
 				continue
 		else if(carbon_target && (surgery.surgery_flags & SURGERY_REQUIRE_LIMB)) //mob with no limb in surgery zone when we need a limb
 			continue
-		if(IS_IN_INVALID_SURGICAL_POSITION(target, surgery))
+		if((surgery.surgery_flags & SURGERY_REQUIRE_RESTING) && target.body_position != LYING_DOWN)
 			continue
 		if(!surgery.can_start(user, target))
 			continue
@@ -130,6 +130,7 @@
 	var/required_tool_type = TOOL_CAUTERY
 	var/obj/item/close_tool = user.get_inactive_held_item()
 	var/is_robotic = the_surgery.requires_bodypart_type == BODYTYPE_ROBOTIC
+
 	if(is_robotic)
 		required_tool_type = TOOL_SCREWDRIVER
 
@@ -303,7 +304,7 @@
 		target.balloon_alert(user, "not the right type of limb!")
 		return
 
-	if (IS_IN_INVALID_SURGICAL_POSITION(target, surgery))
+	if ((surgery.surgery_flags & SURGERY_REQUIRE_RESTING) && target.body_position != LYING_DOWN)
 		target.balloon_alert(user, "patient is not lying down!")
 		return
 

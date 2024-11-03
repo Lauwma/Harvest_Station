@@ -1,3 +1,12 @@
+/mob/living/silicon/pai/ClickOn(atom/target, params)
+	..()
+	if(!camera?.in_camera_mode)
+		return FALSE
+	//pAI picture taking
+	camera.toggle_camera_mode(sound = FALSE)
+	camera.captureimage(target, usr, camera.picture_size_x - 1, camera.picture_size_y - 1)
+	return TRUE
+
 /obj/item/camera/siliconcam/pai_camera
 	name = "pAI photo camera"
 	light_color = COLOR_PAI_GREEN
@@ -6,7 +15,7 @@
 	var/number = length(stored)
 	picture.picture_name = "Image [number] (taken by [loc.name])"
 	stored[picture] = TRUE
-	playsound(src, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, TRUE, -3)
+	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, TRUE, -3)
 	balloon_alert(user, "image recorded")
 
 /**
@@ -37,14 +46,13 @@
  * @returns {boolean} - TRUE if the camera worked.
  */
 /mob/living/silicon/pai/proc/use_camera(mob/user, mode)
-	if(!aicamera || isnull(mode))
+	if(!camera || isnull(mode))
 		return FALSE
 	switch(mode)
 		if(PAI_PHOTO_MODE_CAMERA)
-			aicamera.toggle_camera_mode(user)
+			camera.toggle_camera_mode(user)
 		if(PAI_PHOTO_MODE_PRINTER)
-			var/obj/item/camera/siliconcam/pai_camera/paicam = aicamera
-			paicam.pai_print(user)
+			camera.pai_print(user)
 		if(PAI_PHOTO_MODE_ZOOM)
-			aicamera.adjust_zoom(user)
+			camera.adjust_zoom(user)
 	return TRUE

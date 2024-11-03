@@ -1,7 +1,12 @@
 import { useBackend } from '../backend';
 import { Icon, Section, Stack } from '../components';
 import { Window } from '../layouts';
-import { ObjectivePrintout, Objective } from './common/Objectives';
+
+type Objective = {
+  count: number;
+  name: string;
+  explanation: string;
+};
 
 type Info = {
   objectives: Objective[];
@@ -30,7 +35,7 @@ export const AntagInfoSeparatist = (props, context) => {
 
 const IntroductionObjectives = (props, context) => {
   const { data } = useBackend<Info>(context);
-  const { nation, objectives } = data;
+  const { nation } = data;
   return (
     <Section fill>
       <Stack vertical>
@@ -38,10 +43,7 @@ const IntroductionObjectives = (props, context) => {
           You are the Separatist for a free {nation}!
         </Stack.Item>
         <Stack.Item grow>
-          <ObjectivePrintout
-            objectives={objectives}
-            titleMessage={`${nation}'s objectives:`}
-          />
+          <ObjectivePrintout />
         </Stack.Item>
       </Stack>
     </Section>
@@ -84,5 +86,23 @@ const FrequentlyAskedQuestions = (props, context) => {
         <Stack.Item>Yes.</Stack.Item>
       </Stack>
     </Section>
+  );
+};
+
+const ObjectivePrintout = (props, context) => {
+  const { data } = useBackend<Info>(context);
+  const { nation, objectives } = data;
+  return (
+    <Stack vertical>
+      <Stack.Item bold>{nation}&apos;s objectives:</Stack.Item>
+      <Stack.Item>
+        {(!objectives && 'None!') ||
+          objectives.map((objective) => (
+            <Stack.Item key={objective.count}>
+              #{objective.count}: {objective.explanation}
+            </Stack.Item>
+          ))}
+      </Stack.Item>
+    </Stack>
   );
 };

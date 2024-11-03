@@ -12,6 +12,10 @@
 "d" = (
 /turf/open/floor/wood,
 /area/shuttle/escape)
+"e" = (
+/obj/machinery/light/directional/north,
+/turf/open/floor/carpet,
+/area/shuttle/escape)
 "f" = (
 /obj/structure/chair/comfy/teal,
 /turf/open/floor/carpet,
@@ -120,6 +124,7 @@
 /turf/open/floor/wood,
 /area/shuttle/escape)
 "B" = (
+/obj/machinery/light/directional/south,
 /obj/structure/table/wood,
 /obj/item/paper_bin,
 /obj/item/pen,
@@ -178,7 +183,7 @@ a
 "}
 (3,1,1) = {"
 a
-h
+e
 l
 h
 h

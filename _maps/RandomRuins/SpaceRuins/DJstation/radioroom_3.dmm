@@ -25,6 +25,14 @@
 /obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/djstation)
+"s" = (
+/obj/machinery/light/directional/east,
+/turf/open/floor/iron/cafeteria,
+/area/ruin/space/djstation)
+"u" = (
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron/cafeteria,
+/area/ruin/space/djstation)
 "x" = (
 /obj/structure/lattice,
 /turf/template_noop,
@@ -44,6 +52,11 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/djstation)
+"G" = (
+/obj/structure/cable,
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron/cafeteria,
+/area/ruin/space/djstation)
 "K" = (
 /obj/machinery/duct,
 /obj/modular_map_root/djstation{
@@ -56,7 +69,6 @@
 /area/template_noop)
 "N" = (
 /obj/modular_map_connector,
-/obj/machinery/light/directional/south,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/djstation)
 "O" = (
@@ -75,6 +87,11 @@
 	},
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/djstation)
+"T" = (
+/obj/machinery/light/directional/east,
+/obj/machinery/duct,
+/turf/open/floor/iron/cafeteria,
+/area/ruin/space/djstation)
 "V" = (
 /obj/structure/table,
 /obj/item/radio/intercom{
@@ -87,10 +104,6 @@
 "W" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
-/area/ruin/space/djstation)
-"Z" = (
-/obj/machinery/light/floor,
-/turf/open/floor/iron/cafeteria,
 /area/ruin/space/djstation)
 
 (1,1,1) = {"
@@ -119,19 +132,19 @@ a
 y
 M
 W
-h
+u
 h
 O
 V
 g
-g
+G
 "}
 (4,1,1) = {"
 y
 M
 W
 h
-Z
+h
 Q
 z
 h
@@ -141,12 +154,12 @@ N
 y
 M
 W
-h
+s
 h
 r
 V
 A
-A
+T
 "}
 (6,1,1) = {"
 y

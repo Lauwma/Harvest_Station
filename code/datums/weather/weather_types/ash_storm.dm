@@ -57,6 +57,10 @@
 	GLOB.ash_storm_sounds += weak_sounds
 	return ..()
 
+/datum/weather/ash_storm/end()
+	GLOB.ash_storm_sounds -= weak_sounds
+	return ..()
+
 /datum/weather/ash_storm/can_weather_act(mob/living/mob_to_check)
 	. = ..()
 	if(!. || !ishuman(mob_to_check))
@@ -66,15 +70,18 @@
 		return FALSE
 
 /datum/weather/ash_storm/weather_act(mob/living/victim)
-	victim.adjustFireLoss(4, required_bodytype = BODYTYPE_ORGANIC)
+	victim.adjustFireLoss(4)
 
 /datum/weather/ash_storm/end()
-	GLOB.ash_storm_sounds -= weak_sounds
+	. = ..()
 	for(var/turf/open/misc/asteroid/basalt/basalt as anything in GLOB.dug_up_basalt)
 		if(!(basalt.loc in impacted_areas) || !(basalt.z in impacted_z_levels))
 			continue
-		basalt.refill_dug()
-	return ..()
+		GLOB.dug_up_basalt -= basalt
+		basalt.dug = FALSE
+		basalt.icon_state = "[basalt.base_icon_state]"
+		if(prob(basalt.floor_variance))
+			basalt.icon_state += "[rand(0,12)]"
 
 //Emberfalls are the result of an ash storm passing by close to the playable area of lavaland. They have a 10% chance to trigger in place of an ash storm.
 /datum/weather/ash_storm/emberfall

@@ -15,15 +15,7 @@
 	///The player's written notes, that they can send to chat at any time.
 	var/written_notes
 
-	///The ckey of the person playing as this Mafia role, CAN BE NULL IN FAVOR OF player_pda.
 	var/player_key
-	///The PDA of the person playing as this Mafia role, CAN BE NULL IN FAVOR OF player_key.
-	var/obj/item/modular_computer/player_pda
-
-	///List of all messages this role got throughout the game.
-	var/list/role_messages = list()
-
-
 	var/mob/living/carbon/human/body
 	var/obj/effect/landmark/mafia/assigned_landmark
 
@@ -54,64 +46,10 @@
 		role_unique_actions -= abilities
 
 /datum/mafia_role/Destroy(force, ...)
-	UnregisterSignal(body, COMSIG_MOB_SAY)
 	QDEL_NULL(mafia_alert)
 	QDEL_NULL(body)
-	QDEL_LIST(role_unique_actions)
-	role_messages = null
+	QDEL_NULL(role_unique_actions)
 	return ..()
-
-/datum/mafia_role/proc/register_body(mob/living/carbon/human/new_body)
-	body = new_body
-	RegisterSignal(new_body, COMSIG_MOB_SAY, PROC_REF(handle_speech))
-
-/**
- * send_message_to_player
- *
- * Sends a message to a player, checking if they are playing through a PDA or not.
- * Args:
- * * message - The message to send to the person
- * * balloon_alert - Whether it should be as a balloon alert, only if it's to a non-PDA user.
- */
-/datum/mafia_role/proc/send_message_to_player(message, balloon_alert = FALSE)
-	if(player_pda)
-		role_messages += message
-		return
-	if(balloon_alert)
-		body.balloon_alert(body, message)
-		return
-	to_chat(body, message)
-
-/**
- * handle_speech
- *
- * Handles Mafia roles talking in chat.
- * First it will go through their abilities for Ability-specific speech,
- * if none affects it, we will go to day chat.
- */
-/datum/mafia_role/proc/handle_speech(datum/source, list/speech_args)
-	SIGNAL_HANDLER
-	for(var/datum/mafia_ability/abilities as anything in role_unique_actions)
-		if(abilities.handle_speech(source, speech_args))
-			return
-	var/datum/mafia_controller/mafia_game = GLOB.mafia_game
-	if(!mafia_game || mafia_game.phase == MAFIA_PHASE_NIGHT)
-		return
-	var/message = "[source]: [html_decode(speech_args[SPEECH_MESSAGE])]"
-	mafia_game.send_message(message, log_only = TRUE)
-
-/**
- * Puts the player in their body and keeps track of their previous one to put them back in later.
- * Adds the playing_mafia trait so people examining them will know why they're currently lacking a soul.
- */
-/datum/mafia_role/proc/put_player_in_body(client/player)
-	if(player.mob.mind && player.mob.mind.current)
-		body.AddComponent( \
-			/datum/component/temporary_body, \
-			old_mind = player.mob.mind, \
-			old_body = player.mob.mind.current, \
-		)
-	body.key = player.key
 
 /**
  * Tests kill immunities, if nothing prevents the kill, kills this role.
@@ -128,6 +66,8 @@
 		body.death()
 	if(lynch)
 		reveal_role(game, verbose = TRUE)
+	if(!(player_key in game.mafia_spectators)) //people who played will want to see the end of the game more often than not
+		game.mafia_spectators += player_key
 	game.living_roles -= src
 	return TRUE
 

@@ -10,7 +10,6 @@ type SpawnersMenuContext = {
 type spawner = {
   name: string;
   amount_left: number;
-  desc?: string;
   you_are_text?: string;
   flavor_text?: string;
   important_text?: string;
@@ -55,23 +54,15 @@ export const SpawnersMenu = (props, context) => {
                   </Stack>
                 }>
                 <LabeledList>
-                  {spawner.desc ? (
-                    <LabeledList.Item label="Description">
-                      {spawner.desc}
-                    </LabeledList.Item>
-                  ) : (
-                    <div>
-                      <LabeledList.Item label="Origin">
-                        {spawner.you_are_text || 'Unknown'}
-                      </LabeledList.Item>
-                      <LabeledList.Item label="Directives">
-                        {spawner.flavor_text || 'None'}
-                      </LabeledList.Item>
-                      <LabeledList.Item color="bad" label="Conditions">
-                        {spawner.important_text || 'None'}
-                      </LabeledList.Item>
-                    </div>
-                  )}
+                  <LabeledList.Item label="Origin">
+                    {spawner.you_are_text || 'Unknown'}
+                  </LabeledList.Item>
+                  <LabeledList.Item label="Directives">
+                    {spawner.flavor_text || 'None'}
+                  </LabeledList.Item>
+                  <LabeledList.Item color="bad" label="Conditions">
+                    {spawner.important_text || 'None'}
+                  </LabeledList.Item>
                 </LabeledList>
               </Section>
             </Stack.Item>

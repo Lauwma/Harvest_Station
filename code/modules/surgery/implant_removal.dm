@@ -1,6 +1,5 @@
 /datum/surgery/implant_removal
-	name = "Implant Removal"
-	target_mobtypes = list(/mob/living)
+	name = "Implant removal"
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
 		/datum/surgery_step/incise,
@@ -21,7 +20,7 @@
 	success_sound = 'sound/surgery/hemostat1.ogg'
 	var/obj/item/implant/implant
 
-/datum/surgery_step/extract_implant/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/extract_implant/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	for(var/obj/item/object in target.implants)
 		implant = object
 		break
@@ -43,7 +42,7 @@
 			span_notice("[user] looks for something in [target]'s [target_zone]."),
 		)
 
-/datum/surgery_step/extract_implant/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/extract_implant/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(implant)
 		display_results(
 			user,
@@ -80,9 +79,8 @@
 	return ..()
 
 /datum/surgery/implant_removal/mechanic
-	name = "Implant Removal"
+	name = "implant removal"
 	requires_bodypart_type = BODYTYPE_ROBOTIC
-	target_mobtypes = list(/mob/living/carbon/human) // Simpler mobs don't have bodypart types
 	steps = list(
 		/datum/surgery_step/mechanic_open,
 		/datum/surgery_step/open_hatch,

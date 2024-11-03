@@ -127,7 +127,7 @@
 "nC" = (
 /obj/structure/table/reinforced/rglass,
 /obj/item/defibrillator/loaded,
-/obj/item/surgery_tray/full{
+/obj/item/storage/backpack/duffelbag/med/surgery{
 	pixel_y = 13
 	},
 /obj/effect/turf_decal/tile/blue/anticorner{
@@ -645,7 +645,7 @@ Ei
 AW
 yq
 tq
-rV
+mw
 rV
 OL
 QT
@@ -659,7 +659,7 @@ OL
 QT
 OL
 rV
-rV
+mw
 tq
 Wd
 AW

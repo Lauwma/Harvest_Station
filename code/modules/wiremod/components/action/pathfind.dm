@@ -56,11 +56,9 @@
 	if(isnull(target_Y))
 		return
 
-	var/list/access = list()
-	if(isidcard(id_card.value))
-		var/obj/item/card/id/id = id_card.value
-		access = id.GetAccess()
-	else if (id_card.value)
+	var/atom/path_id = id_card.value
+	if(path_id && !isidcard(path_id))
+		path_id = null
 		failed.set_output(COMPONENT_SIGNAL)
 		reason_failed.set_output("Object marked is not an ID! Using no ID instead.")
 
@@ -100,7 +98,7 @@
 		TIMER_COOLDOWN_END(parent, COOLDOWN_CIRCUIT_PATHFIND_SAME)
 
 		old_dest = destination
-		path = get_path_to(src, destination, max_range, access=access)
+		path = get_path_to(src, destination, max_range, id=path_id)
 		if(length(path) == 0 || !path)// Check if we can even path there
 			next_turf = null
 			failed.set_output(COMPONENT_SIGNAL)

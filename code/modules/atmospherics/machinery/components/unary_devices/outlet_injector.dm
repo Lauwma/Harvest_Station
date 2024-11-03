@@ -17,18 +17,16 @@
 	///Rate of operation of the device
 	var/volume_rate = 50
 
-/obj/machinery/atmospherics/components/unary/outlet_injector/Initialize(mapload)
-	if(isnull(id_tag))
-		id_tag = assign_random_name()
-	. = ..()
+	///id of air sensor its connected to
+	var/chamber_id
 
-	var/static/list/tool_screentips
-	if(!tool_screentips)
-		tool_screentips = string_assoc_nested_list(list(
-			TOOL_MULTITOOL = list(
-				SCREENTIP_CONTEXT_LMB = "Log to link later with air sensor",
-			)
-		))
+/obj/machinery/atmospherics/components/unary/outlet_injector/Initialize(mapload)
+	. = ..()
+	var/static/list/tool_screentips = list(
+		TOOL_MULTITOOL = list(
+			SCREENTIP_CONTEXT_LMB = "Log to link later with air sensor",
+		)
+	)
 	AddElement(/datum/element/contextual_screentip_tools, tool_screentips)
 	register_context()
 
@@ -43,15 +41,28 @@
 	. += span_notice("You can link it with an air sensor using a multitool.")
 
 /obj/machinery/atmospherics/components/unary/outlet_injector/multitool_act(mob/living/user, obj/item/multitool/multi_tool)
-	if(istype(multi_tool.buffer, /obj/machinery/air_sensor))
-		var/obj/machinery/air_sensor/sensor = multi_tool.buffer
-		multi_tool.set_buffer(src)
-		sensor.multitool_act(user, multi_tool)
-		return TOOL_ACT_TOOLTYPE_SUCCESS
+	. = ..()
+	if (!istype(multi_tool))
+		return .
 
-	balloon_alert(user, "injector saved in buffer")
-	multi_tool.set_buffer(src)
-	return TOOL_ACT_TOOLTYPE_SUCCESS
+	balloon_alert(user, "saved in buffer")
+	multi_tool.buffer = src
+	return TRUE
+
+/obj/machinery/atmospherics/components/unary/outlet_injector/wrench_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(.)
+		disconnect_chamber()
+
+///called when its either unwrenched or destroyed
+/obj/machinery/atmospherics/components/unary/outlet_injector/proc/disconnect_chamber()
+	if(chamber_id != null)
+		GLOB.objects_by_id_tag -= CHAMBER_INPUT_FROM_ID(chamber_id)
+		chamber_id = null
+
+/obj/machinery/atmospherics/components/unary/outlet_injector/Destroy()
+	disconnect_chamber()
+	return ..()
 
 /obj/machinery/atmospherics/components/unary/outlet_injector/CtrlClick(mob/user)
 	if(can_interact(user))

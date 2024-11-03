@@ -18,22 +18,15 @@
 	var/trait_to_give
 	///What traits are incompatible with this one?
 	var/blacklist
-	///Extra flags for station traits such as it being abstract, planetary or space only
-	var/trait_flags = STATION_TRAIT_MAP_UNRESTRICTED
+	///Extra flags for station traits such as it being abstract
+	var/trait_flags
 	/// Whether or not this trait can be reverted by an admin
 	var/can_revert = TRUE
-	/// The ID that we look for in dynamic.json. Not synced with 'name' because I can already see this go wrong
-	var/dynamic_threat_id
-	/// If ran during dynamic, do we reduce the total threat? Will be overriden by config if set
-	var/threat_reduction = 0
 
 /datum/station_trait/New()
 	. = ..()
 
 	RegisterSignal(SSticker, COMSIG_TICKER_ROUND_STARTING, PROC_REF(on_round_start))
-
-	if(threat_reduction)
-		GLOB.dynamic_station_traits[src] = threat_reduction
 
 	if(trait_processes)
 		START_PROCESSING(SSstation, src)
@@ -42,7 +35,6 @@
 
 /datum/station_trait/Destroy()
 	SSstation.station_traits -= src
-	GLOB.dynamic_station_traits.Remove(src)
 	return ..()
 
 /// Proc ran when round starts. Use this for roundstart effects.
@@ -52,7 +44,7 @@
 
 ///type of info the centcom report has on this trait, if any.
 /datum/station_trait/proc/get_report()
-	return "<i>[name]</i> - [report_message]"
+	return "[name] - [report_message]"
 
 /// Will attempt to revert the station trait, used by admins.
 /datum/station_trait/proc/revert()
@@ -63,15 +55,3 @@
 		REMOVE_TRAIT(SSstation, trait_to_give, STATION_TRAIT)
 
 	qdel(src)
-
-///Called by decals if they can be colored, to see if we got some cool colors for them. Only takes the first station trait
-/proc/request_station_colors(atom/thing_to_color, pattern = PATTERN_DEFAULT)
-	for(var/datum/station_trait/trait in SSstation.station_traits)
-		var/decal_color = trait.get_decal_color(thing_to_color, pattern)
-		if(decal_color)
-			return decal_color
-	return null
-
-///Return a color for the decals, if any
-/datum/station_trait/proc/get_decal_color(thing_to_color, pattern)
-	return

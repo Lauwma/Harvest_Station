@@ -8,13 +8,9 @@
 	show_to_ghosts = TRUE
 	hijack_speed = 2 //If you can't take out the station, take the shuttle instead.
 	suicide_cry = "FOR THE SYNDICATE!!"
-	/// Which nukie team are we on?
 	var/datum/team/nuclear/nuke_team
-	/// If not assigned a team by default ops will try to join existing ones, set this to TRUE to always create new team.
-	var/always_new_team = FALSE
-	/// Should the user be moved to default spawnpoint after being granted this datum.
-	var/send_to_spawnpoint = TRUE
-	/// The DEFAULT outfit we will give to players granted this datum
+	var/always_new_team = FALSE //If not assigned a team by default ops will try to join existing ones, set this to TRUE to always create new team.
+	var/send_to_spawnpoint = TRUE //Should the user be moved to default spawnpoint.
 	var/nukeop_outfit = /datum/outfit/syndicate
 
 	preview_outfit = /datum/outfit/nuclear_operative_elite
@@ -39,12 +35,9 @@
 	if(!nukeop_outfit) // this variable is null in instances where an antagonist datum is granted via enslaving the mind (/datum/mind/proc/enslave_mind_to_creator), like in golems.
 		return
 
-	// If our nuke_ops_species pref is set to TRUE, (or we have no client) make us a human
-	if(isnull(operative.client) || operative.client.prefs.read_preference(/datum/preference/toggle/nuke_ops_species))
-		operative.set_species(/datum/species/human)
+	operative.set_species(/datum/species/human) //Plasmamen burn up otherwise, and besides, all other species are vulnerable to asimov AIs. Let's standardize all operatives being human.
 
-	operative.equip_species_outfit(nukeop_outfit)
-
+	operative.equipOutfit(nukeop_outfit)
 	return TRUE
 
 /datum/antagonist/nukeop/greet()
@@ -89,14 +82,14 @@
 /datum/antagonist/nukeop/proc/assign_nuke()
 	if(nuke_team && !nuke_team.tracked_nuke)
 		nuke_team.memorized_code = random_nukecode()
-		var/obj/machinery/nuclearbomb/syndicate/nuke = locate() in SSmachines.get_machines_by_type(/obj/machinery/nuclearbomb/syndicate)
+		var/obj/machinery/nuclearbomb/syndicate/nuke = locate() in GLOB.nuke_list
 		if(nuke)
 			nuke_team.tracked_nuke = nuke
 			if(nuke.r_code == NUKE_CODE_UNSET)
 				nuke.r_code = nuke_team.memorized_code
 			else //Already set by admins/something else?
 				nuke_team.memorized_code = nuke.r_code
-			for(var/obj/machinery/nuclearbomb/beer/beernuke as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/nuclearbomb/beer))
+			for(var/obj/machinery/nuclearbomb/beer/beernuke in GLOB.nuke_list)
 				beernuke.r_code = nuke_team.memorized_code
 		else
 			stack_trace("Syndicate nuke not found during nuke team creation.")
@@ -180,7 +173,7 @@
 
 /datum/antagonist/nukeop/proc/admin_tell_code(mob/admin)
 	var/code
-	for (var/obj/machinery/nuclearbomb/bombue as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/nuclearbomb))
+	for (var/obj/machinery/nuclearbomb/bombue as anything in GLOB.nuke_list)
 		if (length(bombue.r_code) <= 5 && bombue.r_code != initial(bombue.r_code))
 			code = bombue.r_code
 			break
@@ -241,9 +234,7 @@
 	name = "Nuclear Operative Leader"
 	nukeop_outfit = /datum/outfit/syndicate/leader
 	always_new_team = TRUE
-	/// Randomly chosen honorific, for distinction
 	var/title
-	/// The nuclear challenge remote we will spawn this player with.
 	var/challengeitem = /obj/item/nuclear_challenge
 
 /datum/antagonist/nukeop/leader/memorize_code()
@@ -323,7 +314,7 @@
 /datum/antagonist/nukeop/lone/assign_nuke()
 	if(nuke_team && !nuke_team.tracked_nuke)
 		nuke_team.memorized_code = random_nukecode()
-		var/obj/machinery/nuclearbomb/selfdestruct/nuke = locate() in SSmachines.get_machines_by_type(/obj/machinery/nuclearbomb/selfdestruct)
+		var/obj/machinery/nuclearbomb/selfdestruct/nuke = locate() in GLOB.nuke_list
 		if(nuke)
 			nuke_team.tracked_nuke = nuke
 			if(nuke.r_code == NUKE_CODE_UNSET)

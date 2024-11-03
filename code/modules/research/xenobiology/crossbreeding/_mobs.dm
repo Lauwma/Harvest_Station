@@ -14,7 +14,8 @@ Slimecrossing Mobs
 	invocation_type = INVOCATION_NONE
 	spell_requirements = NONE
 
-	convert_damage_type = TOX
+	convert_damage = TRUE
+	convert_damage_type = CLONE
 	possible_shapes = list(/mob/living/simple_animal/slime/transformed_slime)
 
 	/// If TRUE, we self-delete (remove ourselves) the next time we turn back into a human
@@ -44,7 +45,7 @@ Slimecrossing Mobs
 	icon_state = "slime_puppy"
 	icon_living = "slime_puppy"
 	icon_dead = "slime_puppy_dead"
-	can_be_shaved = FALSE
+	nofur = TRUE
 	gold_core_spawnable = NO_SPAWN
 	speak_emote = list("blorbles", "bubbles", "borks")
 

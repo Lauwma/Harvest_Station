@@ -12,41 +12,32 @@ export const Mule = (props, context) => {
     load,
     mode,
     modeStatus,
+    haspai,
     autoReturn,
     autoPickup,
     reportDelivery,
     destination,
     home,
     id,
-    allow_possession,
-    possession_enabled,
-    pai_inserted,
     destinations = [],
   } = data;
   const locked = data.locked && !data.siliconUser;
   return (
-    <Window width={350} height={445}>
+    <Window width={350} height={425}>
       <Window.Content>
         <InterfaceLockNoticeBox />
         <Section
           title="Status"
           minHeight="110px"
           buttons={
-            <>
+            !locked && (
               <Button
-                icon="fa-poll-h"
-                content="Rename"
-                onClick={() => act('rename')}
+                icon={on ? 'power-off' : 'times'}
+                content={on ? 'On' : 'Off'}
+                selected={on}
+                onClick={() => act('on')}
               />
-              {!locked && (
-                <Button
-                  icon={on ? 'power-off' : 'times'}
-                  content={on ? 'On' : 'Off'}
-                  selected={on}
-                  onClick={() => act('on')}
-                />
-              )}
-            </>
+            )
           }>
           <ProgressBar
             value={cell ? cellPercent / 100 : 0}
@@ -83,11 +74,11 @@ export const Mule = (props, context) => {
                     onClick={() => act('unload')}
                   />
                 )}
-                {!!pai_inserted && (
+                {!!haspai && (
                   <Button
                     icon="eject"
                     content="Eject PAI"
-                    onClick={() => act('eject_pai')}
+                    onClick={() => act('ejectpai')}
                   />
                 )}
               </>
@@ -146,14 +137,6 @@ export const Mule = (props, context) => {
                   content="Report Delivery"
                   onClick={() => act('report')}
                 />
-                <br />
-                {allow_possession && (
-                  <Button.Checkbox
-                    checked={possession_enabled}
-                    content="Download Personality"
-                    onClick={() => act('toggle_personality')}
-                  />
-                )}
               </LabeledList.Item>
             </LabeledList>
           </Section>

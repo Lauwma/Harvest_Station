@@ -10,7 +10,7 @@
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape)
 "eD" = (
-/obj/structure/chair/comfy/shuttle,
+/obj/item/kirbyplants/photosynthetic,
 /obj/machinery/light/directional/north,
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape)
@@ -87,9 +87,6 @@
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape/brig)
 "sG" = (
-/obj/structure/chair/comfy/shuttle{
-	dir = 8
-	},
 /obj/machinery/light/directional/east,
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape)
@@ -106,6 +103,7 @@
 /area/shuttle/escape/brig)
 "uW" = (
 /obj/structure/chair/office,
+/obj/machinery/light/directional/east,
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape)
 "vw" = (
@@ -182,12 +180,14 @@
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape)
 "GO" = (
-/obj/machinery/light/floor,
+/obj/item/kirbyplants/photosynthetic,
+/obj/machinery/light/directional/south,
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape)
 "HK" = (
 /obj/structure/table/abductor,
 /obj/item/storage/box/alienhandcuffs,
+/obj/machinery/light/directional/east,
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape/brig)
 "IL" = (
@@ -207,13 +207,12 @@
 "JK" = (
 /obj/item/lazarus_injector,
 /obj/structure/table/abductor,
+/obj/machinery/light/directional/east,
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape)
 "Lo" = (
-/obj/structure/chair/comfy/shuttle{
-	dir = 1
-	},
-/obj/machinery/light/directional/south,
+/obj/item/kirbyplants/photosynthetic,
+/obj/machinery/light/directional/west,
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape)
 "Nz" = (
@@ -265,6 +264,7 @@
 /obj/item/clothing/shoes/sneakers/white,
 /obj/item/clothing/shoes/jackboots,
 /obj/item/clothing/glasses/eyepatch,
+/obj/machinery/light/directional/west,
 /turf/open/floor/plating/abductor,
 /area/shuttle/escape)
 "VR" = (
@@ -351,9 +351,9 @@ nH
 Um
 Um
 Um
-vw
+Lo
 Um
-vw
+Lo
 Um
 Um
 Um
@@ -436,23 +436,23 @@ Cv
 (6,1,1) = {"
 nH
 nH
-vw
+eD
 Um
 CT
 CT
-sG
-Um
-Sg
-Sg
-Sg
-Sg
-Sg
-Um
-sG
-CT
 CT
 Um
-vw
+Sg
+Sg
+Sg
+Sg
+Sg
+Um
+CT
+CT
+CT
+Um
+GO
 nH
 nH
 "}
@@ -483,14 +483,14 @@ nH
 nH
 zx
 wk
-Um
+lK
 vw
 nH
 vw
 Um
 Um
 Um
-Um
+sG
 Um
 Um
 Um
@@ -505,7 +505,7 @@ nH
 (9,1,1) = {"
 jj
 Nz
-GO
+Um
 Um
 Um
 nH
@@ -521,7 +521,7 @@ Um
 jj
 Um
 Um
-GO
+Um
 Tn
 jj
 "}
@@ -535,7 +535,7 @@ nH
 Um
 Um
 Um
-Lo
+xd
 nH
 an
 Um
@@ -583,7 +583,7 @@ Um
 Um
 xd
 nH
-eD
+an
 Um
 Um
 Um
@@ -597,7 +597,7 @@ jj
 (13,1,1) = {"
 jj
 xg
-GO
+Um
 Um
 Um
 nH
@@ -612,8 +612,8 @@ Um
 Um
 jj
 Um
-GO
-GO
+Um
+Um
 Um
 jj
 "}
@@ -621,17 +621,17 @@ jj
 nH
 hh
 wk
-Um
+sG
 vw
 nH
 vw
 Um
 Um
 Um
+lK
 Um
 Um
-Um
-Um
+sG
 vw
 nH
 yR
@@ -720,7 +720,7 @@ ui
 ui
 jI
 Um
-GO
+Um
 Um
 Ct
 Um

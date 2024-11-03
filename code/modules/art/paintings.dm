@@ -50,8 +50,6 @@
 	/// Is it clean canvas or was there something painted on it at some point, used to decide when to show wip splotch overlay
 	var/used = FALSE
 	var/finalized = FALSE //Blocks edits
-	/// Whether a grid should be shown in the UI if the canvas is editable and the viewer is holding a painting tool.
-	var/show_grid = TRUE
 	var/icon_generated = FALSE
 	var/icon/generated_icon
 	///boolean that blocks persistence from saving it. enabled from printing copies, because we do not want to save copies.
@@ -130,13 +128,12 @@
 	.["finalized"] = finalized
 	.["editable"] = !finalized //Ideally you should be able to draw moustaches on existing paintings in the gallery but that's not implemented yet
 	.["show_plaque"] = istype(loc,/obj/structure/sign/painting)
-	.["show_grid"] = show_grid
-	.["paint_tool_palette"] = null
 	var/obj/item/painting_implement = user.get_active_held_item()
-	if(!painting_implement)
-		.["paint_tool_color"] = null
-		return
 	.["paint_tool_color"] = get_paint_tool_color(painting_implement)
+	// Clearing additional data so that it doesn't linger around if the painting tool is dropped.
+	.["paint_tool_palette"] = null
+	if(!painting_implement)
+		return
 	SEND_SIGNAL(painting_implement, COMSIG_PAINTING_TOOL_GET_ADDITIONAL_DATA, .)
 
 /obj/item/canvas/examine(mob/user)
@@ -173,29 +170,6 @@
 		if("select_color")
 			var/obj/item/painting_implement = user.get_active_held_item()
 			painting_implement?.set_painting_tool_color(params["selected_color"])
-			. = TRUE
-		if("select_color_from_coords")
-			var/obj/item/painting_implement = user.get_active_held_item()
-			if(!painting_implement)
-				return FALSE
-			var/x = text2num(params["px"])
-			var/y = text2num(params["py"])
-			painting_implement.set_painting_tool_color(grid[x][y])
-			. = TRUE
-		if("change_palette")
-			var/obj/item/painting_implement = user.get_active_held_item()
-			if(!painting_implement)
-				return FALSE
-			//I'd have this done inside the signal, but that'd have to be asynced,
-			//while we want the UI to be updated after the color is chosen, not before.
-			var/chosen_color = input(user, "Pick new color", painting_implement, params["old_color"]) as color|null
-			if(!chosen_color || IS_DEAD_OR_INCAP(user) || !user.is_holding(painting_implement))
-				return FALSE
-			SEND_SIGNAL(painting_implement, COMSIG_PAINTING_TOOL_PALETTE_COLOR_CHANGED, chosen_color, params["color_index"])
-			. = TRUE
-		if("toggle_grid")
-			. = TRUE
-			show_grid = !show_grid
 		if("finalize")
 			. = TRUE
 			finalize(user)
@@ -249,7 +223,7 @@
 	painting_metadata.patron_name = user.real_name
 	painting_metadata.credit_value = offer_amount
 	last_patron = WEAKREF(user.mind)
-	to_chat(user, span_notice("Nanotrasen Trust Foundation thanks you for your contribution. You're now an official patron of this painting."))
+	to_chat(user, span_notice("Nanotrasen Trust Foundation thanks you for your contribution. You're now offical patron of this painting."))
 	var/list/possible_frames = SSpersistent_paintings.get_available_frames(offer_amount)
 	if(possible_frames.len <= 1) // Not much room for choices here.
 		return
@@ -354,8 +328,7 @@
 /obj/item/canvas/proc/try_rename(mob/user)
 	if(painting_metadata.loaded_from_json) // No renaming old paintings
 		return TRUE
-	var/new_name = tgui_input_text(user, "What do you want to name the painting?", "Title Your Masterpiece", null, MAX_NAME_LEN)
-	new_name = reject_bad_name(new_name, allow_numbers = TRUE, ascii_only = FALSE, strict = TRUE, cap_after_symbols = FALSE)
+	var/new_name = tgui_input_text(user, "What do you want to name the painting?", "Title Your Masterpiece")
 	if(isnull(new_name))
 		return FALSE
 	if(new_name != painting_metadata.title && user.can_perform_action(src))
@@ -450,7 +423,7 @@
 	name = "painting frame"
 	desc = "The perfect showcase for your favorite deathtrap memories."
 	icon = 'icons/obj/signs.dmi'
-	custom_materials = list(/datum/material/wood =SHEET_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/wood = 2000)
 	resistance_flags = FLAMMABLE
 	flags_1 = NONE
 	icon_state = "frame-empty"
@@ -463,7 +436,7 @@
 	icon = 'icons/obj/signs.dmi'
 	icon_state = "frame-empty"
 	base_icon_state = "frame"
-	custom_materials = list(/datum/material/wood =SHEET_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/wood = 2000)
 	resistance_flags = FLAMMABLE
 	buildable_sign = FALSE
 	///Canvas we're currently displaying.
@@ -644,7 +617,7 @@
 /obj/item/wallframe/painting/large
 	name = "large painting frame"
 	desc = "The perfect showcase for your favorite deathtrap memories. Make sure you have enough space to mount this one to the wall."
-	custom_materials = list(/datum/material/wood = SHEET_MATERIAL_AMOUNT*2)
+	custom_materials = list(/datum/material/wood = 4000)
 	icon_state = "frame-large-empty"
 	result_path = /obj/structure/sign/painting/large
 	pixel_shift = 0 //See [/obj/structure/sign/painting/large/proc/finalize_size]
@@ -671,7 +644,7 @@
 
 /obj/structure/sign/painting/large
 	icon = 'icons/obj/art/artstuff_64x64.dmi'
-	custom_materials = list(/datum/material/wood = SHEET_MATERIAL_AMOUNT*2)
+	custom_materials = list(/datum/material/wood = 4000)
 	accepted_canvas_types = list(
 		/obj/item/canvas/thirtysix_twentyfour,
 		/obj/item/canvas/fortyfive_twentyseven,
@@ -679,8 +652,6 @@
 
 /obj/structure/sign/painting/large/Initialize(mapload)
 	. = ..()
-	// Necessary so that the painting is framed correctly by the frame overlay when flipped.
-	ADD_KEEP_TOGETHER(src, INNATE_TRAIT)
 	if(mapload)
 		finalize_size()
 

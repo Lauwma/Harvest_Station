@@ -18,7 +18,6 @@
 /obj/structure/chair/comfy/shuttle{
 	dir = 4
 	},
-/obj/machinery/light/cold/directional/north,
 /turf/open/floor/iron/freezer,
 /area/shuttle/transport)
 "g" = (
@@ -130,11 +129,6 @@
 	},
 /turf/open/floor/iron/freezer,
 /area/shuttle/transport)
-"x" = (
-/obj/structure/table/reinforced,
-/obj/machinery/light/cold/directional/north,
-/turf/open/floor/iron/freezer,
-/area/shuttle/transport)
 
 (1,1,1) = {"
 a
@@ -194,7 +188,7 @@ c
 "}
 (9,1,1) = {"
 c
-x
+l
 l
 v
 c

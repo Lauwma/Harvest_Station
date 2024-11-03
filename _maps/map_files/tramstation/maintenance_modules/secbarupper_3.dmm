@@ -154,11 +154,11 @@
 /area/station/maintenance/department/security)
 "sF" = (
 /obj/structure/flora/bush/sparsegrass/style_random,
-/mob/living/basic/butterfly,
+/mob/living/simple_animal/butterfly,
 /turf/open/floor/grass,
 /area/station/asteroid)
 "tc" = (
-/mob/living/basic/butterfly,
+/mob/living/simple_animal/butterfly,
 /turf/open/floor/grass,
 /area/station/asteroid)
 "tn" = (
@@ -500,7 +500,9 @@
 /obj/machinery/light/small/directional/north,
 /obj/structure/table,
 /obj/item/reagent_containers/cup/bucket,
-/obj/structure/sign/poster/official/nanotrasen_logo/directional/north,
+/obj/structure/sign/poster/official/nanotrasen_logo{
+	pixel_y = 32
+	},
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/department/security)
 "Yg" = (

@@ -94,7 +94,7 @@
 			RegisterSignal(card, COMSIG_ITEM_EQUIPPED, PROC_REF(on_card_planted))
 			AddComponent(/datum/component/traitor_objective_register, card, \
 				succeed_signals = null, \
-				fail_signals = list(COMSIG_QDELETING), \
+				fail_signals = list(COMSIG_PARENT_QDELETING), \
 				penalty = TRUE)
 
 /datum/traitor_objective/target_player/assassinate/calling_card/proc/on_card_planted(datum/source, mob/living/equipper, slot)
@@ -107,13 +107,20 @@
 		return //in their pockets please
 	succeed_objective()
 
+/datum/traitor_objective/target_player/assassinate/calling_card/generate_objective(datum/mind/generating_for, list/possible_duplicates)
+	. = ..()
+	if(!.) //didn't generate
+		return FALSE
+	RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(on_target_qdeleted))
+
 /datum/traitor_objective/target_player/assassinate/calling_card/ungenerate_objective()
+	UnregisterSignal(target, COMSIG_PARENT_QDELETING)
 	. = ..() //unsets kill target
 	if(card)
 		UnregisterSignal(card, COMSIG_ITEM_EQUIPPED)
 	card = null
 
-/datum/traitor_objective/target_player/assassinate/calling_card/target_deleted()
+/datum/traitor_objective/target_player/assassinate/calling_card/on_target_qdeleted()
 	//you cannot plant anything on someone who is gone gone, so even if this happens after you're still liable to fail
 	fail_objective(penalty_cost = telecrystal_penalty)
 
@@ -128,7 +135,7 @@
 	. = ..()
 	if(!.) //didn't generate
 		return FALSE
-	AddComponent(/datum/component/traitor_objective_register, behead_goal, fail_signals = list(COMSIG_QDELETING))
+	AddComponent(/datum/component/traitor_objective_register, behead_goal, fail_signals = list(COMSIG_PARENT_QDELETING))
 	RegisterSignal(target, COMSIG_CARBON_REMOVE_LIMB, PROC_REF(on_target_dismembered))
 
 /datum/traitor_objective/target_player/assassinate/behead/ungenerate_objective()
@@ -221,7 +228,7 @@
 		return FALSE //MISSION FAILED, WE'LL GET EM NEXT TIME
 
 	var/datum/mind/target_mind = pick(possible_targets)
-	set_target(target_mind.current)
+	target = target_mind.current
 	replace_in_name("%TARGET%", target.real_name)
 	replace_in_name("%JOB TITLE%", target_mind.assigned_role.title)
 	RegisterSignal(target, COMSIG_LIVING_DEATH, PROC_REF(on_target_death))
@@ -229,17 +236,17 @@
 
 /datum/traitor_objective/target_player/assassinate/ungenerate_objective()
 	UnregisterSignal(target, COMSIG_LIVING_DEATH)
-	set_target(null)
+	target = null
 
 ///proc for checking for special states that invalidate a target
 /datum/traitor_objective/target_player/assassinate/proc/special_target_filter(list/possible_targets)
 	return
 
-/datum/traitor_objective/target_player/assassinate/target_deleted()
+/datum/traitor_objective/target_player/assassinate/proc/on_target_qdeleted()
+	SIGNAL_HANDLER
 	if(objective_state == OBJECTIVE_STATE_INACTIVE)
 		//don't take an objective target of someone who is already obliterated
 		fail_objective()
-	return ..()
 
 /datum/traitor_objective/target_player/assassinate/proc/on_target_death()
 	SIGNAL_HANDLER

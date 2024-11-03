@@ -13,11 +13,9 @@
 	///Required chemicals that must be present in the container but are not USED.
 	var/list/required_catalysts = new/list()
 
-	/// If required_container will check for the exact type, or will also accept subtypes
-	var/required_container_accepts_subtypes = FALSE
-	/// If required_container_accepts_subtypes is FALSE, the exact type of what container this reaction can take place in. Otherwise, what type including subtypes are acceptable.
+	/// the exact container path required for the reaction to happen, typepath
 	var/atom/required_container
-	/// Set this to true to call pre_reaction_other_checks() on react and do some more interesting reaction logic
+	/// an integer required for the reaction to happen
 	var/required_other = FALSE
 
 	///Determines if a chemical reaction can occur inside a mob

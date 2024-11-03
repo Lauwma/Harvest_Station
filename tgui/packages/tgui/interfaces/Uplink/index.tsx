@@ -8,7 +8,7 @@ import { BooleanLike } from 'common/react';
 import { Box, Tabs, Button, Stack, Section, Tooltip, Dimmer } from '../../components';
 import { PrimaryObjectiveMenu } from './PrimaryObjectiveMenu';
 import { Objective, ObjectiveMenu } from './ObjectiveMenu';
-import { calculateProgression, calculateDangerLevel, dangerDefault, dangerLevelsTooltip } from './calculateDangerLevel';
+import { calculateProgression, calculateReputationLevel, reputationDefault, reputationLevelsTooltip } from './calculateReputationLevel';
 
 type UplinkItem = {
   id: string;
@@ -59,7 +59,6 @@ type UplinkData = {
   maximum_potential_objectives: number;
   purchased_items: number;
   shop_locked: BooleanLike;
-  can_renegotiate: BooleanLike;
 };
 
 type UplinkState = {
@@ -161,7 +160,6 @@ export class Uplink extends Component<{}, UplinkState> {
       telecrystals,
       progression_points,
       primary_objectives,
-      can_renegotiate,
       completed_final_objective,
       active_objectives,
       potential_objectives,
@@ -227,7 +225,7 @@ export class Uplink extends Component<{}, UplinkState> {
               <>
                 ,&nbsp;
                 <Box as="span">
-                  {calculateDangerLevel(item.progression_minimum, true)}
+                  {calculateReputationLevel(item.progression_minimum, true)}
                 </Box>
               </>
             ) : (
@@ -280,15 +278,12 @@ export class Uplink extends Component<{}, UplinkState> {
                           (!!has_progression && (
                             <Box>
                               <Box>
-                                <Box>Your current level of threat.</Box> Threat
-                                determines
-                                {has_objectives
-                                  ? ' the severity of secondary objectives you get and '
-                                  : ' '}
-                                what items you can purchase.&nbsp;
+                                Your current level of reputation.&nbsp;
+                                Reputation determines what quality of objective
+                                you get and what items you can purchase.&nbsp;
                                 <Box mt={0.5}>
                                   {/* A minute in deciseconds */}
-                                  Threat passively increases by{' '}
+                                  Reputation passively increases by{' '}
                                   <Box color="green" as="span">
                                     {calculateProgression(
                                       current_progression_scaling
@@ -298,10 +293,10 @@ export class Uplink extends Component<{}, UplinkState> {
                                 </Box>
                                 {Math.abs(progressionPercentage) > 0 && (
                                   <Box mt={0.5}>
-                                    Because your threat level is
+                                    Because your reputation is{' '}
                                     {progressionPercentage < 0
-                                      ? ' ahead '
-                                      : ' behind '}
+                                      ? 'ahead '
+                                      : 'behind '}
                                     of where it should be, you are getting
                                     <Box
                                       as="span"
@@ -317,20 +312,20 @@ export class Uplink extends Component<{}, UplinkState> {
                                     {progressionPercentage < 0
                                       ? 'less'
                                       : 'more'}{' '}
-                                    threat every minute
+                                    reputation every minute
                                   </Box>
                                 )}
-                                {dangerLevelsTooltip}
+                                {reputationLevelsTooltip}
                               </Box>
                             </Box>
                           )) ||
-                          "Your current threat level. You are a killing machine and don't need to improve your threat level."
+                          'Your current level of reputation. You are a respected elite and do not need to improve your reputation.'
                         }>
                         {/* If we have no progression,
                       just give them a generic title */}
                         {has_progression
-                          ? calculateDangerLevel(progression_points, false)
-                          : calculateDangerLevel(dangerDefault, false)}
+                          ? calculateReputationLevel(progression_points, false)
+                          : calculateReputationLevel(reputationDefault, false)}
                       </Tooltip>
                     </Box>
                     <Box color="good" bold fontSize={1.2} textAlign="right">
@@ -384,7 +379,6 @@ export class Uplink extends Component<{}, UplinkState> {
                 <PrimaryObjectiveMenu
                   primary_objectives={primary_objectives}
                   final_objective={completed_final_objective}
-                  can_renegotiate={can_renegotiate}
                 />
               )) ||
                 (currentTab === 1 && has_objectives && (

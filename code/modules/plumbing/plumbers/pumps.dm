@@ -2,12 +2,14 @@
 /obj/machinery/plumbing/liquid_pump
 	name = "liquid pump"
 	desc = "Pump up those sweet liquids from under the surface. Uses thermal energy from geysers to power itself." //better than placing 200 cables, because it wasn't fun
-	icon = 'icons/obj/pipes_n_cables/hydrochem/plumbers.dmi'
+	icon = 'icons/obj/plumbing/plumbers.dmi'
 	icon_state = "pump"
 	base_icon_state = "pump"
 	anchored = FALSE
 	density = TRUE
 	use_power = NO_POWER_USE
+	///category for plumbing RCD
+	category="Synthesizers"
 
 	///units we pump per second
 	var/pump_power = 1

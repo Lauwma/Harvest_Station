@@ -176,10 +176,8 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	if(!(machine_stat & (NOPOWER|BROKEN)) && !(. & EMP_PROTECT_SELF))
 		act_up()
 
-/obj/machinery/announcement_system/emag_act(mob/user, obj/item/card/emag/emag_card)
+/obj/machinery/announcement_system/emag_act()
 	if(obj_flags & EMAGGED)
-		return FALSE
+		return
 	obj_flags |= EMAGGED
 	act_up()
-	balloon_alert(user, "announcement strings corrupted")
-	return TRUE

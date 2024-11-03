@@ -15,8 +15,7 @@
 	owner.add_blocked_language(GLOB.all_languages - random_language, source = LANGUAGE_BABEL)
 	// this lets us bypass tongue language restrictions except for people who have stuff like mute,
 	// no tongue, tongue tied, etc. curse of babel shouldn't let people who have a tongue disability speak
-	if(owner.mind)
-		ADD_TRAIT(owner.mind, TRAIT_TOWER_OF_BABEL, trait_source)
+	ADD_TRAIT(owner, TRAIT_TOWER_OF_BABEL, trait_source)
 	owner.add_mood_event(id, /datum/mood_event/tower_of_babel)
 	return ..()
 
@@ -25,8 +24,8 @@
 	// if user is affected by tower of babel, we remove the blocked languages
 	owner.remove_blocked_language(GLOB.all_languages, source = LANGUAGE_BABEL)
 	owner.remove_all_languages(source = LANGUAGE_BABEL)
-	if(owner.mind)
-		REMOVE_TRAIT(owner.mind, TRAIT_TOWER_OF_BABEL, trait_source)
+	owner.update_atom_languages()
+	REMOVE_TRAIT(owner, TRAIT_TOWER_OF_BABEL, trait_source)
 	return ..()
 
 // Used by wizard magic and tower of babel event

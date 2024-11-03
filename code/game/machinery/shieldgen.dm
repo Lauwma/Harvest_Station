@@ -130,15 +130,14 @@
 /obj/structure/emergency_shield/cult/barrier/proc/Toggle()
 	set_density(!density)
 	air_update_turf(TRUE, !density)
+	invisibility = initial(invisibility)
 	if(!density)
-		SetInvisibility(INVISIBILITY_OBSERVER, id=type)
-	else
-		RemoveInvisibility(type)
+		invisibility = INVISIBILITY_OBSERVER
 
 /obj/machinery/shieldgen
 	name = "anti-breach shielding projector"
 	desc = "Used to seal minor hull breaches."
-	icon = 'icons/obj/machines/shield_generator.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "shieldoff"
 	density = TRUE
 	opacity = FALSE
@@ -269,15 +268,14 @@
 	else
 		return ..()
 
-/obj/machinery/shieldgen/emag_act(mob/user, obj/item/card/emag/emag_card)
+/obj/machinery/shieldgen/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
 		to_chat(user, span_warning("The access controller is damaged!"))
-		return FALSE
+		return
 	obj_flags |= EMAGGED
 	locked = FALSE
 	playsound(src, SFX_SPARKS, 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-	balloon_alert(user, "access controller shorted")
-	return TRUE
+	to_chat(user, span_warning("You short out the access controller."))
 
 /obj/machinery/shieldgen/update_icon_state()
 	icon_state = "shield[active ? "on" : "off"][(machine_stat & BROKEN) ? "br" : null]"
@@ -288,7 +286,7 @@
 /obj/machinery/power/shieldwallgen
 	name = "shield wall generator"
 	desc = "A shield generator."
-	icon = 'icons/obj/machines/shield_generator.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "shield_wall_gen"
 	anchored = FALSE
 	density = TRUE
@@ -369,7 +367,7 @@
 	var/turf/T = loc
 	var/obj/machinery/power/shieldwallgen/G
 	var/steps = 0
-	var/opposite_direction = REVERSE_DIR(direction)
+	var/opposite_direction = turn(direction, 180)
 
 	for(var/i in 1 to shield_range) //checks out to 8 tiles away for another generator
 		T = get_step(T, direction)
@@ -472,15 +470,14 @@
 		user.log_message("activated [src].", LOG_GAME)
 	add_fingerprint(user)
 
-/obj/machinery/power/shieldwallgen/emag_act(mob/user, obj/item/card/emag/emag_card)
+/obj/machinery/power/shieldwallgen/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
 		to_chat(user, span_warning("The access controller is damaged!"))
-		return FALSE
+		return
 	obj_flags |= EMAGGED
 	locked = FALSE
 	playsound(src, SFX_SPARKS, 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-	balloon_alert(user, "access controller shorted")
-	return TRUE
+	to_chat(user, span_warning("You short out the access controller."))
 
 //////////////Containment Field START
 /obj/machinery/shieldwall
@@ -505,7 +502,7 @@
 	for(var/mob/living/L in get_turf(src))
 		visible_message(span_danger("\The [src] is suddenly occupying the same space as \the [L]!"))
 		L.investigate_log("has been gibbed by [src].", INVESTIGATE_DEATHS)
-		L.gib(DROP_ALL_REMAINS)
+		L.gib()
 	RegisterSignal(src, COMSIG_ATOM_SINGULARITY_TRY_MOVE, PROC_REF(block_singularity))
 
 /obj/machinery/shieldwall/Destroy()

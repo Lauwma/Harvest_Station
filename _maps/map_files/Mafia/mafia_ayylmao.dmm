@@ -5,10 +5,6 @@
 "b" = (
 /turf/closed/indestructible/alien,
 /area/centcom/mafia)
-"d" = (
-/obj/effect/landmark/mafia,
-/turf/open/floor/plating/abductor,
-/area/centcom/mafia)
 "g" = (
 /obj/mafia_game_board,
 /obj/effect/mapping_helpers/broken_floor,
@@ -32,20 +28,20 @@
 /area/centcom/mafia)
 "l" = (
 /obj/structure/closet/abductor,
-/obj/item/abductor/gizmo,
 /turf/open/floor/plating/abductor,
 /area/centcom/mafia)
 "m" = (
+/obj/effect/landmark/mafia,
 /obj/structure/bed/abductor,
 /turf/open/floor/plating/abductor,
 /area/centcom/mafia)
 "n" = (
+/obj/effect/landmark/mafia,
 /obj/structure/bed/abductor,
 /turf/open/floor/plating/abductor2,
 /area/centcom/mafia)
 "o" = (
 /obj/structure/closet/abductor,
-/obj/item/abductor/gizmo,
 /turf/open/floor/plating/abductor2,
 /area/centcom/mafia)
 "p" = (
@@ -147,10 +143,6 @@
 /turf/closed/indestructible/abductor{
 	icon_state = "alien21"
 	},
-/area/centcom/mafia)
-"O" = (
-/obj/effect/landmark/mafia,
-/turf/open/floor/plating/abductor2,
 /area/centcom/mafia)
 "P" = (
 /turf/closed/indestructible/abductor,
@@ -400,13 +392,13 @@ W
 G
 x
 r
-O
+r
 x
-d
+q
 x
-O
+r
 x
-d
+q
 q
 x
 E
@@ -450,13 +442,13 @@ j
 m
 q
 q
-d
+q
 x
 t
 t
 t
 x
-O
+r
 r
 r
 n
@@ -500,13 +492,13 @@ j
 n
 r
 r
-O
+r
 x
 t
 t
 t
 x
-d
+q
 q
 q
 m
@@ -550,13 +542,13 @@ I
 J
 x
 q
-d
+q
 x
-O
+r
 x
-d
+q
 x
-O
+r
 r
 x
 Y

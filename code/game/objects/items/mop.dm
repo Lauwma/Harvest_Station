@@ -1,7 +1,7 @@
 /obj/item/mop
 	desc = "The world of janitalia wouldn't be complete without a mop."
 	name = "mop"
-	icon = 'icons/obj/service/janitor.dmi'
+	icon = 'icons/obj/janitor.dmi'
 	icon_state = "mop"
 	inhand_icon_state = "mop"
 	lefthand_file = 'icons/mob/inhands/equipment/custodial_lefthand.dmi'
@@ -25,14 +25,6 @@
 		/obj/structure/mop_bucket,
 	))
 
-/obj/item/mop/apply_fantasy_bonuses(bonus)
-	. = ..()
-	mopspeed = modify_fantasy_variable("mopspeed", mopspeed, -bonus)
-
-/obj/item/mop/remove_fantasy_bonuses(bonus)
-	mopspeed = reset_fantasy_variable("mopspeed", mopspeed)
-	return ..()
-
 /obj/item/mop/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cleaner, mopspeed, pre_clean_callback=CALLBACK(src, PROC_REF(should_clean)), on_cleaned_callback=CALLBACK(src, PROC_REF(apply_reagents)))
@@ -48,7 +40,7 @@
 	if(clean_blacklist[atom_to_clean.type])
 		return DO_NOT_CLEAN
 	if(reagents.total_volume < 0.1)
-		cleaner.balloon_alert(cleaner, "mop is dry!")
+		to_chat(cleaner, span_warning("Your mop is dry!"))
 		return DO_NOT_CLEAN
 	return reagents.has_chemical_flag(REAGENT_CLEANS, 1)
 
@@ -98,7 +90,7 @@
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj,src)
-	user.balloon_alert(user, "condenser switch [refill_enabled ? "on" : "off"]")
+	to_chat(user, span_notice("You set the condenser switch to the '[refill_enabled ? "ON" : "OFF"]' position."))
 	playsound(user, 'sound/machines/click.ogg', 30, TRUE)
 
 /obj/item/mop/advanced/process(seconds_per_tick)

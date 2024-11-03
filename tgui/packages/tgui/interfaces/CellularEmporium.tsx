@@ -1,38 +1,26 @@
-import { BooleanLike } from '../../common/react';
-import { useBackend, useLocalState } from '../backend';
-import { Button, Section, Icon, Input, Stack, LabeledList, Box, NoticeBox } from '../components';
+import { useBackend } from '../backend';
+import { Button, Section, Icon, Stack, LabeledList, Box, NoticeBox } from '../components';
 import { Window } from '../layouts';
-
-type typePath = string;
 
 type CellularEmporiumContext = {
   abilities: Ability[];
-  can_readapt: BooleanLike;
-  genetic_points_count: number;
-  owned_abilities: typePath[];
-  absorb_count: number;
-  dna_count: number;
+  can_readapt: boolean;
+  genetic_points_remaining: number;
 };
 
 type Ability = {
   name: string;
   desc: string;
+  path: string;
+  dna_cost: number;
   helptext: string;
-  path: typePath;
-  genetic_point_required: number; // Checks against genetic_points_count
-  absorbs_required: number; // Checks against absorb_count
-  dna_required: number; // Checks against dna_count
+  owned: boolean;
+  can_purchase: boolean;
 };
 
 export const CellularEmporium = (props, context) => {
   const { act, data } = useBackend<CellularEmporiumContext>(context);
-  const [searchAbilities, setSearchAbilities] = useLocalState(
-    context,
-    'searchAbilities',
-    ''
-  );
-
-  const { can_readapt, genetic_points_count } = data;
+  const { can_readapt, genetic_points_remaining } = data;
   return (
     <Window width={900} height={480}>
       <Window.Content>
@@ -43,30 +31,15 @@ export const CellularEmporium = (props, context) => {
           buttons={
             <Stack>
               <Stack.Item fontSize="16px">
-                {genetic_points_count && genetic_points_count}{' '}
+                {genetic_points_remaining && genetic_points_remaining}{' '}
                 <Icon name="dna" color="#DD66DD" />
               </Stack.Item>
               <Stack.Item>
                 <Button
                   icon="undo"
                   content="Readapt"
-                  color="good"
                   disabled={!can_readapt}
-                  tooltip={
-                    can_readapt
-                      ? 'We readapt, un-evolving all evolved abilities \
-                    and refunding our genetic points.'
-                      : 'We cannot readapt until we absorb more DNA.'
-                  }
                   onClick={() => act('readapt')}
-                />
-              </Stack.Item>
-              <Stack.Item>
-                <Input
-                  width="200px"
-                  onInput={(event) => setSearchAbilities(event.target.value)}
-                  placeholder="Search Abilities..."
-                  value={searchAbilities}
                 />
               </Stack.Item>
             </Stack>
@@ -80,64 +53,31 @@ export const CellularEmporium = (props, context) => {
 
 const AbilityList = (props, context) => {
   const { act, data } = useBackend<CellularEmporiumContext>(context);
-  const [searchAbilities] = useLocalState(context, 'searchAbilities', '');
-  const {
-    abilities,
-    owned_abilities,
-    genetic_points_count,
-    absorb_count,
-    dna_count,
-  } = data;
+  const { abilities, genetic_points_remaining } = data;
 
-  const filteredAbilities =
-    searchAbilities.length <= 1
-      ? abilities
-      : abilities.filter((ability) => {
-        return (
-          ability.name.toLowerCase().includes(searchAbilities.toLowerCase()) ||
-          ability.desc.toLowerCase().includes(searchAbilities.toLowerCase()) ||
-          ability.helptext.toLowerCase().includes(searchAbilities.toLowerCase())
-        );
-      });
-
-  if (filteredAbilities.length === 0) {
-    return (
-      <NoticeBox>
-        {abilities.length === 0
-          ? 'No abilities available to purchase. \
-        This is in error, contact your local hivemind today.'
-          : 'No abilities found.'}
-      </NoticeBox>
-    );
+  if (!abilities) {
+    return <NoticeBox>None</NoticeBox>;
   } else {
     return (
       <LabeledList>
-        {filteredAbilities.map((ability) => (
+        {abilities.map((ability) => (
           <LabeledList.Item
             key={ability.name}
             className="candystripe"
             label={ability.name}
             buttons={
               <Stack>
-                <Stack.Item>{ability.genetic_point_required}</Stack.Item>
+                <Stack.Item>{ability.dna_cost}</Stack.Item>
                 <Stack.Item>
-                  <Icon
-                    name="dna"
-                    color={
-                      owned_abilities.includes(ability.path)
-                        ? '#DD66DD'
-                        : 'gray'
-                    }
-                  />
+                  <Icon name="dna" color={ability.owned ? '#DD66DD' : 'gray'} />
                 </Stack.Item>
                 <Stack.Item>
                   <Button
                     content={'Evolve'}
                     disabled={
-                      owned_abilities.includes(ability.path) ||
-                      ability.genetic_point_required > genetic_points_count ||
-                      ability.absorbs_required > absorb_count ||
-                      ability.dna_required > dna_count
+                      ability.owned ||
+                      ability.dna_cost > genetic_points_remaining ||
+                      !ability.can_purchase
                     }
                     onClick={() =>
                       act('evolve', {

@@ -19,12 +19,14 @@
 /datum/computer_file/New()
 	..()
 	uid = file_uid++
-	RegisterSignal(src, COMSIG_COMPUTER_FILE_STORE, PROC_REF(on_install))
+	RegisterSignal(src, COMSIG_MODULAR_COMPUTER_FILE_ADDED, PROC_REF(on_install))
 
 /datum/computer_file/Destroy(force)
 	if(computer)
+		computer.remove_file(src)
 		computer = null
 	if(disk_host)
+		disk_host.remove_file(src)
 		disk_host = null
 	return ..()
 
@@ -50,9 +52,9 @@
 	return temp
 
 ///Called post-installation of an application in a computer, after 'computer' var is set.
-/datum/computer_file/proc/on_install(datum/computer_file/source, obj/item/modular_computer/computer_installing)
+/datum/computer_file/proc/on_install()
 	SIGNAL_HANDLER
-	computer_installing.stored_files.Add(src)
+	return
 
 /**
  * Called when examining a modular computer
@@ -85,8 +87,8 @@
  * Arguments:
  * * background - Whether the app is running in the background.
  */
-/datum/computer_file/program/proc/event_powerfailure()
-	kill_program()
+/datum/computer_file/program/proc/event_powerfailure(background)
+	kill_program(forced = TRUE)
 
 /**
  * Called when a computer program is crashing due to any required connection being shut off.
@@ -94,7 +96,7 @@
  * * background - Whether the app is running in the background.
  */
 /datum/computer_file/program/proc/event_networkfailure(background)
-	kill_program()
+	kill_program(forced = TRUE)
 	if(background)
 		computer.visible_message(span_danger("\The [computer]'s screen displays a \"Process [filename].[filetype] (PID [rand(100,999)]) terminated - Network Error\" error"))
 	else

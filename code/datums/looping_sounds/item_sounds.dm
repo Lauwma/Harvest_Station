@@ -40,7 +40,3 @@
 	end_volume = 35
 	volume = 40
 	ignore_walls = FALSE
-
-/datum/looping_sound/beesmoke
-	mid_sounds = list('sound/weapons/beesmoke.ogg' = 1)
-	volume = 5

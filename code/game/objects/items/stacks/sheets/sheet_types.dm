@@ -73,16 +73,17 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	new/datum/stack_recipe("rack parts", /obj/item/rack_parts, category = CAT_FURNITURE), \
 	new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 1.5 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_FURNITURE), \
 	null, \
-	new/datum/stack_recipe("atmos canister", /obj/machinery/portable_atmospherics/canister, 10, time = 3 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_ATMOSPHERIC), \
+	new/datum/stack_recipe("unfinished canister frame", /obj/structure/canister_frame/machine/unfinished_canister_frame, 5, time = 0.8 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_ATMOSPHERIC), \
 	null, \
 	new/datum/stack_recipe("floor tile", /obj/item/stack/tile/iron/base, 1, 4, 20, category = CAT_TILES), \
 	new/datum/stack_recipe("iron rod", /obj/item/stack/rods, 1, 2, 60, category = CAT_MISC), \
 	null, \
-	new/datum/stack_recipe("wall girders (anchored)", /obj/structure/girder, 2, time = 4 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, placement_checks = STACK_CHECK_TRAM_FORBIDDEN, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75, category = CAT_STRUCTURE), \
+	new/datum/stack_recipe("wall girders (anchored)", /obj/structure/girder, 2, time = 4 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75, category = CAT_STRUCTURE), \
 	null, \
+	new/datum/stack_recipe("tram wall girders (anchored)", /obj/structure/girder/tram, 2, time = 4 SECONDS, one_per_turf = TRUE, on_solid_ground = FALSE, check_density = FALSE, on_tram = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75, category = CAT_STRUCTURE), \
 	null, \
 	new/datum/stack_recipe("computer frame", /obj/structure/frame/computer, 5, time = 2.5 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_EQUIPMENT), \
-	new/datum/stack_recipe("modular console", /obj/machinery/modular_computer, 10, time = 2.5 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_EQUIPMENT), \
+	new/datum/stack_recipe("modular console", /obj/machinery/modular_computer/console, 10, time = 2.5 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_EQUIPMENT), \
 	new/datum/stack_recipe("machine frame", /obj/structure/frame/machine, 5, time = 2.5 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_EQUIPMENT), \
 	null, \
 	new /datum/stack_recipe_list("airlock assemblies", list( \
@@ -138,7 +139,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	singular_name = "iron sheet"
 	icon_state = "sheet-metal"
 	inhand_icon_state = "sheet-metal"
-	mats_per_unit = list(/datum/material/iron=SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT)
 	throwforce = 10
 	flags_1 = CONDUCT_1
 	resistance_flags = FIRE_PROOF
@@ -148,8 +149,8 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	tableVariant = /obj/structure/table
 	material_type = /datum/material/iron
 	matter_amount = 4
-	cost = SHEET_MATERIAL_AMOUNT
-	source = /datum/robot_energy_storage/material/iron
+	cost = 500
+	source = /datum/robot_energy_storage/iron
 	stairs_type = /obj/structure/stairs
 	sniffable = TRUE
 
@@ -263,7 +264,7 @@ GLOBAL_LIST_INIT(plasteel_recipes, list ( \
 	desc = "This sheet is an alloy of iron and plasma."
 	icon_state = "sheet-plasteel"
 	inhand_icon_state = "sheet-plasteel"
-	mats_per_unit = list(/datum/material/alloy/plasteel=SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/alloy/plasteel=MINERAL_MATERIAL_AMOUNT)
 	material_type = /datum/material/alloy/plasteel
 	throwforce = 10
 	flags_1 = CONDUCT_1
@@ -329,7 +330,6 @@ GLOBAL_LIST_INIT(wood_recipes, list ( \
 	new/datum/stack_recipe("bonfire", /obj/structure/bonfire, 10, time = 6 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_TOOLS), \
 	new/datum/stack_recipe("easel", /obj/structure/easel, 5, time = 1 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_ENTERTAINMENT), \
 	new/datum/stack_recipe("noticeboard", /obj/item/wallframe/noticeboard, 1, time = 1 SECONDS, one_per_turf = FALSE, on_solid_ground = FALSE, check_density = FALSE, category = CAT_FURNITURE), \
-	new/datum/stack_recipe("test tube rack", /obj/item/storage/test_tube_rack, 1, time = 1 SECONDS, check_density = FALSE, category = CAT_CHEMISTRY), \
 	null, \
 	new/datum/stack_recipe_list("pews", list(
 		new /datum/stack_recipe("pew (middle)", /obj/structure/chair/pew, 3, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_FURNITURE),
@@ -346,7 +346,7 @@ GLOBAL_LIST_INIT(wood_recipes, list ( \
 	icon_state = "sheet-wood"
 	inhand_icon_state = "sheet-wood"
 	icon = 'icons/obj/stack_objects.dmi'
-	mats_per_unit = list(/datum/material/wood=SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/wood=MINERAL_MATERIAL_AMOUNT)
 	sheettype = "wood"
 	armor_type = /datum/armor/mineral_wood
 	resistance_flags = FLAMMABLE
@@ -395,7 +395,7 @@ GLOBAL_LIST_INIT(bamboo_recipes, list ( \
 	inhand_icon_state = "sheet-bamboo"
 	icon = 'icons/obj/stack_objects.dmi'
 	sheettype = "bamboo"
-	mats_per_unit = list(/datum/material/bamboo = SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/bamboo = MINERAL_MATERIAL_AMOUNT)
 	throwforce = 15
 	armor_type = /datum/armor/mineral_bamboo
 	resistance_flags = FLAMMABLE
@@ -425,8 +425,6 @@ GLOBAL_LIST_INIT(cloth_recipes, list ( \
 	new/datum/stack_recipe("white bandana", /obj/item/clothing/mask/bandana/white, 2, check_density = FALSE, category = CAT_CLOTHING), \
 	null, \
 	new/datum/stack_recipe("backpack", /obj/item/storage/backpack, 4, check_density = FALSE, category = CAT_CONTAINERS), \
-	new/datum/stack_recipe("satchel", /obj/item/storage/backpack/satchel, 4, check_density = FALSE, category = CAT_CONTAINERS), \
-	new/datum/stack_recipe("messenger bag", /obj/item/storage/backpack/messenger, 4, check_density = FALSE, category = CAT_CONTAINERS), \
 	new/datum/stack_recipe("duffel bag", /obj/item/storage/backpack/duffelbag, 6, check_density = FALSE, category = CAT_CONTAINERS), \
 	null, \
 	new/datum/stack_recipe("plant bag", /obj/item/storage/bag/plants, 4, check_density = FALSE, category = CAT_CONTAINERS), \
@@ -500,21 +498,9 @@ GLOBAL_LIST_INIT(durathread_recipes, list ( \
 	drop_sound = 'sound/items/handling/cloth_drop.ogg'
 	pickup_sound = 'sound/items/handling/cloth_pickup.ogg'
 
-/obj/item/stack/sheet/durathread/Initialize(mapload)
-	. = ..()
-	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/durathread_helmet, /datum/crafting_recipe/durathread_vest)
-
-	AddComponent(
-		/datum/component/slapcrafting,\
-		slapcraft_recipes = slapcraft_recipe_list,\
-	)
-
 /obj/item/stack/sheet/durathread/get_main_recipes()
 	. = ..()
 	. += GLOB.durathread_recipes
-
-/obj/item/stack/sheet/durathread/on_item_crafted(mob/builder, atom/created)
-	created.set_armor_rating(CONSUME, max(50, created.get_armor_rating(CONSUME)))
 
 /obj/item/stack/sheet/cotton
 	name = "raw cotton bundle"
@@ -608,8 +594,7 @@ GLOBAL_LIST_INIT(cardboard_recipes, list ( \
 		new /datum/stack_recipe("light bulbs box", /obj/item/storage/box/lights/bulbs, check_density = FALSE, category = CAT_CONTAINERS), \
 		new /datum/stack_recipe("mixed lights box", /obj/item/storage/box/lights/mixed, check_density = FALSE, category = CAT_CONTAINERS), \
 		new /datum/stack_recipe("mouse traps box", /obj/item/storage/box/mousetraps, check_density = FALSE, category = CAT_CONTAINERS), \
-		new /datum/stack_recipe("candle box", /obj/item/storage/fancy/candle_box, check_density = FALSE, category = CAT_CONTAINERS), \
-		new /datum/stack_recipe("bandage box", /obj/item/storage/box/bandages, check_density = FALSE, category = CAT_CONTAINERS)
+		new /datum/stack_recipe("candle box", /obj/item/storage/fancy/candle_box, check_density = FALSE, category = CAT_CONTAINERS)
 		)),
 
 	null, \
@@ -621,22 +606,14 @@ GLOBAL_LIST_INIT(cardboard_recipes, list ( \
 	singular_name = "cardboard sheet"
 	icon_state = "sheet-card"
 	inhand_icon_state = "sheet-card"
-	mats_per_unit = list(/datum/material/cardboard = SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/cardboard = MINERAL_MATERIAL_AMOUNT)
 	resistance_flags = FLAMMABLE
 	force = 0
 	throwforce = 0
 	merge_type = /obj/item/stack/sheet/cardboard
+	novariants = TRUE
 	grind_results = list(/datum/reagent/cellulose = 10)
 	material_type = /datum/material/cardboard
-
-/obj/item/stack/sheet/cardboard/Initialize(mapload, new_amount, merge, list/mat_override, mat_amt)
-	. = ..()
-	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/cardboard_id)
-
-	AddComponent(
-		/datum/component/slapcrafting,\
-		slapcraft_recipes = slapcraft_recipe_list,\
-	)
 
 /obj/item/stack/sheet/cardboard/get_main_recipes()
 	. = ..()
@@ -688,7 +665,7 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 	icon_state = "sheet-brass"
 	inhand_icon_state = "sheet-brass"
 	icon = 'icons/obj/stack_objects.dmi'
-	mats_per_unit = list(/datum/material/bronze = SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/bronze = MINERAL_MATERIAL_AMOUNT)
 	lefthand_file = 'icons/mob/inhands/items/sheets_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/sheets_righthand.dmi'
 	resistance_flags = FIRE_PROOF | ACID_PROOF
@@ -747,7 +724,7 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 	icon = 'icons/obj/stack_objects.dmi'
 	icon_state = "bone"
 	inhand_icon_state = null
-	mats_per_unit = list(/datum/material/bone = SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/bone = MINERAL_MATERIAL_AMOUNT)
 	singular_name = "bone"
 	desc = "Someone's been drinking their milk."
 	force = 7
@@ -760,23 +737,8 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 	merge_type = /obj/item/stack/sheet/bone
 	material_type = /datum/material/bone
 
-/obj/item/stack/sheet/bone/Initialize(mapload, new_amount, merge, list/mat_override, mat_amt)
-	. = ..()
-
-	// As bone and sinew have just a little too many recipes for this, we'll just split them up.
-	// Sinew slapcrafting will mostly-sinew recipes, and bones will have mostly-bones recipes.
-	var/static/list/slapcraft_recipe_list = list(\
-		/datum/crafting_recipe/bonedagger, /datum/crafting_recipe/bonespear, /datum/crafting_recipe/boneaxe,\
-		/datum/crafting_recipe/bonearmor, /datum/crafting_recipe/skullhelm, /datum/crafting_recipe/bracers
-		)
-
-	AddComponent(
-		/datum/component/slapcrafting,\
-		slapcraft_recipes = slapcraft_recipe_list,\
-	)
 GLOBAL_LIST_INIT(plastic_recipes, list(
-	new /datum/stack_recipe("plastic floor tile", /obj/item/stack/tile/plastic, 1, 4, 20, time = 2 SECONDS, check_density = FALSE, category = CAT_TILES), \
-	new /datum/stack_recipe("thermoplastic tram tile", /obj/item/stack/thermoplastic, 1, 2, time = 4 SECONDS, check_density = FALSE, placement_checks = STACK_CHECK_TRAM_EXCLUSIVE, category = CAT_TILES), \
+	new /datum/stack_recipe("plastic floor tile", /obj/item/stack/tile/plastic, 1, 4, 20, check_density = FALSE, category = CAT_TILES), \
 	new /datum/stack_recipe("folding plastic chair", /obj/structure/chair/plastic, 2, check_density = FALSE, category = CAT_FURNITURE), \
 	new /datum/stack_recipe("plastic flaps", /obj/structure/plasticflaps, 5, one_per_turf = TRUE, on_solid_ground = TRUE, time = 4 SECONDS, category = CAT_FURNITURE), \
 	new /datum/stack_recipe("water bottle", /obj/item/reagent_containers/cup/glass/waterbottle/empty, check_density = FALSE, category = CAT_CONTAINERS), \
@@ -793,7 +755,7 @@ GLOBAL_LIST_INIT(plastic_recipes, list(
 	singular_name = "plastic sheet"
 	icon_state = "sheet-plastic"
 	inhand_icon_state = "sheet-plastic"
-	mats_per_unit = list(/datum/material/plastic=SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/plastic=MINERAL_MATERIAL_AMOUNT)
 	throwforce = 7
 	material_type = /datum/material/plastic
 	merge_type = /obj/item/stack/sheet/plastic
@@ -818,7 +780,7 @@ new /datum/stack_recipe("paper frame door", /obj/structure/mineral_door/paperfra
 	singular_name = "paper frame"
 	icon_state = "sheet-paper"
 	inhand_icon_state = "sheet-paper"
-	mats_per_unit = list(/datum/material/paper = SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/paper = MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/sheet/paperframes
 	resistance_flags = FLAMMABLE
 	grind_results = list(/datum/reagent/cellulose = 20)
@@ -840,7 +802,7 @@ new /datum/stack_recipe("paper frame door", /obj/structure/mineral_door/paperfra
 	singular_name = "meat sheet"
 	icon_state = "sheet-meat"
 	material_flags = MATERIAL_EFFECTS | MATERIAL_COLOR
-	mats_per_unit = list(/datum/material/meat = SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/meat = MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/sheet/meat
 	material_type = /datum/material/meat
 	material_modifier = 1 //None of that wussy stuff
@@ -857,7 +819,7 @@ new /datum/stack_recipe("paper frame door", /obj/structure/mineral_door/paperfra
 	desc = "It's a delicious pepperoni sheetzza!"
 	singular_name = "pepperoni sheetzza"
 	icon_state = "sheet-pizza"
-	mats_per_unit = list(/datum/material/pizza = SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/pizza = MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/sheet/pizza
 	material_type = /datum/material/pizza
 	material_modifier = 1
@@ -874,7 +836,7 @@ new /datum/stack_recipe("paper frame door", /obj/structure/mineral_door/paperfra
 	desc = "You're too old to be playing with sandcastles. Now you build... sandstations."
 	singular_name = "sand block"
 	icon_state = "sheet-sandstone"
-	mats_per_unit = list(/datum/material/sand = SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/sand = MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/sheet/sandblock
 	material_type = /datum/material/sand
 	material_modifier = 1
@@ -893,11 +855,10 @@ new /datum/stack_recipe("paper frame door", /obj/structure/mineral_door/paperfra
 	singular_name = "haunted sheet"
 	icon_state = "sheet-meat"
 	material_flags = MATERIAL_EFFECTS | MATERIAL_COLOR
-	mats_per_unit = list(/datum/material/hauntium = SHEET_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/hauntium = MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/sheet/hauntium
 	material_type = /datum/material/hauntium
 	material_modifier = 1 //None of that wussy stuff
-	grind_results = list(/datum/reagent/hauntium = 20)
 
 /obj/item/stack/sheet/hauntium/fifty
 	amount = 50

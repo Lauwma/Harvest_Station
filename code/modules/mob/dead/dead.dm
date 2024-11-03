@@ -23,7 +23,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 		add_verb(src, /mob/dead/proc/server_hop)
 	set_focus(src)
 	become_hearing_sensitive()
-	log_mob_tag("TAG: [tag] CREATED: [key_name(src)] \[[src.type]\]")
+	log_mob_tag("CREATED: [key_name(src)] \[[src.type]\]")
 	return INITIALIZE_HINT_NORMAL
 
 /mob/dead/canUseStorage()
@@ -46,13 +46,11 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 		. += "Players Ready: [SSticker.totalPlayersReady]"
 		. += "Admins Ready: [SSticker.total_admins_ready] / [length(GLOB.admins)]"
 
-#define SERVER_HOPPER_TRAIT "server_hopper"
-
 /mob/dead/proc/server_hop()
 	set category = "OOC"
 	set name = "Server Hop"
 	set desc= "Jump to the other server"
-	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM)) // in case the round is ending and a cinematic is already playing we don't wanna clash with that (yes i know)
+	if(notransform)
 		return
 	var/list/our_id = CONFIG_GET(string/cross_comms_name)
 	var/list/csa = CONFIG_GET(keyed_list/cross_server) - our_id
@@ -76,11 +74,11 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 
 	var/client/C = client
 	to_chat(C, span_notice("Sending you to [pick]."))
-	new /atom/movable/screen/splash(null, null, C)
+	new /atom/movable/screen/splash(null, C)
 
-	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, SERVER_HOPPER_TRAIT)
+	notransform = TRUE
 	sleep(2.9 SECONDS) //let the animation play
-	REMOVE_TRAIT(src, TRAIT_NO_TRANSFORM, SERVER_HOPPER_TRAIT)
+	notransform = FALSE
 
 	if(!C)
 		return
@@ -88,8 +86,6 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	winset(src, null, "command=.options") //other wise the user never knows if byond is downloading resources
 
 	C << link("[addr]")
-
-#undef SERVER_HOPPER_TRAIT
 
 /mob/dead/proc/update_z(new_z) // 1+ to register, null to unregister
 	if (registered_z != new_z)

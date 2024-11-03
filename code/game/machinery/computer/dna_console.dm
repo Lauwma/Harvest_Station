@@ -235,13 +235,10 @@
 	// Set the default tgui state
 	set_default_state()
 
-/obj/machinery/computer/scan_consolenew/LateInitialize()
-	. = ..()
 	// Link machine with research techweb. Used for discovering and accessing
 	// already discovered mutations
 	if(!CONFIG_GET(flag/no_default_techweb_link) && !stored_research)
-		CONNECT_TO_RND_SERVER_ROUNDSTART(stored_research, src)
-
+		stored_research = SSresearch.science_tech
 
 /obj/machinery/computer/scan_consolenew/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
@@ -719,10 +716,10 @@
 				//should be a "sometimes" thing, not an "always" thing, but risky enough to force the need for precautions to isolate the subject
 				if(prob(60))
 					var/datum/disease/advance/random/random_disease = new /datum/disease/advance/random(2,2)
-					scanner_occupant.ContactContractDisease(random_disease)
+					random_disease.try_infect(scanner_occupant, FALSE)
 				else if (prob(30))
 					var/datum/disease/advance/random/random_disease = new /datum/disease/advance/random(3,4)
-					scanner_occupant.ContactContractDisease(random_disease)
+					random_disease.try_infect(scanner_occupant, FALSE)
 				//Instantiate list to hold resulting mutation_index
 				var/mutation_data[0]
 				//Start with the bad mutation, overwrite with the desired mutation if it passes the check
@@ -2293,12 +2290,12 @@
 
 /obj/machinery/computer/scan_consolenew/proc/set_connected_scanner(new_scanner)
 	if(connected_scanner)
-		UnregisterSignal(connected_scanner, COMSIG_QDELETING)
+		UnregisterSignal(connected_scanner, COMSIG_PARENT_QDELETING)
 		if(connected_scanner.linked_console == src)
 			connected_scanner.set_linked_console(null)
 	connected_scanner = new_scanner
 	if(connected_scanner)
-		RegisterSignal(connected_scanner, COMSIG_QDELETING, PROC_REF(react_to_scanner_del))
+		RegisterSignal(connected_scanner, COMSIG_PARENT_QDELETING, PROC_REF(react_to_scanner_del))
 		connected_scanner.set_linked_console(src)
 
 /obj/machinery/computer/scan_consolenew/proc/react_to_scanner_del(datum/source)

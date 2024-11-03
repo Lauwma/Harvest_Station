@@ -41,14 +41,11 @@
 	//Effects of bloodloss
 	var/word = pick("dizzy","woozy","faint")
 	switch(blood_volume)
-		if(BLOOD_VOLUME_MAX_LETHAL to INFINITY)
+		if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
 			if(SPT_PROB(7.5, seconds_per_tick))
 				to_chat(src, span_userdanger("Blood starts to tear your skin apart. You're going to burst!"))
 				investigate_log("has been gibbed by having too much blood.", INVESTIGATE_DEATHS)
 				inflate_gib()
-		if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
-			if(SPT_PROB(5, seconds_per_tick))
-				to_chat(src, span_warning("You feel your skin swelling."))
 		if(BLOOD_VOLUME_MAXIMUM to BLOOD_VOLUME_EXCESS)
 			if(SPT_PROB(5, seconds_per_tick))
 				to_chat(src, span_warning("You feel terribly bloated."))
@@ -91,13 +88,13 @@
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/proc/bleed(amt)
-	if(!blood_volume || (status_flags & GODMODE))
+	if(!blood_volume)
 		return
 	blood_volume = max(blood_volume - amt, 0)
 
 	//Blood loss still happens in locker, floor stays clean
 	if(isturf(loc) && prob(sqrt(amt)*BLOOD_DRIP_RATE_MOD))
-		add_splatter_floor(loc, (amt <= 10))
+		add_splatter_floor(loc, (amt >= 10))
 
 /mob/living/carbon/human/bleed(amt)
 	amt *= physiology.bleed_mod
@@ -325,8 +322,6 @@
 		return
 	if(!T)
 		T = get_turf(src)
-	if(isclosedturf(T) || (isgroundlessturf(T) && !GET_TURF_BELOW(T)))
-		return
 
 	var/list/temp_blood_DNA
 	if(small_drip)
@@ -360,6 +355,13 @@
 /mob/living/carbon/human/add_splatter_floor(turf/T, small_drip)
 	if(!HAS_TRAIT(src, TRAIT_NOBLOOD))
 		..()
+
+/mob/living/carbon/human/species/drone/add_splatter_floor(turf/T, small_drip)
+	if(!T)
+		T = get_turf(src)
+	var/obj/effect/decal/cleanable/oil/B = locate() in T.contents
+	if(!B)
+		B = new(T)
 
 /mob/living/carbon/alien/add_splatter_floor(turf/T, small_drip)
 	if(!T)

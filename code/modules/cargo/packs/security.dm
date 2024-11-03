@@ -225,28 +225,19 @@
 	crate_name = "energy gun crate"
 	crate_type = /obj/structure/closet/crate/secure/plasma
 
-/datum/supply_pack/security/armory/laser_carbine
-	name = "Laser Carbine Crate"
-	desc = "Contains three laser carbines, capable of rapidly firing weak lasers."
-	cost = CARGO_CRATE_VALUE * 9
-	contains = list(/obj/item/gun/energy/laser/carbine = 3)
-	crate_name = "laser carbine crate"
-	crate_type = /obj/structure/closet/crate/secure/plasma
-
-/datum/supply_pack/security/armory/disabler_smg
-	name = "Disabler SMG Crate"
-	desc = "Contains three disabler SMGs, capable of rapidly firing weak disabler beams."
-	cost = CARGO_CRATE_VALUE * 7
-	contains = list(/obj/item/gun/energy/disabler/smg = 3)
-	crate_name = "disabler smg crate"
-	crate_type = /obj/structure/closet/crate/secure/plasma
-
 /datum/supply_pack/security/armory/exileimp
 	name = "Exile Implants Crate"
 	desc = "Contains five Exile implants."
 	cost = CARGO_CRATE_VALUE * 3.5
 	contains = list(/obj/item/storage/box/exileimp)
 	crate_name = "exile implant crate"
+
+/datum/supply_pack/security/armory/restrainimp
+	name = "Restraining Implants Crate"
+	desc = "Contains five Restraining implants and a Restraining Belt."
+	cost = CARGO_CRATE_VALUE * 3.5
+	contains = list(/obj/item/storage/box/restrainimp, /obj/item/restraining_belt)
+	crate_name = "restraining implant and belt crate"
 
 /datum/supply_pack/security/armory/fire
 	name = "Incendiary Weapons Crate"
@@ -325,6 +316,20 @@
 				)
 	crate_name = "swat crate"
 
+/datum/supply_pack/security/armory/adv_police
+	name = "Advanced Security Armor (by SPC)"
+	desc = "Contains one fullbody sets of tough, fireproof suits designed in a joint \
+		effort by the SPC (Security Professionnal Corporation) and Nanotrasen. Each set contains a suit, helmet, mask, combat belt, \
+		and gorilla gloves."
+	cost = CARGO_CRATE_VALUE * 12
+	contains = list(/obj/item/clothing/head/helmet/advanced_police,
+					/obj/item/clothing/suit/armor/advanced_police,
+					/obj/item/clothing/mask/gas/sechailer/swat,
+					/obj/item/storage/belt/military/assault,
+					/obj/item/clothing/gloves/tackler/combat,
+				)
+	crate_name = "advanced security armor (by spc)"
+
 /datum/supply_pack/security/armory/thermal
 	name = "Thermal Pistol Crate"
 	desc = "Contains a pair of holsters each with two experimental thermal pistols, \
@@ -332,11 +337,3 @@
 	cost = CARGO_CRATE_VALUE * 7
 	contains = list(/obj/item/storage/belt/holster/energy/thermal = 2)
 	crate_name = "thermal pistol crate"
-
-/datum/supply_pack/security/sunglasses
-	name = "Sunglasses Crate"
-	desc = "A single pair of flash-proof sunglasses."
-	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_SECURITY
-	contains = list(/obj/item/clothing/glasses/sunglasses = 1)
-	crate_name = "sunglasses crate"

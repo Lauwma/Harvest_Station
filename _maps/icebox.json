@@ -14,7 +14,7 @@
 	},
 	"traits": [
 		{
-			"Up": true,
+			"Up": 1,
 			"Mining": true,
 			"Linkage": null,
 			"Gravity": true,
@@ -23,8 +23,8 @@
 			"No Parallax": true
 		},
 		{
-			"Down": true,
-			"Up": true,
+			"Down": -1,
+			"Up": 1,
 			"Mining": true,
 			"Linkage": null,
 			"Gravity": true,
@@ -33,7 +33,7 @@
 			"No Parallax": true
 		},
 		{
-			"Down": true,
+			"Down": -1,
 			"Mining": true,
 			"Linkage": null,
 			"Gravity": true,
@@ -46,6 +46,9 @@
 	"minetype": "none",
 	"blacklist_file": "iceruinblacklist.txt",
 	"job_changes": {
+		"Cook": {
+			"additional_cqc_areas": ["/area/station/service/kitchen/diner"]
+		},
 		"Captain": {
 			"special_charter": "moon"
 		}

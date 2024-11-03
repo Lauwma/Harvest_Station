@@ -10,15 +10,6 @@
 	resistance_flags = NONE
 	cut_type = /obj/item/clothing/gloves/fingerless
 
-/obj/item/clothing/gloves/color/black/Initialize(mapload)
-	. = ..()
-	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/radiogloves)
-
-	AddComponent(
-		/datum/component/slapcrafting,\
-		slapcraft_recipes = slapcraft_recipe_list,\
-	)
-
 /obj/item/clothing/gloves/fingerless
 	name = "fingerless gloves"
 	desc = "Plain black gloves without fingertips for the hard-working."
@@ -32,26 +23,18 @@
 	undyeable = TRUE
 	clothing_traits = list(TRAIT_FINGERPRINT_PASSTHROUGH)
 
-/obj/item/clothing/gloves/color/fingerless/Initialize(mapload)
-	. = ..()
-	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/gripperoffbrand)
-
-	AddComponent(
-		/datum/component/slapcrafting,\
-		slapcraft_recipes = slapcraft_recipe_list,\
-	)
-
 /obj/item/clothing/gloves/color/orange
 	name = "orange gloves"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "orange"
-	greyscale_colors = COLOR_CRAYON_ORANGE
+	greyscale_colors = "#ff9300"
 
 /obj/item/clothing/gloves/color/red
 	name = "red gloves"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "red"
-	greyscale_colors = COLOR_CRAYON_RED
+	greyscale_colors = "#da0000"
+
 
 /obj/item/clothing/gloves/color/red/insulated
 	name = "insulated gloves"
@@ -74,7 +57,7 @@
 	name = "blue gloves"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "blue"
-	greyscale_colors = COLOR_CRAYON_BLUE
+	greyscale_colors = "#00b7ef"
 
 /obj/item/clothing/gloves/color/purple
 	name = "purple gloves"
@@ -86,7 +69,7 @@
 	name = "green gloves"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "green"
-	greyscale_colors = COLOR_CRAYON_GREEN
+	greyscale_colors = "#a8e61d"
 
 /obj/item/clothing/gloves/color/grey
 	name = "grey gloves"
@@ -120,5 +103,5 @@
 	name = "white gloves"
 	desc = "These look pretty fancy."
 	icon_state = "white"
-	greyscale_colors = COLOR_WHITE
+	greyscale_colors = "#ffffff"
 	custom_price = PAYCHECK_CREW

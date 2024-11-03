@@ -38,7 +38,7 @@
 		"i hope it was worth it",
 	)
 	input_obj_or_mob = list(
-		/mob/living/basic/pet/fox,
+		/mob/living/simple_animal/pet/fox,
 	)
 	output_organs = list(
 		/obj/item/organ/internal/ears/fox,

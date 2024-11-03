@@ -43,10 +43,10 @@
 
 /datum/station_goal/proc/get_coverage()
 	var/list/coverage = list()
-	for(var/obj/machinery/satellite/meteor_shield/shield_satt as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/satellite/meteor_shield))
-		if(!shield_satt.active || !is_station_level(shield_satt.z))
+	for(var/obj/machinery/satellite/meteor_shield/A in GLOB.machines)
+		if(!A.active || !is_station_level(A.z))
 			continue
-		coverage |= view(shield_satt.kill_range, shield_satt)
+		coverage |= view(A.kill_range,A)
 	return coverage.len
 
 /obj/machinery/satellite/meteor_shield
@@ -118,11 +118,10 @@
 /obj/machinery/satellite/meteor_shield/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
 		balloon_alert(user, "already emagged!")
-		return FALSE
+		return
 	if(!COOLDOWN_FINISHED(src, shared_emag_cooldown))
-		balloon_alert(user, "on cooldown!")
 		to_chat(user, span_warning("The last satellite emagged needs [DisplayTimeText(COOLDOWN_TIMELEFT(src, shared_emag_cooldown))] to recalibrate first. Emagging another so soon could damage the satellite network."))
-		return FALSE
+		return
 	var/cooldown_applied = METEOR_SHIELD_EMAG_COOLDOWN
 	if(istype(emag_card, /obj/item/card/emag/meteor_shield_recalibrator))
 		cooldown_applied /= 3
@@ -133,7 +132,6 @@
 	say("Recalibrating... ETA:[DisplayTimeText(cooldown_applied)].")
 	if(active) //if we allowed inactive updates a sat could be worth -1 active meteor shields on first emag
 		update_emagged_meteor_sat(user)
-	return TRUE
 
 /obj/machinery/satellite/meteor_shield/proc/update_emagged_meteor_sat(mob/user)
 	if(!active)

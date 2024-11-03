@@ -4,7 +4,7 @@
 /obj/structure/disposalconstruct
 	name = "disposal pipe segment"
 	desc = "A huge pipe segment used for constructing disposal systems."
-	icon = 'icons/obj/pipes_n_cables/disposal.dmi'
+	icon = 'icons/obj/atmospherics/pipes/disposal.dmi'
 	icon_state = "conpipe"
 	anchored = FALSE
 	density = FALSE
@@ -83,7 +83,7 @@
 		if(initialize_dirs & DISP_DIR_RIGHT)
 			dpdir |= turn(dir, -90)
 		if(initialize_dirs & DISP_DIR_FLIP)
-			dpdir |= REVERSE_DIR(dir)
+			dpdir |= turn(dir, 180)
 	return dpdir
 
 /obj/structure/disposalconstruct/proc/AfterRotation(mob/user, degrees)
@@ -154,7 +154,7 @@
 			to_chat(user, span_warning("A disposals machine already exists here!"))
 			return TRUE
 
-		if(!I.tool_start_check(user, amount=1))
+		if(!I.tool_start_check(user, amount=0))
 			return TRUE
 
 		to_chat(user, span_notice("You start welding the [pipename] in place..."))

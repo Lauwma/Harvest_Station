@@ -31,22 +31,12 @@ RSF
 	var/dispense_cost = 0
 	w_class = WEIGHT_CLASS_NORMAL
 	///An associated list of atoms and charge costs. This can contain a separate list, as long as it's associated item is an object
-	///The RSF item list below shows in the player facing ui in this order, this is why it isn't in alphabetical order, but instead sorted by category
-	var/list/cost_by_item = list(
-		/obj/item/reagent_containers/cup/glass/drinkingglass = 20,
-		/obj/item/reagent_containers/cup/glass/sillycup = 10,
-		/obj/item/plate = 70,
-		/obj/item/reagent_containers/cup/bowl = 70,
-		/obj/item/kitchen/fork/plastic = 30,
-		/obj/item/knife/plastic = 30,
-		/obj/item/kitchen/spoon/plastic = 30,
-		/obj/item/food/seaweedsheet = 30,
-		/obj/item/storage/dice = 200,
-		/obj/item/toy/cards/deck = 200,
-		/obj/item/paper = 10,
-		/obj/item/pen = 50,
-		/obj/item/clothing/mask/cigarette = 10,
-	)
+	var/list/cost_by_item = list(/obj/item/reagent_containers/cup/glass/drinkingglass = 20,
+								/obj/item/paper = 10,
+								/obj/item/storage/dice = 200,
+								/obj/item/pen = 50,
+								/obj/item/clothing/mask/cigarette = 10,
+								)
 	///An associated list of fuel and it's value
 	var/list/matter_by_item = list(/obj/item/rcd_ammo = 10,)
 	///A list of surfaces that we are allowed to place things on.
@@ -183,13 +173,12 @@ RSF
 	///Tracks whether or not the cookiesynth is about to print a poisoned cookie
 	var/toxin = FALSE //This might be better suited to some initialize fuckery, but I don't have a good "poisoned" sprite
 
-/obj/item/rsf/cookiesynth/emag_act(mob/user, obj/item/card/emag/emag_card)
+/obj/item/rsf/cookiesynth/emag_act(mob/user)
 	obj_flags ^= EMAGGED
 	if(obj_flags & EMAGGED)
-		balloon_alert(user, "reagent safety checker shorted out")
+		to_chat(user, span_warning("You short out [src]'s reagent safety checker!"))
 	else
-		balloon_alert(user, "reagent safety checker reset")
-	return TRUE
+		to_chat(user, span_warning("You reset [src]'s reagent safety checker!"))
 
 /obj/item/rsf/cookiesynth/attack_self(mob/user)
 	var/mob/living/silicon/robot/P = null

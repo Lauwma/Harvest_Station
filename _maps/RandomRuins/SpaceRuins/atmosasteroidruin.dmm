@@ -2,23 +2,12 @@
 "af" = (
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
-"aO" = (
-/obj/effect/spawner/structure/window/reinforced/plasma,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/yellow/visible,
-/turf/open/floor/plating,
-/area/ruin/space/has_grav/atmosasteroid)
 "ba" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /obj/effect/turf_decal/tile/yellow/half{
 	dir = 1
 	},
 /turf/open/floor/iron/co2_pressurized,
-/area/ruin/space/has_grav/atmosasteroid)
-"bC" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/siphon{
-	dir = 8
-	},
-/turf/open/floor/engine/co2/equalized_with_regular_air,
 /area/ruin/space/has_grav/atmosasteroid)
 "bF" = (
 /obj/effect/turf_decal/tile/yellow/half,
@@ -38,6 +27,10 @@
 	dir = 1
 	},
 /turf/open/floor/engine/airless,
+/area/ruin/space/has_grav/atmosasteroid)
+"fz" = (
+/obj/machinery/atmospherics/miner/carbon_dioxide,
+/turf/open/floor/engine/co2/equalized_with_regular_air,
 /area/ruin/space/has_grav/atmosasteroid)
 "fV" = (
 /obj/machinery/atmospherics/components/binary/volume_pump{
@@ -70,37 +63,18 @@
 	},
 /turf/open/floor/engine/airless,
 /area/ruin/space/has_grav/atmosasteroid)
-"hN" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/dark,
-/obj/machinery/light/small/directional/west,
-/turf/open/floor/engine/airless,
-/area/ruin/space/has_grav/atmosasteroid)
 "hP" = (
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/green,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/atmosasteroid)
-"hS" = (
-/obj/structure/rack,
-/obj/item/rpd_upgrade{
-	pixel_x = -4;
-	pixel_y = 3
+"hX" = (
+/obj/item/analyzer/ranged,
+/obj/effect/turf_decal/tile/yellow/half{
+	dir = 4
 	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
-	},
-/obj/item/rpd_upgrade/unwrench{
-	pixel_x = 5
-	},
-/obj/item/paper/crumpled{
-	default_raw_text = "Ever since I set up those miners, they've all been making a strange clunking noise, especially the Carbon Dioxide miner. I swear, it's just been getting louder and louder these past couple hours. I just hope I set it up right."
-	},
-/obj/machinery/door/window/left/directional/east,
-/obj/structure/window/spawner/directional/north,
-/obj/structure/window/spawner/directional/south,
-/obj/item/storage/toolbox/mechanical,
-/obj/item/gps/spaceruin,
-/turf/open/floor/iron/dark/co2_pressurized,
+/obj/machinery/light/dim/directional/east,
+/turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
 "ij" = (
 /obj/effect/spawner/structure/window/reinforced/plasma,
@@ -126,17 +100,6 @@
 	},
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
-"jM" = (
-/obj/machinery/power/port_gen/pacman/pre_loaded{
-	anchored = 1
-	},
-/obj/structure/cable,
-/obj/effect/turf_decal/tile/yellow/half{
-	dir = 1
-	},
-/obj/machinery/light/directional/north,
-/turf/open/floor/iron/co2_pressurized,
-/area/ruin/space/has_grav/atmosasteroid)
 "jP" = (
 /obj/machinery/door/airlock/atmos/glass,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
@@ -160,10 +123,6 @@
 	dir = 4
 	},
 /turf/open/floor/iron/co2_pressurized,
-/area/ruin/space/has_grav/atmosasteroid)
-"ky" = (
-/obj/machinery/light/small/directional/east,
-/turf/open/floor/engine/plasma,
 /area/ruin/space/has_grav/atmosasteroid)
 "kB" = (
 /obj/machinery/atmospherics/components/trinary/mixer/airmix/inverse{
@@ -217,6 +176,12 @@
 	},
 /turf/open/floor/engine/air,
 /area/ruin/space/has_grav/atmosasteroid)
+"nB" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 8
+	},
+/turf/open/floor/iron/co2_pressurized,
+/area/ruin/space/has_grav/atmosasteroid)
 "og" = (
 /obj/machinery/power/turbine/inlet_compressor,
 /turf/open/misc/asteroid,
@@ -252,6 +217,10 @@
 /obj/structure/closet/firecloset/full,
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
+"ps" = (
+/obj/machinery/atmospherics/miner/oxygen,
+/turf/open/floor/engine/o2,
+/area/ruin/space/has_grav/atmosasteroid)
 "pw" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /obj/effect/turf_decal/stripes/corner{
@@ -265,10 +234,6 @@
 "pU" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber,
 /turf/open/floor/engine/airless,
-/area/ruin/space/has_grav/atmosasteroid)
-"qA" = (
-/obj/machinery/light/small/directional/south,
-/turf/open/floor/engine/air,
 /area/ruin/space/has_grav/atmosasteroid)
 "rg" = (
 /obj/machinery/suit_storage_unit/standard_unit,
@@ -290,13 +255,32 @@
 /obj/machinery/power/turbine/turbine_outlet,
 /turf/open/misc/asteroid,
 /area/ruin/space/has_grav/atmosasteroid)
-"sH" = (
-/obj/item/analyzer/ranged,
-/obj/effect/turf_decal/tile/yellow/half{
-	dir = 4
-	},
-/obj/machinery/light/broken/directional/east,
+"sp" = (
+/obj/effect/turf_decal/tile/yellow/half,
+/obj/machinery/atmospherics/components/unary/portables_connector/visible,
 /turf/open/floor/iron/co2_pressurized,
+/area/ruin/space/has_grav/atmosasteroid)
+"tC" = (
+/obj/structure/rack,
+/obj/item/rpd_upgrade{
+	pixel_x = -4;
+	pixel_y = 3
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/item/rpd_upgrade/unwrench{
+	pixel_x = 5
+	},
+/obj/item/paper/crumpled{
+	default_raw_text = "Ever since I set up those miners, they've all been making a strange clunking noise, especially the Carbon Dioxide miner. I swear, it's just been getting louder and louder these past couple hours. I just hope I set it up right."
+	},
+/obj/machinery/door/window/left/directional/east,
+/obj/structure/window/spawner/directional/north,
+/obj/structure/window/spawner/directional/south,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/gps/spaceruin,
+/turf/open/floor/iron/dark/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
 "tL" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector{
@@ -339,11 +323,6 @@
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/atmosasteroid)
-"zw" = (
-/obj/machinery/atmospherics/miner/nitrogen,
-/obj/machinery/light/small/directional/south,
-/turf/open/floor/engine/n2,
-/area/ruin/space/has_grav/atmosasteroid)
 "zD" = (
 /obj/machinery/atmospherics/pipe/bridge_pipe/general/visible/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/yellow/visible,
@@ -353,12 +332,23 @@
 /obj/machinery/power/turbine/core_rotor,
 /turf/open/misc/asteroid,
 /area/ruin/space/has_grav/atmosasteroid)
-"zL" = (
-/obj/machinery/light/small/directional/east,
-/turf/open/floor/engine/n2o,
+"zM" = (
+/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/yellow/visible,
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/atmosasteroid)
 "Ak" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
+/turf/open/floor/iron/co2_pressurized,
+/area/ruin/space/has_grav/atmosasteroid)
+"Al" = (
+/obj/machinery/power/port_gen/pacman/pre_loaded{
+	anchored = 1
+	},
+/obj/structure/cable,
+/obj/effect/turf_decal/tile/yellow/half{
+	dir = 1
+	},
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
 "AJ" = (
@@ -379,10 +369,6 @@
 /turf/open/floor/iron/dark/corner/co2_pressurized{
 	dir = 4
 	},
-/area/ruin/space/has_grav/atmosasteroid)
-"By" = (
-/obj/machinery/atmospherics/miner/carbon_dioxide,
-/turf/open/floor/engine/co2/equalized_with_regular_air,
 /area/ruin/space/has_grav/atmosasteroid)
 "Cb" = (
 /obj/machinery/atmospherics/pipe/layer_manifold/yellow/visible,
@@ -408,6 +394,16 @@
 	},
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
+"Dw" = (
+/obj/machinery/airalarm/directional/west,
+/obj/effect/turf_decal/tile/yellow/half{
+	dir = 8
+	},
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 1
+	},
+/turf/open/floor/iron/co2_pressurized,
+/area/ruin/space/has_grav/atmosasteroid)
 "DN" = (
 /obj/machinery/door/airlock/external/glass/ruin{
 	locked = 1
@@ -418,13 +414,6 @@
 "Ep" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
-	},
-/turf/open/floor/iron/co2_pressurized,
-/area/ruin/space/has_grav/atmosasteroid)
-"ED" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
-/obj/effect/turf_decal/tile/yellow/half{
-	dir = 4
 	},
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
@@ -455,7 +444,10 @@
 	},
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
-"Hl" = (
+"HD" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/siphon{
+	dir = 8
+	},
 /turf/open/floor/engine/co2/equalized_with_regular_air,
 /area/ruin/space/has_grav/atmosasteroid)
 "HF" = (
@@ -511,6 +503,13 @@
 	dir = 8
 	},
 /area/ruin/space/has_grav/atmosasteroid)
+"LI" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/tank_holder/extinguisher/advanced{
+	anchored = 1
+	},
+/turf/open/floor/iron/dark/side/co2_pressurized,
+/area/ruin/space/has_grav/atmosasteroid)
 "LJ" = (
 /obj/machinery/atmospherics/pipe/layer_manifold/purple/visible{
 	dir = 4
@@ -520,22 +519,11 @@
 	},
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
-"LP" = (
-/obj/machinery/atmospherics/components/unary/portables_connector/visible{
-	dir = 8
-	},
-/turf/open/floor/iron/co2_pressurized,
-/area/ruin/space/has_grav/atmosasteroid)
 "Mt" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
-/turf/open/floor/iron/co2_pressurized,
-/area/ruin/space/has_grav/atmosasteroid)
-"Mz" = (
-/obj/effect/turf_decal/tile/yellow/half,
-/obj/machinery/atmospherics/components/unary/portables_connector/visible,
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
 "MG" = (
@@ -560,6 +548,15 @@
 /obj/machinery/portable_atmospherics/scrubber/huge/movable,
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
+"Ns" = (
+/obj/effect/turf_decal/tile/yellow/half{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/layer_manifold/green/visible{
+	dir = 4
+	},
+/turf/open/floor/iron/co2_pressurized,
+/area/ruin/space/has_grav/atmosasteroid)
 "Ny" = (
 /turf/closed/wall,
 /area/ruin/space/has_grav/atmosasteroid)
@@ -568,15 +565,6 @@
 	dir = 1
 	},
 /turf/open/floor/engine/o2,
-/area/ruin/space/has_grav/atmosasteroid)
-"Oc" = (
-/obj/effect/turf_decal/tile/yellow/half{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/layer_manifold/green/visible{
-	dir = 4
-	},
-/turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
 "Oe" = (
 /obj/item/pickaxe,
@@ -595,17 +583,6 @@
 /obj/machinery/electrolyzer,
 /turf/open/floor/iron/dark/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
-"QA" = (
-/obj/effect/turf_decal/tile/yellow/half,
-/obj/structure/extinguisher_cabinet/directional/south,
-/obj/machinery/light/directional/south,
-/turf/open/floor/iron/co2_pressurized,
-/area/ruin/space/has_grav/atmosasteroid)
-"QI" = (
-/obj/machinery/atmospherics/miner/oxygen,
-/obj/machinery/light/small/directional/south,
-/turf/open/floor/engine/o2,
-/area/ruin/space/has_grav/atmosasteroid)
 "QP" = (
 /turf/closed/mineral,
 /area/ruin/space/has_grav/atmosasteroid)
@@ -618,16 +595,6 @@
 "Rp" = (
 /turf/open/floor/engine/n2o,
 /area/ruin/space/has_grav/atmosasteroid)
-"RI" = (
-/obj/machinery/airalarm/directional/west,
-/obj/effect/turf_decal/tile/yellow/half{
-	dir = 8
-	},
-/obj/machinery/atmospherics/components/unary/portables_connector/visible{
-	dir = 1
-	},
-/turf/open/floor/iron/co2_pressurized,
-/area/ruin/space/has_grav/atmosasteroid)
 "RJ" = (
 /obj/item/stack/rods,
 /obj/machinery/atmospherics/pipe/layer_manifold/dark/visible{
@@ -637,7 +604,7 @@
 /obj/effect/turf_decal/tile/yellow/half{
 	dir = 4
 	},
-/mob/living/basic/mining/hivelord,
+/mob/living/simple_animal/hostile/asteroid/hivelord,
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
 "RK" = (
@@ -659,15 +626,14 @@
 	},
 /turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
-"SO" = (
-/obj/machinery/light/small/broken/directional/east,
-/turf/open/floor/engine/co2/equalized_with_regular_air,
-/area/ruin/space/has_grav/atmosasteroid)
 "TP" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon{
 	dir = 8
 	},
 /turf/open/floor/engine/plasma,
+/area/ruin/space/has_grav/atmosasteroid)
+"TU" = (
+/turf/open/floor/engine/co2/equalized_with_regular_air,
 /area/ruin/space/has_grav/atmosasteroid)
 "Ub" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
@@ -685,6 +651,14 @@
 "Up" = (
 /turf/template_noop,
 /area/template_noop)
+"Ur" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
+/obj/effect/turf_decal/tile/yellow/half{
+	dir = 4
+	},
+/obj/machinery/light/broken/directional/east,
+/turf/open/floor/iron/co2_pressurized,
+/area/ruin/space/has_grav/atmosasteroid)
 "Uz" = (
 /obj/effect/turf_decal/tile/yellow/anticorner{
 	dir = 8
@@ -702,16 +676,18 @@
 /obj/machinery/atmospherics/miner/plasma,
 /turf/open/floor/engine/plasma,
 /area/ruin/space/has_grav/atmosasteroid)
-"VH" = (
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/tank_holder/extinguisher/advanced{
-	anchored = 1
-	},
-/turf/open/floor/iron/dark/side/co2_pressurized,
+"Vw" = (
+/obj/effect/turf_decal/tile/yellow/half,
+/obj/structure/extinguisher_cabinet/directional/south,
+/turf/open/floor/iron/co2_pressurized,
 /area/ruin/space/has_grav/atmosasteroid)
 "Wc" = (
 /obj/effect/turf_decal/tile/yellow/half,
 /turf/open/floor/iron/co2_pressurized,
+/area/ruin/space/has_grav/atmosasteroid)
+"Wn" = (
+/obj/machinery/atmospherics/miner/nitrogen,
+/turf/open/floor/engine/n2,
 /area/ruin/space/has_grav/atmosasteroid)
 "Ws" = (
 /obj/item/shard/plasma,
@@ -841,7 +817,7 @@ QP
 QP
 gG
 pU
-hN
+Co
 fm
 gG
 rg
@@ -872,7 +848,7 @@ gG
 UL
 Ak
 af
-QA
+Vw
 gG
 gG
 gG
@@ -897,7 +873,7 @@ gG
 Lj
 Ak
 af
-Mz
+sp
 ij
 Ra
 hj
@@ -918,14 +894,14 @@ gG
 oZ
 fV
 vo
-RI
+Dw
 Ep
 Ak
 af
 Wc
 zd
 hj
-QI
+ps
 gG
 QP
 "}
@@ -941,14 +917,14 @@ zH
 vW
 gG
 jB
-LP
-LP
+nB
+nB
 af
 af
 KT
 zD
 Cb
-aO
+zM
 NP
 hj
 gG
@@ -965,14 +941,14 @@ rC
 vW
 So
 gG
-jM
+Al
 af
 jV
 FU
 FU
 KT
 uH
-Wc
+bF
 gG
 gG
 gG
@@ -997,7 +973,7 @@ Oz
 mI
 Bq
 uH
-Mz
+sp
 ij
 tL
 vG
@@ -1016,7 +992,7 @@ Oe
 xr
 gG
 HF
-VH
+LI
 Ny
 Ny
 Ny
@@ -1025,7 +1001,7 @@ uH
 Wc
 zd
 vG
-zw
+Wn
 gG
 QP
 "}
@@ -1040,15 +1016,15 @@ og
 vW
 mC
 gG
-HF
+Lj
 Lv
 MG
 OY
-hS
+tC
 pw
 kB
 Cb
-aO
+zM
 om
 vG
 gG
@@ -1125,7 +1101,7 @@ af
 ZN
 zd
 eL
-qA
+eL
 gG
 QP
 "}
@@ -1142,10 +1118,10 @@ gG
 gG
 LJ
 KR
-sH
-Oc
+hX
+Ns
 KR
-ED
+Ur
 RJ
 mA
 df
@@ -1196,8 +1172,8 @@ gG
 rp
 Rp
 gG
-bC
-Hl
+HD
+TU
 gG
 QP
 QP
@@ -1216,13 +1192,13 @@ QP
 QP
 gG
 UR
-ky
+iD
 gG
 Kg
-zL
+Rp
 gG
-By
-SO
+fz
+TU
 gG
 QP
 QP

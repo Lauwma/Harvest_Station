@@ -293,8 +293,7 @@
 /turf/open/floor/carpet/blue,
 /area/ruin/smoking_room/room)
 "X" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/effect/mapping_helpers/damaged_window,
+/obj/effect/spawner/structure/window/reinforced/damaged,
 /turf/open/floor/wood,
 /area/ruin/smoking_room/house)
 "Z" = (

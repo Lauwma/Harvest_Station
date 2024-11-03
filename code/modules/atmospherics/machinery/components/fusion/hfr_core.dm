@@ -4,7 +4,7 @@
 /obj/machinery/atmospherics/components/unary/hypertorus/core
 	name = "HFR core"
 	desc = "This is the Hypertorus Fusion Reactor core, an advanced piece of technology to finely tune the reaction inside of the machine. It has I/O for cooling gases."
-	icon = 'icons/obj/machines/atmospherics/hypertorus.dmi'
+	icon = 'icons/obj/atmospherics/components/hypertorus.dmi'
 	icon_state = "core_off"
 	circuit = /obj/item/circuitboard/machine/HFR_core
 	use_power = IDLE_POWER_USE
@@ -176,8 +176,7 @@
 	investigate_log("has been created.", INVESTIGATE_HYPERTORUS)
 
 	// Our center is unreachable, so prevent stuff from getting stuck in there
-	var/static/list/turf_traits = list(TRAIT_SECLUDED_LOCATION)
-	AddElement(/datum/element/give_turf_traits, turf_traits)
+	AddElement(/datum/element/trait_loc, TRAIT_SECLUDED_LOCATION)
 
 /obj/machinery/atmospherics/components/unary/hypertorus/core/Destroy()
 	unregister_signals(TRUE)

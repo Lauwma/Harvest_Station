@@ -46,8 +46,19 @@
 "aj" = (
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/escape)
+"ak" = (
+/obj/item/kirbyplants{
+	icon_state = "plant-22"
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/escape)
 "al" = (
 /obj/structure/chair/comfy/shuttle,
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/escape/brig)
+"am" = (
+/obj/structure/chair/comfy/shuttle,
+/obj/machinery/light/directional/north,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/escape/brig)
 "an" = (
@@ -97,6 +108,16 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/mineral/titanium,
 /area/shuttle/escape)
+"ax" = (
+/obj/structure/table,
+/obj/machinery/recharger{
+	active_power_usage = 0;
+	idle_power_usage = 0;
+	pixel_y = 4;
+	use_power = 0
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/escape/brig)
 "ay" = (
 /obj/structure/table,
 /obj/item/storage/box/handcuffs,
@@ -112,6 +133,12 @@
 "aA" = (
 /obj/machinery/door/airlock/public/glass,
 /turf/open/floor/mineral/titanium/white,
+/area/shuttle/escape)
+"aB" = (
+/obj/item/kirbyplants{
+	icon_state = "plant-21"
+	},
+/turf/open/floor/mineral/titanium,
 /area/shuttle/escape)
 "aC" = (
 /turf/open/floor/mineral/titanium,
@@ -212,6 +239,13 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
+"aT" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/machinery/light/directional/south,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/escape)
 "aU" = (
 /obj/structure/table/glass,
 /obj/item/storage/medkit/brute{
@@ -248,36 +282,12 @@
 /obj/effect/mapping_helpers/airlock/access/all/command/general,
 /turf/open/floor/mineral/titanium,
 /area/shuttle/escape/brig)
-"eo" = (
-/obj/item/kirbyplants/organic/plant21,
-/obj/machinery/light/directional/south,
-/turf/open/floor/mineral/titanium,
-/area/shuttle/escape)
 "iP" = (
 /obj/machinery/vending/wallmed/directional/south{
 	use_power = 0
 	},
 /turf/open/floor/mineral/titanium,
 /area/shuttle/escape)
-"Fq" = (
-/obj/item/kirbyplants/organic/plant22,
-/turf/open/floor/mineral/titanium/blue,
-/area/shuttle/escape)
-"Jy" = (
-/obj/item/kirbyplants/organic/plant21,
-/turf/open/floor/mineral/titanium,
-/area/shuttle/escape)
-"SP" = (
-/obj/structure/table,
-/obj/machinery/recharger{
-	active_power_usage = 0;
-	idle_power_usage = 0;
-	pixel_y = 4;
-	use_power = 0
-	},
-/obj/machinery/light/directional/south,
-/turf/open/floor/mineral/plastitanium/red,
-/area/shuttle/escape/brig)
 
 (1,1,1) = {"
 aa
@@ -300,13 +310,13 @@ aa
 ab
 ah
 aq
-Fq
+ak
 ac
-Jy
+aB
 aH
 aH
 aH
-Jy
+aB
 ah
 ab
 aa
@@ -362,16 +372,16 @@ aa
 (6,1,1) = {"
 aa
 ab
-Fq
+ak
 aC
-Fq
+ak
 ab
 aF
 aI
 aL
 aC
 aC
-aS
+aT
 ah
 ab
 "}
@@ -388,7 +398,7 @@ aC
 aC
 aC
 aC
-eo
+aB
 ab
 "}
 (8,1,1) = {"
@@ -398,7 +408,7 @@ al
 at
 at
 ac
-Jy
+aB
 aC
 aC
 aC
@@ -426,7 +436,7 @@ ac
 (10,1,1) = {"
 aa
 ab
-al
+am
 at
 at
 ac
@@ -444,7 +454,7 @@ aa
 ab
 al
 at
-SP
+ax
 ab
 aC
 aC
@@ -468,7 +478,7 @@ aO
 aP
 aC
 aC
-Jy
+aB
 ab
 "}
 (13,1,1) = {"

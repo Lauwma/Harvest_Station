@@ -200,22 +200,13 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	power_change() // all machines set to current power level, also updates icon
 	update_beauty()
 
-/// Generate turfs, including cool cave wall gen
-/area/proc/RunTerrainGeneration()
+/area/proc/RunGeneration()
 	if(map_generator)
 		map_generator = new map_generator()
 		var/list/turfs = list()
 		for(var/turf/T in contents)
 			turfs += T
 		map_generator.generate_terrain(turfs, src)
-
-/// Populate the previously generated terrain with mobs and objects
-/area/proc/RunTerrainPopulation()
-	if(map_generator)
-		var/list/turfs = list()
-		for(var/turf/T in contents)
-			turfs += T
-		map_generator.populate_terrain(turfs, src)
 
 /area/proc/test_gen()
 	if(map_generator)
@@ -482,7 +473,6 @@ GLOBAL_LIST_EMPTY(teleportlocs)
  */
 /area/Exited(atom/movable/gone, direction)
 	SEND_SIGNAL(src, COMSIG_AREA_EXITED, gone, direction)
-	SEND_SIGNAL(gone, COMSIG_MOVABLE_EXITED_AREA, src, direction)
 
 	if(!gone.important_recursive_contents?[RECURSIVE_CONTENTS_AREA_SENSITIVE])
 		return
@@ -510,7 +500,8 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	power_light = FALSE
 	power_environ = FALSE
 	always_unpowered = FALSE
-	area_flags &= ~(VALID_TERRITORY|BLOBS_ALLOWED|CULT_PERMITTED)
+	area_flags &= ~VALID_TERRITORY
+	area_flags &= ~BLOBS_ALLOWED
 	require_area_resort()
 /**
  * Set the area size of the area
@@ -557,10 +548,3 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	if(name == initial(name))
 		return name
 	return "[name] ([initial(name)])"
-
-/**
- * A blank area subtype solely used by the golem area editor for the purpose of
- * allowing golems to create new areas without suffering from the hazard_area debuffs.
- */
-/area/golem
-	name = "Golem Territory"

@@ -121,7 +121,7 @@
 /turf/open/floor/iron/airless,
 /area/ruin/space/has_grav/onehalf/hallway)
 "aA" = (
-/obj/item/emergency_bed,
+/obj/item/roller,
 /turf/open/floor/iron/white,
 /area/ruin/space/has_grav/onehalf/dorms_med)
 "aB" = (
@@ -497,6 +497,13 @@
 	},
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/onehalf/drone_bay)
+"bE" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/light/directional/south,
+/turf/open/floor/iron,
+/area/ruin/space/has_grav/onehalf/drone_bay)
 "bF" = (
 /obj/structure/disposalpipe/segment{
 	dir = 9
@@ -608,6 +615,11 @@
 /obj/structure/closet/emcloset,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/onehalf/bridge)
+"cd" = (
+/obj/machinery/light/directional/north,
+/obj/structure/frame/computer,
+/turf/open/floor/iron,
+/area/ruin/space/has_grav/onehalf/bridge)
 "ce" = (
 /obj/structure/frame/computer,
 /turf/open/floor/iron,
@@ -620,7 +632,6 @@
 "cg" = (
 /obj/structure/table/reinforced,
 /obj/effect/spawner/random/entertainment/money_large,
-/obj/machinery/light/directional/north,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/onehalf/bridge)
 "ch" = (
@@ -807,6 +818,7 @@
 /turf/template_noop,
 /area/ruin/space/has_grav/onehalf/hallway)
 "cM" = (
+/obj/machinery/light/directional/west,
 /obj/machinery/vending/sovietsoda,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/onehalf/bridge)
@@ -845,7 +857,6 @@
 /obj/structure/table/reinforced,
 /obj/item/gps/spaceruin,
 /obj/item/flashlight,
-/obj/machinery/light/directional/south,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/onehalf/bridge)
 "cZ" = (
@@ -860,6 +871,7 @@
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/onehalf/bridge)
 "db" = (
+/obj/machinery/light/directional/south,
 /obj/structure/table/reinforced,
 /obj/item/storage/medkit/regular,
 /turf/open/floor/iron,
@@ -916,13 +928,6 @@
 	},
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/onehalf/dorms_med)
-"Id" = (
-/obj/structure/disposalpipe/junction{
-	dir = 8
-	},
-/obj/machinery/light/directional/south,
-/turf/open/floor/iron,
-/area/ruin/space/has_grav/onehalf/drone_bay)
 "KC" = (
 /obj/structure/frame/computer,
 /obj/structure/cable,
@@ -1316,7 +1321,7 @@ ar
 ar
 ba
 bp
-bp
+bE
 bU
 cb
 cm
@@ -1338,7 +1343,7 @@ aF
 aO
 aZ
 bq
-Id
+bD
 bU
 cc
 cn
@@ -1362,7 +1367,7 @@ bb
 bp
 bp
 bU
-ce
+cd
 co
 cn
 ms
@@ -1404,7 +1409,7 @@ ar
 ar
 bc
 bp
-bp
+bE
 bU
 cf
 Vh

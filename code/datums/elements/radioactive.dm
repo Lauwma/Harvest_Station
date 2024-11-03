@@ -1,39 +1,19 @@
 #define DELAY_BETWEEN_RADIATION_PULSES (3 SECONDS)
 
 /// This atom will regularly pulse radiation.
+/// As this is only applied on uranium objects for now, this defaults to uranium constants.
 /datum/element/radioactive
-	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY | ELEMENT_BESPOKE
-	argument_hash_start_idx = 2
-	///Range of our wave in tiles
-	var/range
-	///Threshold for radioactive permeance
-	var/threshold
-	///Chance the object is irradiated
-	var/chance
-	///Minimum time needed in order to be irradiated
-	var/minimum_exposure_time
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 
 	var/list/radioactive_objects = list()
 
 /datum/element/radioactive/New()
 	START_PROCESSING(SSdcs, src)
 
-/datum/element/radioactive/Attach(
-	datum/target,
-	range = 3,
-	threshold = RAD_LIGHT_INSULATION,
-	chance = URANIUM_IRRADIATION_CHANCE,
-	minimum_exposure_time = URANIUM_RADIATION_MINIMUM_EXPOSURE_TIME,
-	)
-
+/datum/element/radioactive/Attach(datum/target)
 	. = ..()
 
 	radioactive_objects[target] = world.time
-
-	src.range = range
-	src.threshold = threshold
-	src.chance = chance
-	src.minimum_exposure_time = minimum_exposure_time
 
 /datum/element/radioactive/Detach(datum/source, ...)
 	radioactive_objects -= source
@@ -47,10 +27,10 @@
 
 		radiation_pulse(
 			radioactive_object,
-			max_range = range,
-			threshold = threshold,
-			chance = chance,
-			minimum_exposure_time = minimum_exposure_time,
+			max_range = 3,
+			threshold = RAD_LIGHT_INSULATION,
+			chance = URANIUM_IRRADIATION_CHANCE,
+			minimum_exposure_time = URANIUM_RADIATION_MINIMUM_EXPOSURE_TIME,
 		)
 
 		radioactive_objects[radioactive_object] = world.time

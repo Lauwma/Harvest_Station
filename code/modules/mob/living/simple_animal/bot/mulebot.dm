@@ -24,14 +24,12 @@
 	buckle_lying = 0
 	mob_size = MOB_SIZE_LARGE
 	buckle_prevents_pull = TRUE // No pulling loaded shit
-	bot_mode_flags = ~BOT_MODE_ROUNDSTART_POSSESSION
 
 	maints_access_required = list(ACCESS_ROBOTICS, ACCESS_CARGO)
 	radio_key = /obj/item/encryptionkey/headset_cargo
 	radio_channel = RADIO_CHANNEL_SUPPLY
 	bot_type = MULE_BOT
 	path_image_color = "#7F5200"
-	possessed_message = "You are a MULEbot! Do your best to make sure that packages get to their destination!"
 
 	/// unique identifier in case there are multiple mulebots.
 	var/id
@@ -70,7 +68,7 @@
 	if(prob(0.666) && mapload)
 		new /mob/living/simple_animal/bot/mulebot/paranormal(loc)
 		return INITIALIZE_HINT_QDEL
-	set_wires(new /datum/wires/mulebot(src))
+	wires = new /datum/wires/mulebot(src)
 
 	// Doing this hurts my soul, but simplebot access reworks are for another day.
 	var/datum/id_trim/job/cargo_trim = SSid_access.trim_singletons_by_path[/datum/id_trim/job/cargo_technician]
@@ -86,14 +84,14 @@
 	AddElement(/datum/element/ridable, /datum/component/riding/creature/mulebot)
 	diag_hud_set_mulebotcell()
 
-/mob/living/simple_animal/bot/mulebot/Exited(atom/movable/gone, direction)
-	. = ..()
-	if(gone == load)
+/mob/living/simple_animal/bot/mulebot/handle_atom_del(atom/A)
+	if(A == load)
 		unload(0)
-	if(gone == cell)
+	if(A == cell)
 		turn_off()
 		cell = null
 		diag_hud_set_mulebotcell()
+	return ..()
 
 /mob/living/simple_animal/bot/mulebot/examine(mob/user)
 	. = ..()
@@ -137,6 +135,8 @@
 
 /mob/living/simple_animal/bot/mulebot/proc/set_id(new_id)
 	id = new_id
+	if(!paicard)
+		name = "[initial(name)] ([new_id])"
 
 /mob/living/simple_animal/bot/mulebot/bot_reset()
 	..()
@@ -157,10 +157,8 @@
 		user.put_in_hands(cell)
 	else
 		cell.forceMove(drop_location())
-	user.visible_message(
-		span_notice("[user] crowbars [cell] out from [src]."),
-		span_notice("You pry [cell] out of [src]."),
-	)
+	visible_message(span_notice("[user] crowbars [cell] out from [src]."),
+					span_notice("You pry [cell] out of [src]."))
 	cell = null
 	diag_hud_set_mulebotcell()
 	return TOOL_ACT_TOOLTYPE_SUCCESS
@@ -174,10 +172,8 @@
 			return TRUE
 		cell = I
 		diag_hud_set_mulebotcell()
-		user.visible_message(
-			span_notice("[user] inserts \a [cell] into [src]."),
-			span_notice("You insert [cell] into [src]."),
-		)
+		visible_message(span_notice("[user] inserts \a [cell] into [src]."),
+						span_notice("You insert [cell] into [src]."))
 		return TRUE
 	else if(is_wire_tool(I) && bot_cover_flags & BOT_COVER_OPEN)
 		return attack_hand(user)
@@ -192,15 +188,14 @@
 	else
 		return ..()
 
-/mob/living/simple_animal/bot/mulebot/emag_act(mob/user, obj/item/card/emag/emag_card)
+/mob/living/simple_animal/bot/mulebot/emag_act(mob/user)
 	if(!(bot_cover_flags & BOT_COVER_EMAGGED))
 		bot_cover_flags |= BOT_COVER_EMAGGED
 	if(!(bot_cover_flags & BOT_COVER_OPEN))
 		bot_cover_flags ^= BOT_COVER_LOCKED
-	balloon_alert(user, "controls [bot_cover_flags & BOT_COVER_LOCKED ? "locked" : "unlocked"]")
+		to_chat(user, span_notice("You [bot_cover_flags & BOT_COVER_LOCKED ? "lock" : "unlock"] [src]'s controls!"))
 	flick("[base_icon]-emagged", src)
 	playsound(src, SFX_SPARKS, 100, FALSE, SHORT_RANGE_SOUND_EXTRARANGE)
-	return TRUE
 
 /mob/living/simple_animal/bot/mulebot/update_icon_state() //if you change the icon_state names, please make sure to update /datum/wires/mulebot/on_pulse() as well. <3
 	. = ..()
@@ -213,7 +208,7 @@
 	if(!load || ismob(load)) //mob offsets and such are handled by the riding component / buckling
 		return
 	var/mutable_appearance/load_overlay = mutable_appearance(load.icon, load.icon_state, layer + 0.01)
-	load_overlay.pixel_y = initial(load.pixel_y) + 11
+	load_overlay.pixel_y = initial(load.pixel_y) + 9
 	. += load_overlay
 
 /mob/living/simple_animal/bot/mulebot/ex_act(severity)
@@ -227,8 +222,6 @@
 		if(EXPLODE_LIGHT)
 			wires.cut_random()
 
-	return TRUE
-
 
 /mob/living/simple_animal/bot/mulebot/bullet_act(obj/projectile/Proj)
 	. = ..()
@@ -237,7 +230,7 @@
 			unload(0)
 		if(prob(25))
 			visible_message(span_danger("Something shorts out inside [src]!"))
-			wires.cut_random(source = Proj.firer)
+			wires.cut_random()
 
 /mob/living/simple_animal/bot/mulebot/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -268,10 +261,8 @@
 	data["autoReturn"] = auto_return
 	data["autoPickup"] = auto_pickup
 	data["reportDelivery"] = report_delivery
+	data["haspai"] = paicard ? TRUE : FALSE
 	data["id"] = id
-	data["allow_possession"] = bot_mode_flags & BOT_MODE_CAN_BE_SAPIENT
-	data["possession_enabled"] = can_be_possessed
-	data["pai_inserted"] = !!paicard
 	return data
 
 /mob/living/simple_animal/bot/mulebot/ui_act(action, params)
@@ -283,7 +274,7 @@
 		if("lock")
 			if(usr.has_unlimited_silicon_privilege)
 				bot_cover_flags ^= BOT_COVER_LOCKED
-				return TRUE
+				. = TRUE
 		if("on")
 			if(bot_mode_flags & BOT_MODE_ON)
 				turn_off()
@@ -294,10 +285,10 @@
 				if(!turn_on())
 					to_chat(usr, span_warning("You can't switch on [src]!"))
 					return
-			return TRUE
+			. = TRUE
 		else
 			bot_control(action, usr, params) // Kill this later. // Kill PDAs in general please
-			return TRUE
+			. = TRUE
 
 /mob/living/simple_animal/bot/mulebot/bot_control(command, mob/user, list/params = list(), pda = FALSE)
 	if(pda && wires.is_cut(WIRE_RX)) // MULE wireless is controlled by wires.
@@ -349,6 +340,8 @@
 			auto_pickup = !auto_pickup
 		if("report")
 			report_delivery = !report_delivery
+		if("ejectpai")
+			ejectpairemote(user)
 
 /mob/living/simple_animal/bot/mulebot/proc/buzz(type)
 	switch(type)
@@ -467,7 +460,7 @@
 	if(cell)
 		. += "Charge Left: [cell.charge]/[cell.maxcharge]"
 	else
-		. += "No Cell Inserted!"
+		. += text("No Cell Inserted!")
 	if(load)
 		. += "Current Load: [get_load_name()]"
 
@@ -588,7 +581,7 @@
 // calculates a path to the current destination
 // given an optional turf to avoid
 /mob/living/simple_animal/bot/mulebot/calc_path(turf/avoid = null)
-	path = get_path_to(src, target, max_distance=250, access=access_card.GetAccess(), exclude=avoid, diagonal_handling=DIAGONAL_REMOVE_ALL)
+	path = get_path_to(src, target, max_distance=250, id=access_card, exclude=avoid)
 
 // sets the current destination
 // signals all beacons matching the delivery code
@@ -663,7 +656,7 @@
 
 
 /mob/living/simple_animal/bot/mulebot/MobBump(mob/M) // called when the bot bumps into a mob
-	if(mind || !isliving(M)) //if there's a sentience controlling the bot, they aren't allowed to harm folks.
+	if(paicard || !isliving(M)) //if there's a PAIcard controlling the bot, they aren't allowed to harm folks.
 		return ..()
 	var/mob/living/L = M
 	if(wires.is_cut(WIRE_AVOIDANCE)) // usually just bumps, but if the avoidance wire is cut, knocks them over.
@@ -676,12 +669,6 @@
 
 // when mulebot is in the same loc
 /mob/living/simple_animal/bot/mulebot/proc/run_over(mob/living/carbon/human/crushed)
-	if (!(bot_cover_flags & BOT_COVER_EMAGGED) && !wires.is_cut(WIRE_AVOIDANCE))
-		if (!has_status_effect(/datum/status_effect/careful_driving))
-			crushed.visible_message(span_notice("[src] slows down to avoid crushing [crushed]."))
-		apply_status_effect(/datum/status_effect/careful_driving)
-		return // Player mules must be emagged before they can trample
-
 	log_combat(src, crushed, "run over", addition = "(DAMTYPE: [uppertext(BRUTE)])")
 	crushed.visible_message(
 		span_danger("[src] drives over [crushed]!"),
@@ -776,6 +763,11 @@
 	else
 		return ..()
 
+/mob/living/simple_animal/bot/mulebot/insertpai(mob/user, obj/item/pai_card/card)
+	. = ..()
+	if(.)
+		visible_message(span_notice("[src]'s safeties are locked on."))
+
 /// Checks whether the bot can complete a step_towards, checking whether the bot is on and has the charge to do the move. Returns COMPONENT_MOB_BOT_CANCELSTEP if the bot should not step.
 /mob/living/simple_animal/bot/mulebot/proc/check_pre_step(datum/source)
 	SIGNAL_HANDLER
@@ -792,10 +784,6 @@
 	SIGNAL_HANDLER
 
 	cell?.use(cell_move_power_usage)
-
-/mob/living/simple_animal/bot/mulebot/post_possession()
-	. = ..()
-	visible_message(span_notice("[src]'s safeties are locked on."))
 
 /mob/living/simple_animal/bot/mulebot/paranormal//allows ghosts only unless hacked to actually be useful
 	name = "\improper GHOULbot"

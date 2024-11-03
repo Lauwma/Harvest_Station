@@ -107,7 +107,7 @@
 #define HAND_RIGHT (1<<10)
 #define HANDS (HAND_LEFT | HAND_RIGHT)
 #define NECK (1<<11)
-#define FULL_BODY ALL
+#define FULL_BODY (~0)
 
 //defines for the index of hands
 #define LEFT_HANDS 1
@@ -145,7 +145,6 @@
 #define MASKCOVERSMOUTH (1<<3) // on other items, these are just for mask/head
 #define HEADCOVERSMOUTH (1<<4)
 #define PEPPERPROOF (1<<5) //protects against pepperspray
-#define EARS_COVERED (1<<6)
 
 #define TINT_DARKENED 2 //Threshold of tint level to apply weld mask overlay
 #define TINT_BLIND 3 //Threshold of tint level to obscure vision fully
@@ -182,7 +181,6 @@ GLOBAL_LIST_INIT(detective_vest_allowed, list(
 	/obj/item/storage/belt/holster/detective,
 	/obj/item/storage/belt/holster/nukie,
 	/obj/item/storage/belt/holster/energy,
-	/obj/item/gun/ballistic/shotgun/automatic/combat/compact,
 ))
 
 GLOBAL_LIST_INIT(security_vest_allowed, list(
@@ -200,7 +198,6 @@ GLOBAL_LIST_INIT(security_vest_allowed, list(
 	/obj/item/storage/belt/holster/detective,
 	/obj/item/storage/belt/holster/nukie,
 	/obj/item/storage/belt/holster/energy,
-	/obj/item/gun/ballistic/shotgun/automatic/combat/compact,
 ))
 
 GLOBAL_LIST_INIT(security_wintercoat_allowed, list(
@@ -214,21 +211,6 @@ GLOBAL_LIST_INIT(security_wintercoat_allowed, list(
 	/obj/item/storage/belt/holster/detective,
 	/obj/item/storage/belt/holster/nukie,
 	/obj/item/storage/belt/holster/energy,
-	/obj/item/gun/ballistic/shotgun/automatic/combat/compact,
-))
-
-//Allowed list for all chaplain suits (except the honkmother robe)
-
-GLOBAL_LIST_INIT(chaplain_suit_allowed, list(
-	/obj/item/book/bible,
-	/obj/item/nullrod,
-	/obj/item/reagent_containers/cup/glass/bottle/holywater,
-	/obj/item/storage/fancy/candle_box,
-	/obj/item/flashlight/flare/candle,
-	/obj/item/tank/internals/emergency_oxygen,
-	/obj/item/tank/internals/plasmaman,
-	/obj/item/gun/ballistic/bow/divine,
-	/obj/item/gun/ballistic/revolver/chaplain,
 ))
 
 /// String for items placed into the left pocket.

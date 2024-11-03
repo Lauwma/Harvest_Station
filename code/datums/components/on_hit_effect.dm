@@ -18,11 +18,6 @@
 	if(!(ismachinery(parent) || isstructure(parent) || isgun(parent) || isprojectilespell(parent) || isitem(parent) || isanimal_or_basicmob(parent) || isprojectile(parent)))
 		return ELEMENT_INCOMPATIBLE
 
-/datum/component/on_hit_effect/Destroy(force, silent)
-	on_hit_callback = null
-	extra_check_callback = null
-	return ..()
-
 /datum/component/on_hit_effect/RegisterWithParent()
 	if(ismachinery(parent) || isstructure(parent) || isgun(parent) || isprojectilespell(parent))
 		RegisterSignal(parent, COMSIG_PROJECTILE_ON_HIT, PROC_REF(on_projectile_hit))
@@ -48,7 +43,7 @@
 		return
 
 	if(extra_check_callback)
-		if(!extra_check_callback.Invoke(user, target, source))
+		if(!extra_check_callback.Invoke(user, target))
 			return
 	on_hit_callback.Invoke(source, user, target, user.zone_selected)
 	return COMPONENT_AFTERATTACK_PROCESSED_ITEM
@@ -64,18 +59,18 @@
 			return
 	on_hit_callback.Invoke(attacker, attacker, target, attacker.zone_selected)
 
-/datum/component/on_hit_effect/proc/on_projectile_hit(datum/fired_from, atom/movable/firer, atom/target, angle, body_zone)
+/datum/component/on_hit_effect/proc/on_projectile_hit(datum/fired_from, atom/movable/firer, atom/target, angle, obj/item/bodypart/hit_limb)
 	SIGNAL_HANDLER
 
 	if(extra_check_callback)
 		if(!extra_check_callback.Invoke(firer, target))
 			return
-	on_hit_callback.Invoke(fired_from, firer, target, body_zone)
+	on_hit_callback.Invoke(fired_from, firer, target, hit_limb.body_zone)
 
-/datum/component/on_hit_effect/proc/on_projectile_self_hit(datum/source, mob/firer, atom/target, angle, body_zone)
+/datum/component/on_hit_effect/proc/on_projectile_self_hit(datum/source, mob/firer, atom/target, angle, obj/item/bodypart/hit_limb)
 	SIGNAL_HANDLER
 
 	if(extra_check_callback)
 		if(!extra_check_callback.Invoke(firer, target))
 			return
-	on_hit_callback.Invoke(source, firer, target, body_zone)
+	on_hit_callback.Invoke(source, firer, target, hit_limb.body_zone)

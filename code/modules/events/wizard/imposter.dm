@@ -38,4 +38,3 @@
 		I.mind.special_role = "imposter"
 		I.log_message("is an imposter!", LOG_ATTACK, color="red") //?
 		SEND_SOUND(I, sound('sound/effects/magic.ogg'))
-		announce_to_ghosts(I)

@@ -21,8 +21,8 @@
 	var/list/glow_stuff
 	/// How much alpha to leave when cutting away emissive blockers
 	var/alpha_to_leave = 255
-	/// Color of starlight to use. Defaults to STARLIGHT_COLOR if not set
-	var/starlight_color
+	/// Color of starlight to use
+	var/starlight_color = COLOR_STARLIGHT
 
 /turf/open/floor/glass/broken_states()
 	return list("glass-damaged1", "glass-damaged2", "glass-damaged3")
@@ -40,7 +40,6 @@
 /turf/open/floor/glass/Destroy()
 	. = ..()
 	QDEL_LIST(glow_stuff)
-	UnregisterSignal(SSdcs, COMSIG_STARLIGHT_COLOR_CHANGED)
 
 /// If this turf is at the bottom of the local rendering stack
 /// Then we're gonna make it emissive block so the space below glows
@@ -52,15 +51,7 @@
 		return
 
 	glow_stuff = partially_block_emissives(src, alpha_to_leave)
-	if(!starlight_color)
-		RegisterSignal(SSdcs, COMSIG_STARLIGHT_COLOR_CHANGED, PROC_REF(starlight_changed))
-	else
-		UnregisterSignal(SSdcs, COMSIG_STARLIGHT_COLOR_CHANGED)
-	set_light(2, 1, starlight_color || GLOB.starlight_color, l_height = LIGHTING_HEIGHT_SPACE)
-
-/turf/open/floor/glass/proc/starlight_changed(datum/source, old_star, new_star)
-	if(light_color == old_star)
-		set_light(l_color = new_star)
+	set_light(2, 0.75, starlight_color)
 
 /turf/open/floor/glass/make_plating()
 	return

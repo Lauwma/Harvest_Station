@@ -5,7 +5,6 @@
 
 /obj/machinery/power/terminal
 	name = "terminal"
-	icon = 'icons/obj/pipes_n_cables/structures.dmi'
 	icon_state = "term"
 	desc = "It's an underfloor wiring terminal, used to draw power from the grid."
 	layer = WIRE_TERMINAL_LAYER //a bit above wires
@@ -23,13 +22,6 @@
 		master = null
 	return ..()
 
-/obj/machinery/power/terminal/examine(mob/user)
-	. = ..()
-	if(!QDELETED(powernet))
-		. += span_notice("It's operating on the [lowertext(GLOB.cable_layer_to_name["[cable_layer]"])].")
-	else
-		. += span_warning("It's disconnected from the [lowertext(GLOB.cable_layer_to_name["[cable_layer]"])].")
-
 /obj/machinery/power/terminal/should_have_node()
 	return TRUE
 
@@ -45,6 +37,7 @@
 	. = FALSE
 	if(panel_open)
 		. = TRUE
+
 
 /obj/machinery/power/terminal/proc/dismantle(mob/living/user, obj/item/I)
 	if(isturf(loc))

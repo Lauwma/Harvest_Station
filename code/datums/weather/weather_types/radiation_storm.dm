@@ -24,10 +24,6 @@
 	target_trait = ZTRAIT_STATION
 
 	immunity_type = TRAIT_RADSTORM_IMMUNE
-	/// Chance we get a negative mutation, if we fail we get a positive one
-	var/negative_mutation_chance = 90
-	/// Chance we mutate
-	var/mutate_chance = 40
 
 /datum/weather/rad_storm/telegraph()
 	..()
@@ -35,7 +31,7 @@
 
 
 /datum/weather/rad_storm/weather_act(mob/living/L)
-	if(!prob(mutate_chance))
+	if(!prob(40))
 		return
 
 	if(!ishuman(L))
@@ -55,20 +51,17 @@
 	H.random_mutate_unique_features()
 
 	if(prob(50))
-		do_mutate(L)
+		if(prob(90))
+			H.easy_random_mutate(NEGATIVE+MINOR_NEGATIVE)
+		else
+			H.easy_random_mutate(POSITIVE)
+		H.domutcheck()
 
 /datum/weather/rad_storm/end()
 	if(..())
 		return
 	priority_announce("The radiation threat has passed. Please return to your workplaces.", "Anomaly Alert")
 	status_alarm(FALSE)
-
-/datum/weather/rad_storm/proc/do_mutate(mob/living/carbon/human/mutant)
-	if(prob(negative_mutation_chance))
-		mutant.easy_random_mutate(NEGATIVE+MINOR_NEGATIVE)
-	else
-		mutant.easy_random_mutate(POSITIVE)
-	mutant.domutcheck()
 
 /datum/weather/rad_storm/proc/status_alarm(active) //Makes the status displays show the radiation warning for those who missed the announcement.
 	var/datum/radio_frequency/frequency = SSradio.return_frequency(FREQ_STATUS_DISPLAYS)
@@ -82,41 +75,5 @@
 	else
 		signal.data["command"] = "shuttle"
 
-	var/atom/movable/virtualspeaker/virtual_speaker = new(null)
-	frequency.post_signal(virtual_speaker, signal)
-
-/// Used by the radioactive nebula when the station doesnt have enough shielding
-/datum/weather/rad_storm/nebula
-	protected_areas = list(/area/shuttle)
-
-	weather_overlay = "nebula_radstorm"
-	weather_duration_lower = 100 HOURS
-	weather_duration_upper = 100 HOURS
-
-	end_message = null
-
-	mutate_chance = 0.1
-
-	///Chance we pulse a living during the storm
-	var/radiation_chance = 5
-
-/datum/weather/rad_storm/nebula/weather_act(mob/living/living)
-	..()
-
-	if(!prob(radiation_chance))
-		return
-
-	if(!SSradiation.can_irradiate_basic(living) || SSradiation.wearing_rad_protected_clothing(living))
-		return
-
-	radiation_pulse(
-		source = living,
-		max_range = 0,
-		threshold = RAD_LIGHT_INSULATION,
-		chance = URANIUM_IRRADIATION_CHANCE,
-	)
-
-/datum/weather/rad_storm/nebula/status_alarm(active)
-	if(!active) //we stay on
-		return
-	..()
+	var/atom/movable/virtualspeaker/virt = new(null)
+	frequency.post_signal(virt, signal)

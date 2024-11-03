@@ -5,7 +5,7 @@
 	base_icon_state = "durand"
 	movedelay = 4
 	max_integrity = 400
-	accesses = list(ACCESS_MECH_SCIENCE, ACCESS_MECH_SECURITY)
+	internals_req_access = list(ACCESS_MECH_SCIENCE, ACCESS_MECH_SECURITY)
 	armor_type = /datum/armor/mecha_durand
 	max_temperature = 30000
 	force = 40
@@ -14,9 +14,7 @@
 	wreckage = /obj/structure/mecha_wreckage/durand
 	mech_type = EXOSUIT_MODULE_DURAND
 	max_equip_by_category = list(
-		MECHA_L_ARM = 1,
-		MECHA_R_ARM = 1,
-		MECHA_UTILITY = 3,
+		MECHA_UTILITY = 1,
 		MECHA_POWER = 1,
 		MECHA_ARMOR = 3,
 	)
@@ -158,7 +156,7 @@ own integrity back to max. Shield is automatically dropped if we run out of powe
 
 /obj/durand_shield //projectiles get passed to this when defense mode is enabled
 	name = "defense grid"
-	icon = 'icons/mob/effects/durand_shield.dmi'
+	icon = 'icons/mecha/durand_shield.dmi'
 	icon_state = "shield_null"
 	invisibility = INVISIBILITY_MAXIMUM //no showing on right-click
 	pixel_y = 4
@@ -233,7 +231,7 @@ own integrity back to max. Shield is automatically dropped if we run out of powe
 	set_light_on(chassis.defense_mode)
 
 	if(chassis.defense_mode)
-		SetInvisibility(INVISIBILITY_NONE, id=type)
+		invisibility = 0
 		flick("shield_raise", src)
 		playsound(src, 'sound/mecha/mech_shield_raise.ogg', 50, FALSE)
 		icon_state = "shield"
@@ -256,14 +254,14 @@ own integrity back to max. Shield is automatically dropped if we run out of powe
  */
 /obj/durand_shield/proc/make_invisible()
 	if(!chassis.defense_mode)
-		RemoveInvisibility(type)
+		invisibility = INVISIBILITY_MAXIMUM
 
 /obj/durand_shield/proc/resetdir(datum/source, olddir, newdir)
 	SIGNAL_HANDLER
 
 	setDir(newdir)
 
-/obj/durand_shield/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)
+/obj/durand_shield/take_damage()
 	if(!chassis)
 		qdel(src)
 		return

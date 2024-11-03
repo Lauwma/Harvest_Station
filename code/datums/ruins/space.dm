@@ -126,12 +126,6 @@
 	name = "Derelict 8"
 	description = "An auxiliary storage bay might be the least respected room on any functional station, but studies show they are the least likely to be hit in an artillery strike."
 
-/datum/map_template/ruin/space/derelict9
-	id = "derelict9"
-	suffix = "derelict9.dmm"
-	name = "Derelict 9"
-	description = "Someone already found this high-security supply cache already, but were unable to get inside. Perhaps the next visitor will have more luck."
-
 /datum/map_template/ruin/space/empty_shell
 	id = "empty-shell"
 	suffix = "emptyshell.dmm"
@@ -294,7 +288,9 @@
 	id = "whiteshipdock"
 	suffix = "whiteshipdock.dmm"
 	name = "Whiteship Dock"
+	cost = 0
 	description = "An abandoned but functional vessel parked in deep space, ripe for the taking."
+	always_place = TRUE
 
 /datum/map_template/ruin/space/cat_experiments
 	id = "meow"
@@ -400,6 +396,7 @@
 	name = "Mass driver Router"
 	description = "An old, still functional router for some long destroyed system."
 
+
 /datum/map_template/ruin/space/prey_pod
 	id = "prey"
 	suffix = "prey_pod.dmm"
@@ -450,7 +447,7 @@
 
 /datum/map_template/ruin/space/mimesvclowns
 	id = "mimesvclowns"
-	suffix = "mimesvsclowns.dmm"
+	suffix = "mimesvclowns.dmm"
 	name = "Abandoned Mime Outpost"
 	description = "When you fight mimes, you better bring more than slips."
 

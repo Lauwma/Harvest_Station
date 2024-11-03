@@ -26,7 +26,7 @@
 /area/station/maintenance/starboard/central)
 "v" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/closet/mini_fridge/grimy,
+/obj/structure/closet/mini_fridge,
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/starboard/central)
 "z" = (
@@ -44,7 +44,7 @@
 "B" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/grille,
-/obj/structure/window/spawner/directional/south,
+/obj/structure/window/spawner,
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/starboard/central)
 "F" = (

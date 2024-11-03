@@ -6,7 +6,7 @@
  */
 /obj/structure/server
 	name = "server"
-	icon = 'icons/obj/science/circuits.dmi'
+	icon = 'icons/obj/wiremod.dmi'
 	icon_state = "setup_stationary"
 
 	density = TRUE

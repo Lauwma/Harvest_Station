@@ -22,11 +22,9 @@
 		gun = casing.gun
 
 
-/obj/projectile/beam/wormhole/on_hit(atom/target, blocked = 0, pierce_hit)
+/obj/projectile/beam/wormhole/on_hit(atom/target)
 	var/obj/item/gun/energy/wormhole_projector/projector = gun.resolve()
 	if(!projector)
 		qdel(src)
-		return BULLET_ACT_BLOCK
-
-	. = ..()
+		return
 	projector.create_portal(src, get_turf(src))

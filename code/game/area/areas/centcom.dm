@@ -78,6 +78,8 @@
 /area/centcom/central_command_areas/supplypod
 	name = "Supplypod Facility"
 	icon_state = "supplypod"
+	static_lighting = FALSE
+	base_lighting_alpha = 255
 
 /area/centcom/central_command_areas/supplypod/pod_storage
 	name = "Supplypod Storage"
@@ -120,10 +122,16 @@
 /area/centcom/tdome
 	name = "Thunderdome"
 	icon_state = "thunder"
+	static_lighting = TRUE
+	requires_power = FALSE
+	has_gravity = STANDARD_GRAVITY
+	flags_1 = NONE
 
 /area/centcom/tdome/arena
 	name = "Thunderdome Arena"
 	icon_state = "thunder"
+	static_lighting = FALSE
+	base_lighting_alpha = 255
 
 /area/centcom/tdome/tdome1
 	name = "Thunderdome (Team 1)"
@@ -208,18 +216,6 @@
 	name = "Syndicate Elite Squad"
 	icon_state = "syndie-elite"
 
-//MAFIA
-/area/centcom/mafia
-	name = "Mafia Minigame"
-	icon_state = "mafia"
-	static_lighting = FALSE
-
-	base_lighting_alpha = 255
-	requires_power = FALSE
-	has_gravity = STANDARD_GRAVITY
-	flags_1 = NONE
-	area_flags = BLOCK_SUICIDE | UNIQUE_AREA
-
 //CAPTURE THE FLAG
 /area/centcom/ctf
 	name = "Capture the Flag"
@@ -229,7 +225,7 @@
 	base_lighting_alpha = 255
 	has_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
-	area_flags = UNIQUE_AREA | NOTELEPORT | NO_DEATH_MESSAGE | BLOCK_SUICIDE
+	area_flags = UNIQUE_AREA | NOTELEPORT | NO_DEATH_MESSAGE
 
 /area/centcom/ctf/control_room
 	name = "Control Room A"

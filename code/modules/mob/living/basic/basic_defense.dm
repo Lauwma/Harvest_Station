@@ -38,7 +38,7 @@
 		to_chat(user, span_danger("You [response_harm_simple] [src]!"))
 		playsound(loc, attacked_sound, 25, TRUE, -1)
 		var/obj/item/bodypart/arm/active_arm = user.get_active_hand()
-		var/damage = (basic_mob_flags & IMMUNE_TO_FISTS) ? 0 : rand(active_arm.unarmed_damage_low, active_arm.unarmed_damage_high)
+		var/damage = rand(active_arm.unarmed_damage_low, active_arm.unarmed_damage_high)
 
 		attack_threshold_check(damage)
 		log_combat(user, src, "attacked")
@@ -109,12 +109,12 @@
 			damage = rand(20, 35)
 		return attack_threshold_check(damage)
 
-/mob/living/basic/attack_drone(mob/living/basic/drone/attacking_drone)
+/mob/living/basic/attack_drone(mob/living/simple_animal/drone/attacking_drone)
 	if(attacking_drone.combat_mode) //No kicking dogs even as a rogue drone. Use a weapon.
 		return
 	return ..()
 
-/mob/living/basic/attack_drone_secondary(mob/living/basic/drone/attacking_drone)
+/mob/living/basic/attack_drone_secondary(mob/living/simple_animal/drone/attacking_drone)
 	if(attacking_drone.combat_mode)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return ..()
@@ -139,8 +139,7 @@
 /mob/living/basic/ex_act(severity, target, origin)
 	. = ..()
 	if(!. || QDELETED(src))
-		return FALSE
-
+		return
 	var/bomb_armor = getarmor(null, BOMB)
 	switch(severity)
 		if (EXPLODE_DEVASTATE)
@@ -148,8 +147,8 @@
 				apply_damage(500, damagetype = BRUTE)
 			else
 				investigate_log("has been gibbed by an explosion.", INVESTIGATE_DEATHS)
-				gib(DROP_ALL_REMAINS)
-
+				gib()
+				return
 		if (EXPLODE_HEAVY)
 			var/bloss = 60
 			if(prob(bomb_armor))
@@ -162,12 +161,7 @@
 				bloss = bloss / 1.5
 			apply_damage(bloss, damagetype = BRUTE)
 
-	return TRUE
-
 /mob/living/basic/blob_act(obj/structure/blob/attacking_blob)
-	. = ..()
-	if (!.)
-		return
 	apply_damage(20, damagetype = BRUTE)
 
 /mob/living/basic/do_attack_animation(atom/attacked_atom, visual_effect_icon, used_item, no_effect)

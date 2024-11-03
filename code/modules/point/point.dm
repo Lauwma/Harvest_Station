@@ -77,7 +77,7 @@
 	abstract_move(get_turf(src))
 	pixel_x = old_loc.pixel_x
 	pixel_y = old_loc.pixel_y
-	SetInvisibility(set_invis)
+	invisibility = set_invis
 
 #undef POINT_TIME
 

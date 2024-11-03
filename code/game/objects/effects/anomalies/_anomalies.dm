@@ -41,7 +41,10 @@
 		aSignal.code = rand(1,100)
 		aSignal.anomaly_type = type
 
-		aSignal.set_frequency(sanitize_frequency(rand(MIN_FREE_FREQ, MAX_FREE_FREQ), free = TRUE))
+		var/frequency = rand(MIN_FREE_FREQ, MAX_FREE_FREQ)
+		if(ISMULTIPLE(frequency, 2))//signaller frequencies are always uneven!
+			frequency++
+		aSignal.set_frequency(frequency)
 
 	if(new_lifespan)
 		lifespan = new_lifespan
@@ -71,7 +74,8 @@
 /obj/effect/anomaly/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(countdown)
-	QDEL_NULL(aSignal)
+	if(aSignal)
+		QDEL_NULL(aSignal)
 	return ..()
 
 /obj/effect/anomaly/proc/anomalyEffect(seconds_per_tick)
@@ -84,19 +88,13 @@
 /obj/effect/anomaly/ex_act(severity, target)
 	if(severity >= EXPLODE_DEVASTATE)
 		qdel(src)
-		return TRUE
-
-	return FALSE
 
 /obj/effect/anomaly/proc/anomalyNeutralize()
 	new /obj/effect/particle_effect/fluid/smoke/bad(loc)
 
 	if(drops_core)
-		if(isnull(aSignal))
-			stack_trace("An anomaly ([src]) exists that drops a core, yet has no core!")
-		else
-			aSignal.forceMove(drop_location())
-			aSignal = null
+		aSignal.forceMove(drop_location())
+		aSignal = null
 	// else, anomaly core gets deleted by qdel(src).
 
 	qdel(src)
@@ -112,7 +110,6 @@
 /obj/effect/anomaly/proc/stabilize(anchor = FALSE, has_core = TRUE)
 	immortal = TRUE
 	name = (has_core ? "stable " : "hollow ") + name
-	if(!has_core)
-		drops_core = FALSE
-		QDEL_NULL(aSignal)
+	aSignal = has_core ? aSignal : null
 	immobile = anchor
+

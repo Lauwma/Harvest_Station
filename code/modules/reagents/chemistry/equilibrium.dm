@@ -324,8 +324,8 @@
 	//keep limited
 	if(delta_chem_factor > step_target_vol)
 		delta_chem_factor = step_target_vol
-	else if (delta_chem_factor < CHEMICAL_QUANTISATION_LEVEL)
-		delta_chem_factor = CHEMICAL_QUANTISATION_LEVEL
+	else if (delta_chem_factor < CHEMICAL_VOLUME_MINIMUM)
+		delta_chem_factor = CHEMICAL_VOLUME_MINIMUM
 	//Normalise to multiproducts
 	delta_chem_factor /= product_ratio
 	//delta_chem_factor = round(delta_chem_factor, CHEMICAL_QUANTISATION_LEVEL) // Might not be needed - left here incase testmerge shows that it does. Remove before full commit.

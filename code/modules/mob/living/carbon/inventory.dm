@@ -49,73 +49,74 @@
 		legcuffed,
 	)
 
-/mob/living/carbon/proc/equip_in_one_of_slots(obj/item/equipping, list/slots, qdel_on_fail = TRUE, indirect_action = FALSE)
+/mob/living/carbon/proc/equip_in_one_of_slots(obj/item/I, list/slots, qdel_on_fail = 1)
 	for(var/slot in slots)
-		if(equip_to_slot_if_possible(equipping, slots[slot], disable_warning = TRUE, indirect_action = indirect_action))
+		if(equip_to_slot_if_possible(I, slots[slot], qdel_on_fail = 0, disable_warning = TRUE))
 			return slot
 	if(qdel_on_fail)
-		qdel(equipping)
+		qdel(I)
 	return null
 
 //This is an UNSAFE proc. Use mob_can_equip() before calling this one! Or rather use equip_to_slot_if_possible() or advanced_equip_to_slot_if_possible()
-/mob/living/carbon/equip_to_slot(obj/item/equipping, slot, initial = FALSE, redraw_mob = FALSE, indirect_action = FALSE)
+/mob/living/carbon/equip_to_slot(obj/item/I, slot, initial = FALSE, redraw_mob = FALSE)
 	if(!slot)
 		return
-	if(!istype(equipping))
+	if(!istype(I))
 		return
 
-	var/index = get_held_index_of_item(equipping)
+	var/index = get_held_index_of_item(I)
 	if(index)
 		held_items[index] = null
 
-	if(equipping.pulledby)
-		equipping.pulledby.stop_pulling()
+	if(I.pulledby)
+		I.pulledby.stop_pulling()
 
-	equipping.screen_loc = null
+	I.screen_loc = null
 	if(client)
-		client.screen -= equipping
+		client.screen -= I
 	if(observers?.len)
-		for(var/mob/dead/observe as anything in observers)
+		for(var/M in observers)
+			var/mob/dead/observe = M
 			if(observe.client)
-				observe.client.screen -= equipping
-	equipping.forceMove(src)
-	SET_PLANE_EXPLICIT(equipping, ABOVE_HUD_PLANE, src)
-	equipping.appearance_flags |= NO_CLIENT_COLOR
+				observe.client.screen -= I
+	I.forceMove(src)
+	SET_PLANE_EXPLICIT(I, ABOVE_HUD_PLANE, src)
+	I.appearance_flags |= NO_CLIENT_COLOR
 	var/not_handled = FALSE
 
 	switch(slot)
 		if(ITEM_SLOT_BACK)
 			if(back)
 				return
-			back = equipping
+			back = I
 			update_worn_back()
 		if(ITEM_SLOT_MASK)
 			if(wear_mask)
 				return
-			wear_mask = equipping
-			wear_mask_update(equipping, toggle_off = 0)
+			wear_mask = I
+			wear_mask_update(I, toggle_off = 0)
 		if(ITEM_SLOT_HEAD)
 			if(head)
 				return
-			head = equipping
-			SEND_SIGNAL(src, COMSIG_CARBON_EQUIP_HAT, equipping)
-			head_update(equipping)
+			head = I
+			SEND_SIGNAL(src, COMSIG_CARBON_EQUIP_HAT, I)
+			head_update(I)
 		if(ITEM_SLOT_NECK)
 			if(wear_neck)
 				return
-			wear_neck = equipping
-			update_worn_neck(equipping)
+			wear_neck = I
+			update_worn_neck(I)
 		if(ITEM_SLOT_HANDCUFFED)
-			set_handcuffed(equipping)
+			set_handcuffed(I)
 			update_handcuffed()
 		if(ITEM_SLOT_LEGCUFFED)
-			legcuffed = equipping
+			legcuffed = I
 			update_worn_legcuffs()
 		if(ITEM_SLOT_HANDS)
-			put_in_hands(equipping)
+			put_in_hands(I)
 			update_held_items()
 		if(ITEM_SLOT_BACKPACK)
-			if(!back || !back.atom_storage?.attempt_insert(equipping, src, override = TRUE, force = indirect_action ? STORAGE_SOFT_LOCKED : STORAGE_NOT_LOCKED))
+			if(!back || !back.atom_storage?.attempt_insert(I, src, override = TRUE))
 				not_handled = TRUE
 		else
 			not_handled = TRUE
@@ -124,13 +125,13 @@
 	//We cannot call it for items that have not been handled as they are not yet correctly
 	//in a slot (handled further down inheritance chain, probably living/carbon/human/equip_to_slot
 	if(!not_handled)
-		has_equipped(equipping, slot, initial)
+		has_equipped(I, slot, initial)
 
 	return not_handled
 
 /// This proc is called after an item has been successfully handled and equipped to a slot.
 /mob/living/carbon/proc/has_equipped(obj/item/item, slot, initial = FALSE)
-	return item.on_equipped(src, slot, initial)
+	return item.equipped(src, slot, initial)
 
 /mob/living/carbon/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE)
 	. = ..() //Sets the default return value to what the parent returns.
@@ -379,7 +380,7 @@
 				return
 
 		if(IS_DEAD_OR_INCAP(offered))
-			to_chat(src, span_warning("[offered.p_Theyre()] unable to take anything in [offered.p_their()] current state!"))
+			to_chat(src, span_warning("[offered.p_theyre(TRUE)] unable to take anything in [offered.p_their()] current state!"))
 			return
 
 		if(!CanReach(offered))

@@ -80,10 +80,7 @@
 	if(!istype(T))
 		return
 	//Simple way to keep plane conflicts away, could probably be upgraded to something less nuclear with 513
-	if(!open)
-		T.SetInvisibility(INVISIBILITY_MAXIMUM, id=type)
-	else
-		T.RemoveInvisibility(type)
+	T.invisibility = open ? 0 : INVISIBILITY_MAXIMUM
 
 /obj/structure/pitgrate/proc/toggle()
 	open = !open

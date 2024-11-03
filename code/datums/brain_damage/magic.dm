@@ -3,7 +3,6 @@
 //Unlike regular traumas this can affect the victim's body and surroundings
 
 /datum/brain_trauma/magic
-	abstract_type = /datum/brain_trauma/magic
 	resilience = TRAUMA_RESILIENCE_LOBOTOMY
 
 /datum/brain_trauma/magic/lumiphobia

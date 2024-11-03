@@ -12,10 +12,9 @@
 	if (!rift_behaviour)
 		CRASH("Forgot to specify rift behaviour for [src]")
 
-	if (!controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET))
-		return
+	var/mob/living/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	var/datum/action/cooldown/using_action = controller.blackboard[BB_CARP_RIFT]
-	if (!using_action?.IsAvailable())
+	if (QDELETED(target) || QDELETED(using_action) || !using_action.IsAvailable())
 		return
 
 	controller.queue_behavior(rift_behaviour, BB_CARP_RIFT, BB_BASIC_MOB_CURRENT_TARGET)
@@ -31,7 +30,7 @@
 	finish_planning = TRUE
 
 /datum/ai_planning_subtree/make_carp_rift/panic_teleport/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
-	if (controller.blackboard[BB_BASIC_MOB_STOP_FLEEING])
+	if (!controller.blackboard[BB_BASIC_MOB_FLEEING])
 		return
 	return ..()
 

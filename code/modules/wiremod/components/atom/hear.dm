@@ -41,7 +41,7 @@
 
 /obj/item/circuit_component/hear/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods, message_range)
 	if(speaker == parent?.shell)
-		return FALSE
+		return
 
 	message_port.set_output(raw_message)
 	if(message_language)
@@ -49,4 +49,3 @@
 	speaker_port.set_output(speaker)
 	speaker_name.set_output(speaker.GetVoice())
 	trigger_port.set_output(COMPONENT_SIGNAL)
-	return TRUE

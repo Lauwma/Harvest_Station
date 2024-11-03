@@ -1,19 +1,16 @@
 //Chaplain Suit Subtypes
 //If any new staple chaplain items get added, put them in these lists
 /obj/item/clothing/suit/chaplainsuit
-	allowed = null
+	allowed = list(/obj/item/storage/book/bible, /obj/item/nullrod, /obj/item/reagent_containers/cup/glass/bottle/holywater, /obj/item/storage/fancy/candle_box, /obj/item/flashlight/flare/candle, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman)
 	icon = 'icons/obj/clothing/suits/chaplain.dmi'
 	worn_icon = 'icons/mob/clothing/suits/chaplain.dmi'
-
-/obj/item/clothing/suit/chaplainsuit/Initialize(mapload)
-	. = ..()
-	allowed = GLOB.chaplain_suit_allowed
 
 /obj/item/clothing/suit/chaplainsuit/armor
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	cold_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	armor_type = /datum/armor/chaplainsuit_armor
+	clothing_flags = BLOCKS_SHOVE_KNOCKDOWN
 	strip_delay = 80
 	equip_delay_other = 60
 
@@ -27,11 +24,7 @@
 	wound = 20
 
 /obj/item/clothing/suit/hooded/chaplainsuit
-	allowed = null
-
-/obj/item/clothing/suit/hooded/chaplainsuit/Initialize(mapload)
-	. = ..()
-	allowed = GLOB.chaplain_suit_allowed
+	allowed = list(/obj/item/storage/book/bible, /obj/item/nullrod, /obj/item/reagent_containers/cup/glass/bottle/holywater, /obj/item/storage/fancy/candle_box, /obj/item/flashlight/flare/candle, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman)
 
 //Suits
 /obj/item/clothing/suit/chaplainsuit/holidaypriest
@@ -47,14 +40,6 @@
 	desc = "Maximum piety in this star system."
 	icon_state = "nun"
 	inhand_icon_state = "nun"
-	body_parts_covered = CHEST|GROIN|LEGS|ARMS|HANDS
-	flags_inv = HIDEJUMPSUIT
-
-/obj/item/clothing/suit/chaplainsuit/habit
-	name = "religious tunic"
-	desc = "No nunsene clothing."
-	icon_state = "habit"
-	alternate_worn_layer = GLOVES_LAYER // since the sleeves cover a part of the hands, this way it looks better while retaining glove overlay correctly.
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|HANDS
 	flags_inv = HIDEJUMPSUIT
 
@@ -149,7 +134,9 @@
 	desc = "It sounds like hissing steam, ticking cogs, gone silent, It looks like a dead machine, trying to tick with life."
 	icon_state = "clockwork_cuirass"
 	inhand_icon_state = null
+	allowed = list(/obj/item/storage/book/bible, /obj/item/nullrod, /obj/item/reagent_containers/cup/glass/bottle/holywater, /obj/item/storage/fancy/candle_box, /obj/item/flashlight/flare/candle, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman)
 	slowdown = 0
+	clothing_flags = NONE
 
 /obj/item/clothing/head/helmet/chaplain
 	name = "crusader helmet"
@@ -177,7 +164,9 @@
 	desc = "God wills it!"
 	icon_state = "knight_templar"
 	inhand_icon_state = null
+	allowed = list(/obj/item/storage/book/bible, /obj/item/nullrod, /obj/item/reagent_containers/cup/glass/bottle/holywater, /obj/item/storage/fancy/candle_box, /obj/item/flashlight/flare/candle, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman)
 	slowdown = 0
+	clothing_flags = NONE
 
 /obj/item/clothing/head/helmet/chaplain/cage
 	name = "cage"
@@ -253,12 +242,8 @@
 	worn_icon = 'icons/mob/clothing/suits/chaplain.dmi'
 	inhand_icon_state = null
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
-	allowed = null
+	allowed = list(/obj/item/storage/book/bible, /obj/item/nullrod, /obj/item/reagent_containers/cup/glass/bottle/holywater, /obj/item/storage/fancy/candle_box, /obj/item/flashlight/flare/candle, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman)
 	hoodtype = /obj/item/clothing/head/hooded/chaplain_hood
-
-/obj/item/clothing/suit/hooded/chaplain_hoodie/Initialize(mapload)
-	. = ..()
-	allowed = GLOB.chaplain_suit_allowed
 
 /obj/item/clothing/head/hooded/chaplain_hood
 	name = "follower hood"

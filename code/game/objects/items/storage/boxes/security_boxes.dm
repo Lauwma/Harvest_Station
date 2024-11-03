@@ -123,6 +123,18 @@
 	)
 	generate_items_inside(items_inside,src)
 
+/obj/item/storage/box/restrainimp
+	name = "boxed restraining implants"
+	desc = "Box of restraining implants. It has a picture of a clown getting yelled at."
+	illustration = "implant"
+
+/obj/item/storage/box/restrainimp/PopulateContents()
+	var/static/items_inside = list(
+		/obj/item/implantcase/restraining = 5,
+		/obj/item/implanter = 1,
+	)
+	generate_items_inside(items_inside,src)
+
 /obj/item/storage/box/prisoner
 	name = "box of prisoner IDs"
 	desc = "Take away their last shred of dignity, their name."
@@ -237,16 +249,6 @@
 /obj/item/storage/box/beanbag/PopulateContents()
 	for(var/i in 1 to 6)
 		new /obj/item/ammo_casing/shotgun/beanbag(src)
-
-/obj/item/storage/box/breacherslug
-	name = "box of breaching shotgun shells"
-	desc = "A box full of breaching slugs, designed for rapid entry, not very effective against anything else."
-	icon_state = "breacher_box"
-	illustration = null
-
-/obj/item/storage/box/breacherslug/PopulateContents()
-	for(var/i in 1 to 7)
-		new /obj/item/ammo_casing/shotgun/breacher(src)
 
 /obj/item/storage/box/emptysandbags
 	name = "box of empty sandbags"

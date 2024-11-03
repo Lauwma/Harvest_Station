@@ -7,4 +7,7 @@
 /datum/computer_file/program/maintenance
 	filetype = "MNT"
 	available_on_ntnet = FALSE
-	unique_copy = TRUE
+
+/datum/computer_file/program/maintenance/clone(rename = FALSE)
+	. = ..()
+	qdel(src)

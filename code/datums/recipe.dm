@@ -89,6 +89,7 @@
 	for (var/obj/O in (container.contents-result_obj))
 		if (O.reagents)
 			O.reagents.del_reagent(/datum/reagent/consumable/nutriment)
+			O.reagents.update_total()
 			O.reagents.trans_to(result_obj, O.reagents.total_volume)
 		qdel(O)
 	container.reagents.clear_reagents()

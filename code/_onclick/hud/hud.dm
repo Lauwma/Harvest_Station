@@ -71,9 +71,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	/// had with a proc call, especially on one of the hottest procs in the
 	/// game (MouseEntered).
 	var/screentips_enabled = SCREENTIP_PREFERENCE_ENABLED
-	/// Whether to use text or images for click hints.
-	/// Same behavior as `screentips_enabled`--very hot, updated when the preference is updated.
-	var/screentip_images = TRUE
 	/// If this client is being shown atmos debug overlays or not
 	var/atmos_debug_overlays = FALSE
 
@@ -98,11 +95,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	// subtypes can override this to force a specific UI style
 	var/ui_style
 
-	// List of weakrefs to objects that we add to our screen that we don't expect to DO anything
-	// They typically use * in their render target. They exist solely so we can reuse them,
-	// and avoid needing to make changes to all idk 300 consumers if we want to change the appearance
-	var/list/asset_refs_for_reuse = list()
-
 /datum/hud/New(mob/owner)
 	mymob = owner
 
@@ -125,7 +117,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/datum/preferences/preferences = owner?.client?.prefs
 	screentip_color = preferences?.read_preference(/datum/preference/color/screentip_color)
 	screentips_enabled = preferences?.read_preference(/datum/preference/choiced/enable_screentips)
-	screentip_images = preferences?.read_preference(/datum/preference/toggle/screentip_images)
 	screentip_text = new(null, src)
 	static_inventory += screentip_text
 
@@ -134,11 +125,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 		plane_master_controllers[controller_instance.name] = controller_instance
 
 	owner.overlay_fullscreen("see_through_darkness", /atom/movable/screen/fullscreen/see_through_darkness)
-
-	// Register onto the global spacelight appearances
-	// So they can be render targeted by anything in the world
-	for(var/obj/starlight_appearance/starlight as anything in GLOB.starlight_objects)
-		register_reuse(starlight)
 
 	RegisterSignal(SSmapping, COMSIG_PLANE_OFFSET_INCREASE, PROC_REF(on_plane_increase))
 	RegisterSignal(mymob, COMSIG_MOB_LOGIN, PROC_REF(client_refresh))
@@ -149,8 +135,8 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 /datum/hud/proc/client_refresh(datum/source)
 	SIGNAL_HANDLER
-	RegisterSignal(mymob.canon_client, COMSIG_CLIENT_SET_EYE, PROC_REF(on_eye_change))
-	on_eye_change(null, null, mymob.canon_client.eye)
+	RegisterSignal(mymob.client, COMSIG_CLIENT_SET_EYE, PROC_REF(on_eye_change))
+	on_eye_change(null, null, mymob.client.eye)
 
 /datum/hud/proc/clear_client(datum/source)
 	SIGNAL_HANDLER
@@ -222,13 +208,10 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	QDEL_NULL(module_store_icon)
 	QDEL_LIST(static_inventory)
 
-	// all already deleted by static inventory clear
 	inv_slots.Cut()
 	action_intent = null
 	zone_select = null
 	pull_icon = null
-	rest_icon = null
-	hand_slots.Cut()
 
 	QDEL_LIST(toggleable_inventory)
 	QDEL_LIST(hotkeybuttons)
@@ -255,8 +238,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 /datum/hud/proc/on_plane_increase(datum/source, old_max_offset, new_max_offset)
 	SIGNAL_HANDLER
-	for(var/i in old_max_offset + 1 to new_max_offset)
-		register_reuse(GLOB.starlight_objects[i + 1])
 	build_plane_groups(old_max_offset + 1, new_max_offset)
 
 /// Creates the required plane masters to fill out new z layers (because each "level" of multiz gets its own plane master set)
@@ -385,7 +366,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	reorganize_alerts(screenmob)
 	screenmob.reload_fullscreen()
 	update_parallax_pref(screenmob)
-	update_reuse(screenmob)
 
 	// ensure observers get an accurate and up-to-date view
 	if (!viewmob)
@@ -437,22 +417,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	ui_style = new_ui_style
 	build_hand_slots()
 
-/datum/hud/proc/register_reuse(atom/movable/screen/reuse)
-	asset_refs_for_reuse += WEAKREF(reuse)
-	mymob?.client?.screen += reuse
-
-/datum/hud/proc/unregister_reuse(atom/movable/screen/reuse)
-	asset_refs_for_reuse -= WEAKREF(reuse)
-	mymob?.client?.screen -= reuse
-
-/datum/hud/proc/update_reuse(mob/show_to)
-	for(var/datum/weakref/screen_ref as anything in asset_refs_for_reuse)
-		var/atom/movable/screen/reuse = screen_ref.resolve()
-		if(isnull(reuse))
-			asset_refs_for_reuse -= screen_ref
-			continue
-		show_to.client?.screen += reuse
-
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
 /mob/verb/button_pressed_F12()
 	set name = "F12"
@@ -476,13 +440,14 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	hand_slots = list()
 	var/atom/movable/screen/inventory/hand/hand_box
 	for(var/i in 1 to mymob.held_items.len)
-		hand_box = new /atom/movable/screen/inventory/hand(null, src)
+		hand_box = new /atom/movable/screen/inventory/hand()
 		hand_box.name = mymob.get_held_index_name(i)
 		hand_box.icon = ui_style
 		hand_box.icon_state = "hand_[mymob.held_index_to_dir(i)]"
 		hand_box.screen_loc = ui_hand_position(i)
 		hand_box.held_index = i
 		hand_slots["[i]"] = hand_box
+		hand_box.hud = src
 		static_inventory += hand_box
 		hand_box.update_appearance()
 
@@ -536,7 +501,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 			palette_actions.insert_action(button, palette_actions.index_of(relative_to))
 		if(SCRN_OBJ_FLOATING) // If we don't have it as a define, this is a screen_loc, and we should be floating
 			floating_actions += button
-			var/client/our_client = mymob.canon_client
+			var/client/our_client = mymob.client
 			if(!our_client)
 				position_action(button, button.linked_action.default_button_position)
 				return
@@ -577,7 +542,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 /// Ensures all of our buttons are properly within the bounds of our client's view, moves them if they're not
 /datum/hud/proc/view_audit_buttons()
-	var/our_view = mymob?.canon_client?.view
+	var/our_view = mymob?.client?.view
 	if(!our_view)
 		return
 	listed_actions.check_against_view()
@@ -693,7 +658,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	return "WEST[coord_col]:[coord_col_offset],NORTH[coord_row]:-[pixel_north_offset]"
 
 /datum/action_group/proc/check_against_view()
-	var/owner_view = owner?.mymob?.canon_client?.view
+	var/owner_view = owner?.mymob?.client?.view
 	if(!owner_view)
 		return
 	// Unlikey as it is, we may have been changed. Want to start from our target position and fail down

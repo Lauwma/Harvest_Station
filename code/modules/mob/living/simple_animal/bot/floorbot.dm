@@ -22,7 +22,6 @@
 	bot_type = FLOOR_BOT
 	hackables = "floor construction protocols"
 	path_image_color = "#FFA500"
-	possessed_message = "You are a floorbot! Repair the hull to the best of your ability!"
 
 	var/process_type //Determines what to do when process_scan() receives a target. See process_scan() for details.
 	var/targetdirection
@@ -101,13 +100,12 @@
 	else
 		..()
 
-/mob/living/simple_animal/bot/floorbot/emag_act(mob/user, obj/item/card/emag/emag_card)
-	. = ..()
+/mob/living/simple_animal/bot/floorbot/emag_act(mob/user)
+	..()
 	if(!(bot_cover_flags & BOT_COVER_EMAGGED))
 		return
-	balloon_alert(user, "safeties disabled")
-	audible_message(span_danger("[src] buzzes oddly!"))
-	return TRUE
+	if(user)
+		to_chat(user, span_danger("[src] buzzes and beeps."))
 
 ///mobs should use move_resist instead of anchored.
 /mob/living/simple_animal/bot/floorbot/proc/toggle_magnet(engage = TRUE, change_icon = TRUE)
@@ -249,9 +247,9 @@
 		if(!length(path))
 			if(!isturf(target))
 				var/turf/TL = get_turf(target)
-				path = get_path_to(src, TL, max_distance=30, access=access_card.GetAccess(), simulated_only = FALSE)
+				path = get_path_to(src, TL, max_distance=30, id=access_card,simulated_only = FALSE)
 			else
-				path = get_path_to(src, target, max_distance=30, access=access_card.GetAccess(), simulated_only = FALSE)
+				path = get_path_to(src, target, max_distance=30, id=access_card,simulated_only = FALSE)
 
 			if(!bot_move(target))
 				add_to_ignore(target)

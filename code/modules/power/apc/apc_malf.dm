@@ -69,7 +69,7 @@
 	if(forced)
 		occupier.forceMove(drop_location())
 		INVOKE_ASYNC(occupier, TYPE_PROC_REF(/mob/living, death))
-		occupier.gib(DROP_ALL_REMAINS)
+		occupier.gib()
 
 	if(!occupier.nuking) //Pinpointers go back to tracking the nuke disk, as long as the AI (somehow) isn't mid-nuking.
 		for(var/obj/item/pinpointer/nuke/disk_pinpointers in GLOB.pinpointer_list)
@@ -77,29 +77,26 @@
 			disk_pinpointers.alert = FALSE
 
 /obj/machinery/power/apc/transfer_ai(interaction, mob/user, mob/living/silicon/ai/AI, obj/item/aicard/card)
-	. = ..()
-	if(!.)
-		return
 	if(card.AI)
 		to_chat(user, span_warning("[card] is already occupied!"))
-		return FALSE
+		return
 	if(!occupier)
 		to_chat(user, span_warning("There's nothing in [src] to transfer!"))
-		return FALSE
+		return
 	if(!occupier.mind || !occupier.client)
 		to_chat(user, span_warning("[occupier] is either inactive or destroyed!"))
-		return FALSE
+		return
 	if(!occupier.parent.stat)
 		to_chat(user, span_warning("[occupier] is refusing all attempts at transfer!") )
-		return FALSE
+		return
 	if(transfer_in_progress)
 		to_chat(user, span_warning("There's already a transfer in progress!"))
-		return FALSE
+		return
 	if(interaction != AI_TRANS_TO_CARD || occupier.stat)
-		return FALSE
+		return
 	var/turf/user_turf = get_turf(user)
 	if(!user_turf)
-		return FALSE
+		return
 	transfer_in_progress = TRUE
 	user.visible_message(span_notice("[user] slots [card] into [src]..."), span_notice("Transfer process initiated. Sending request for AI approval..."))
 	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
@@ -108,21 +105,21 @@
 		to_chat(user, span_danger("AI denied transfer request. Process terminated."))
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 50, TRUE)
 		transfer_in_progress = FALSE
-		return FALSE
+		return
 	if(user.loc != user_turf)
 		to_chat(user, span_danger("Location changed. Process terminated."))
 		to_chat(occupier, span_warning("[user] moved away! Transfer canceled."))
 		transfer_in_progress = FALSE
-		return FALSE
+		return
 	to_chat(user, span_notice("AI accepted request. Transferring stored intelligence to [card]..."))
 	to_chat(occupier, span_notice("Transfer starting. You will be moved to [card] shortly."))
 	if(!do_after(user, 50, target = src))
 		to_chat(occupier, span_warning("[user] was interrupted! Transfer canceled."))
 		transfer_in_progress = FALSE
-		return FALSE
+		return
 	if(!occupier || !card)
 		transfer_in_progress = FALSE
-		return FALSE
+		return
 	user.visible_message(span_notice("[user] transfers [occupier] to [card]!"), span_notice("Transfer complete! [occupier] is now stored in [card]."))
 	to_chat(occupier, span_notice("Transfer complete! You've been stored in [user]'s [card.name]."))
 	occupier.forceMove(card)
@@ -131,4 +128,4 @@
 	occupier.cancel_camera()
 	occupier = null
 	transfer_in_progress = FALSE
-	return TRUE
+	return

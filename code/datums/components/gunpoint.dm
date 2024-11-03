@@ -172,27 +172,25 @@
 	qdel(src)
 
 ///If the shooter is hit by an attack, they have a 50% chance to flinch and fire. If it hit the arm holding the trigger, it's an 80% chance to fire instead
-/datum/component/gunpoint/proc/flinch(mob/living/source, damage_amount, damagetype, def_zone, blocked, wound_bonus, bare_wound_bonus, sharpness, attack_direction, attacking_item)
+/datum/component/gunpoint/proc/flinch(attacker, damage, damagetype, def_zone)
 	SIGNAL_HANDLER
 
-	if(!attack_direction) // No fliching from yourself
-		return
+	var/mob/living/shooter = parent
+	if(attacker == shooter)
+		return // somehow this wasn't checked for months but no one tried punching themselves to initiate the shot, amazing
 
 	var/flinch_chance = 50
-	var/gun_hand = (source.get_held_index_of_item(weapon) % 2) ? BODY_ZONE_L_ARM : BODY_ZONE_R_ARM
+	var/gun_hand = LEFT_HANDS
 
-	if(isbodypart(def_zone))
-		var/obj/item/bodypart/hitting = def_zone
-		def_zone = hitting.body_zone
+	if(shooter.held_items[RIGHT_HANDS] == weapon)
+		gun_hand = RIGHT_HANDS
 
-	if(def_zone == gun_hand)
+	if((def_zone == BODY_ZONE_L_ARM && gun_hand == LEFT_HANDS) || (def_zone == BODY_ZONE_R_ARM && gun_hand == RIGHT_HANDS))
 		flinch_chance = 80
 
 	if(prob(flinch_chance))
-		source.visible_message(
-			span_danger("[source] flinches!"),
-			span_danger("You flinch!"),
-		)
+		shooter.visible_message(span_danger("[shooter] flinches!"), \
+			span_danger("You flinch!"))
 		INVOKE_ASYNC(src, PROC_REF(trigger_reaction))
 
 #undef GUNPOINT_DELAY_STAGE_2

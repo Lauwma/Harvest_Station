@@ -50,14 +50,14 @@
 	var/obj/structure/ladder/L
 
 	if (!down)
-		L = locate() in GET_TURF_BELOW(T)
+		L = locate() in SSmapping.get_turf_below(T)
 		if (L)
 			if(crafted == L.crafted)
 				down = L
 				L.up = src  // Don't waste effort looping the other way
 				L.update_appearance()
 	if (!up)
-		L = locate() in GET_TURF_ABOVE(T)
+		L = locate() in SSmapping.get_turf_above(T)
 		if (L)
 			if(crafted == L.crafted)
 				up = L

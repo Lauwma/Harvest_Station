@@ -91,19 +91,18 @@
 	greyscale_colors = "#FAFAFA#000099#B347BC"
 	inserted_item = /obj/item/pen/fountain
 	starting_programs = list(
-		/datum/computer_file/program/borg_monitor,
-		/datum/computer_file/program/budgetorders,
 		/datum/computer_file/program/crew_manifest,
-		/datum/computer_file/program/robocontrol,
-		/datum/computer_file/program/science,
 		/datum/computer_file/program/status,
+		/datum/computer_file/program/science,
+		/datum/computer_file/program/robocontrol,
+		/datum/computer_file/program/budgetorders,
 		/datum/computer_file/program/signal_commander,
 	)
 
 /obj/item/modular_computer/pda/heads/quartermaster
 	name = "quartermaster PDA"
 	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
-	greyscale_colors = "#c4b787#18191e#8b4c31"
+	greyscale_colors = "#D6B328#6506CA#927444"
 	inserted_item = /obj/item/pen/survival
 	stored_paper = 20
 	starting_programs = list(
@@ -113,6 +112,7 @@
 		/datum/computer_file/program/robocontrol,
 		/datum/computer_file/program/budgetorders,
 		/datum/computer_file/program/shipping,
+		/datum/computer_file/program/robocontrol,
 	)
 
 /**
@@ -139,7 +139,7 @@
 
 /obj/item/modular_computer/pda/warden
 	name = "warden PDA"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_double
+	greyscale_config = /datum/greyscale_config/tablet/stripe_split
 	greyscale_colors = "#EA3232#0000CC#363636"
 	starting_programs = list(
 		/datum/computer_file/program/records/security,
@@ -156,8 +156,6 @@
 	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
 	greyscale_colors = "#D99A2E#69DBF3#E3DF3D"
 	starting_programs = list(
-		/datum/computer_file/program/alarm_monitor,
-		/datum/computer_file/program/atmosscan,
 		/datum/computer_file/program/supermatter_monitor,
 	)
 
@@ -166,9 +164,8 @@
 	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
 	greyscale_colors = "#EEDC43#00E5DA#727272"
 	starting_programs = list(
-		/datum/computer_file/program/alarm_monitor,
 		/datum/computer_file/program/atmosscan,
-		/datum/computer_file/program/supermatter_monitor,
+		/datum/computer_file/program/alarm_monitor,
 	)
 
 /**
@@ -181,23 +178,20 @@
 	greyscale_colors = "#FAFAFA#000099#B347BC"
 	starting_programs = list(
 		/datum/computer_file/program/atmosscan,
-		/datum/computer_file/program/science,
 		/datum/computer_file/program/signal_commander,
 	)
 
 /obj/item/modular_computer/pda/roboticist
 	name = "roboticist PDA"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_double
+	greyscale_config = /datum/greyscale_config/tablet/stripe_split
 	greyscale_colors = "#484848#0099CC#D94927"
 	starting_programs = list(
-		/datum/computer_file/program/science,
 		/datum/computer_file/program/robocontrol,
-		/datum/computer_file/program/borg_monitor,
 	)
 
 /obj/item/modular_computer/pda/geneticist
 	name = "geneticist PDA"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_double
+	greyscale_config = /datum/greyscale_config/tablet/stripe_split
 	greyscale_colors = "#FAFAFA#000099#0097CA"
 	starting_programs = list(
 		/datum/computer_file/program/records/medical,
@@ -218,8 +212,6 @@
 
 /obj/item/modular_computer/pda/medical/paramedic
 	name = "paramedic PDA"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_double
-	greyscale_colors = "#28334D#000099#3F96CC"
 	starting_programs = list(
 		/datum/computer_file/program/records/medical,
 		/datum/computer_file/program/radar/lifeline,
@@ -227,7 +219,7 @@
 
 /obj/item/modular_computer/pda/viro
 	name = "virology PDA"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_double
+	greyscale_config = /datum/greyscale_config/tablet/stripe_split
 	greyscale_colors = "#FAFAFA#355FAC#57C451"
 	starting_programs = list(
 		/datum/computer_file/program/records/medical,
@@ -239,22 +231,13 @@
 	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
 	greyscale_colors = "#FAFAFA#355FAC#EA6400"
 
-/obj/item/modular_computer/pda/coroner
-	name = "coroner PDA"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
-	greyscale_colors = "#FAFAFA#000099#1f2026"
-	starting_programs = list(
-		/datum/computer_file/program/records/medical,
-		/datum/computer_file/program/crew_manifest,
-	)
-
 /**
  * Supply
  */
 
 /obj/item/modular_computer/pda/cargo
 	name = "cargo technician PDA"
-	greyscale_colors = "#8b4c31#2c2e32"
+	greyscale_colors = "#D6B328#6506CA"
 	stored_paper = 20
 	starting_programs = list(
 		/datum/computer_file/program/shipping,
@@ -265,16 +248,8 @@
 /obj/item/modular_computer/pda/shaftminer
 	name = "shaft miner PDA"
 	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
-	greyscale_colors = "#927444#8b4c31#4c202d"
+	greyscale_colors = "#927444#D6B328#6C3BA1"
 	starting_programs = list(
-		/datum/computer_file/program/skill_tracker,
-	)
-
-/obj/item/modular_computer/pda/bitrunner
-	name = "bit runner PDA"
-	greyscale_colors = "#D6B328#6BC906"
-	starting_programs = list(
-		/datum/computer_file/program/arcade,
 		/datum/computer_file/program/skill_tracker,
 	)
 
@@ -332,22 +307,8 @@
 
 /obj/item/modular_computer/pda/clown/Initialize(mapload)
 	. = ..()
-	AddComponent(\
-		/datum/component/slippery,\
-		knockdown = 12 SECONDS,\
-		lube_flags = NO_SLIP_WHEN_WALKING,\
-		on_slip_callback = CALLBACK(src, PROC_REF(AfterSlip)),\
-		can_slip_callback = CALLBACK(src, PROC_REF(try_slip)),\
-		slot_whitelist = list(ITEM_SLOT_ID, ITEM_SLOT_BELT),\
-	)
+	AddComponent(/datum/component/slippery/clowning, 120, NO_SLIP_WHEN_WALKING, CALLBACK(src, PROC_REF(AfterSlip)), slot_whitelist = list(ITEM_SLOT_ID, ITEM_SLOT_BELT))
 	AddComponent(/datum/component/wearertargeting/sitcomlaughter, CALLBACK(src, PROC_REF(after_sitcom_laugh)))
-
-/// Return true if our wearer is in a position to slip someone
-/obj/item/modular_computer/pda/clown/proc/try_slip(mob/living/slipper, mob/living/slippee)
-	if(!istype(slipper.get_item_by_slot(ITEM_SLOT_FEET), /obj/item/clothing/shoes/clown_shoes))
-		to_chat(slipper,span_warning("[src] failed to slip anyone. Perhaps I shouldn't have abandoned my legacy..."))
-		return FALSE
-	return TRUE
 
 /obj/item/modular_computer/pda/clown/update_overlays()
 	. = ..()
@@ -377,7 +338,7 @@
 	. = ..()
 	for(var/datum/computer_file/program/messenger/msg in stored_files)
 		msg.mime_mode = TRUE
-		msg.alert_silenced = TRUE
+		msg.ringer_status = FALSE
 
 /obj/item/modular_computer/pda/curator
 	name = "curator PDA"
@@ -395,17 +356,7 @@
 /obj/item/modular_computer/pda/curator/Initialize(mapload)
 	. = ..()
 	for(var/datum/computer_file/program/messenger/msg in stored_files)
-		msg.alert_silenced = TRUE
-
-/obj/item/modular_computer/pda/psychologist
-	name = "psychologist PDA"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
-	greyscale_colors = "#333333#000099#3F96CC"
-	starting_programs = list(
-		/datum/computer_file/program/records/medical,
-		/datum/computer_file/program/crew_manifest,
-		/datum/computer_file/program/robocontrol,
-	)
+		msg.ringer_status = FALSE
 
 /**
  * No Department
@@ -440,13 +391,3 @@
 	greyscale_config = null
 	greyscale_colors = null
 	long_ranged = TRUE
-
-/obj/item/modular_computer/pda/clear/Initialize(mapload)
-	. = ..()
-	var/datum/computer_file/program/themeify/theme_app = locate() in stored_files
-	if(theme_app)
-		for(var/theme_key in GLOB.pda_name_to_theme - GLOB.default_pda_themes)
-			theme_app.imported_themes += theme_key
-
-/obj/item/modular_computer/pda/clear/get_messenger_ending()
-	return "Sent from my crystal PDA"

@@ -50,9 +50,12 @@
 /turf/open/floor/plating,
 /area/centcom/mafia)
 "al" = (
-/obj/item/shovel,
-/obj/item/pickaxe,
-/obj/structure/closet/secure_closet/miner/unlocked,
+/obj/structure/closet{
+	desc = "It's a storage unit. For mining stuff. Y'know.";
+	icon_state = "mining";
+	name = "miner equipment locker"
+	},
+/obj/item/clothing/under/rank/cargo/miner/lavaland,
 /turf/open/floor/fakebasalt,
 /area/centcom/mafia)
 "am" = (
@@ -60,6 +63,7 @@
 /turf/open/floor/fakebasalt,
 /area/centcom/mafia)
 "an" = (
+/obj/effect/landmark/mafia,
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 9
 	},
@@ -70,9 +74,12 @@
 /obj/effect/turf_decal/trimline/brown/filled/end{
 	dir = 4
 	},
-/obj/item/shovel,
-/obj/item/pickaxe,
-/obj/structure/closet/secure_closet/miner/unlocked,
+/obj/structure/closet{
+	desc = "It's a storage unit. For mining stuff. Y'know.";
+	icon_state = "mining";
+	name = "miner equipment locker"
+	},
+/obj/item/clothing/under/rank/cargo/miner/lavaland,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "ap" = (
@@ -91,9 +98,12 @@
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 9
 	},
-/obj/item/shovel,
-/obj/item/pickaxe,
-/obj/structure/closet/secure_closet/miner/unlocked,
+/obj/structure/closet{
+	desc = "It's a storage unit. For mining stuff. Y'know.";
+	icon_state = "mining";
+	name = "miner equipment locker"
+	},
+/obj/item/clothing/under/rank/cargo/miner/lavaland,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "as" = (
@@ -101,6 +111,20 @@
 	dir = 9
 	},
 /turf/open/floor/iron,
+/area/centcom/mafia)
+"at" = (
+/obj/effect/turf_decal/tile/red,
+/obj/effect/turf_decal/tile/red{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/mafia)
+"au" = (
+/obj/effect/turf_decal/tile/red{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/red,
+/turf/open/floor/iron/dark,
 /area/centcom/mafia)
 "av" = (
 /obj/mafia_game_board,
@@ -125,23 +149,31 @@
 /obj/effect/turf_decal/trimline/brown/filled/end{
 	dir = 4
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "az" = (
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 5
 	},
-/obj/item/shovel,
-/obj/item/pickaxe,
-/obj/structure/closet/secure_closet/miner/unlocked,
+/obj/structure/closet{
+	desc = "It's a storage unit. For mining stuff. Y'know.";
+	icon_state = "mining";
+	name = "miner equipment locker"
+	},
+/obj/item/clothing/under/rank/cargo/miner/lavaland,
+/turf/open/floor/iron,
+/area/centcom/mafia)
+"aA" = (
+/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 6
+	},
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aB" = (
 /obj/effect/turf_decal/trimline/brown/filled/end{
 	dir = 1
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aC" = (
@@ -177,25 +209,39 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/mafia)
+"aG" = (
+/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 10
+	},
+/turf/open/floor/iron,
+/area/centcom/mafia)
 "aH" = (
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 10
 	},
-/obj/item/shovel,
-/obj/item/pickaxe,
-/obj/structure/closet/secure_closet/miner/unlocked,
+/obj/structure/closet{
+	desc = "It's a storage unit. For mining stuff. Y'know.";
+	icon_state = "mining";
+	name = "miner equipment locker"
+	},
+/obj/item/clothing/under/rank/cargo/miner/lavaland,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aI" = (
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 6
 	},
-/obj/item/shovel,
-/obj/item/pickaxe,
-/obj/structure/closet/secure_closet/miner/unlocked,
+/obj/structure/closet{
+	desc = "It's a storage unit. For mining stuff. Y'know.";
+	icon_state = "mining";
+	name = "miner equipment locker"
+	},
+/obj/item/clothing/under/rank/cargo/miner/lavaland,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aJ" = (
+/obj/effect/landmark/mafia,
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 6
 	},
@@ -208,9 +254,19 @@
 /obj/effect/turf_decal/trimline/brown/filled/end{
 	dir = 8
 	},
-/obj/item/shovel,
-/obj/item/pickaxe,
-/obj/structure/closet/secure_closet/miner/unlocked,
+/obj/structure/closet{
+	desc = "It's a storage unit. For mining stuff. Y'know.";
+	icon_state = "mining";
+	name = "miner equipment locker"
+	},
+/obj/item/clothing/under/rank/cargo/miner/lavaland,
+/turf/open/floor/iron,
+/area/centcom/mafia)
+"aL" = (
+/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 5
+	},
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aM" = (
@@ -237,7 +293,13 @@
 /area/centcom/mafia)
 "aP" = (
 /obj/effect/turf_decal/trimline/brown/filled/end,
+/turf/open/floor/iron,
+/area/centcom/mafia)
+"aQ" = (
 /obj/effect/landmark/mafia,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 9
+	},
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aR" = (
@@ -250,7 +312,6 @@
 /obj/effect/turf_decal/trimline/brown/filled/end{
 	dir = 8
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aT" = (
@@ -272,6 +333,24 @@
 	dir = 6
 	},
 /turf/open/floor/iron,
+/area/centcom/mafia)
+"aW" = (
+/obj/effect/turf_decal/tile/red{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/mafia)
+"aX" = (
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
 /area/centcom/mafia)
 "aY" = (
 /turf/closed/indestructible/reinforced,
@@ -447,11 +526,11 @@ aY
 ar
 aM
 ap
-aq
+am
 aq
 ap
 aw
-aV
+aA
 ap
 aq
 al
@@ -469,7 +548,7 @@ ac
 ad
 ad
 aY
-aF
+aL
 aN
 aY
 aY
@@ -479,7 +558,7 @@ ax
 aY
 aY
 aq
-aq
+am
 aY
 ad
 ad
@@ -498,11 +577,11 @@ ap
 aO
 aP
 ap
-am
+aq
 ap
 ay
 ap
-am
+aq
 aq
 ap
 aY
@@ -543,10 +622,10 @@ aY
 ac
 ad
 aj
-aq
-aq
-aq
 am
+aq
+aq
+aq
 ap
 aq
 aZ
@@ -602,10 +681,10 @@ aq
 ab
 aq
 ap
+aq
+aq
+aq
 am
-aq
-aq
-aq
 aj
 ad
 ac
@@ -646,11 +725,11 @@ aY
 aY
 ap
 aq
-am
+aq
 ap
 aS
 ap
-am
+aq
 ap
 aB
 aD
@@ -669,7 +748,7 @@ ac
 af
 ad
 aY
-aq
+am
 aq
 aY
 aY
@@ -679,7 +758,7 @@ aq
 aY
 aY
 aE
-aM
+aG
 aY
 ad
 ad
@@ -697,11 +776,11 @@ aY
 al
 aq
 ap
-as
+aQ
 aU
 ap
 aq
-aq
+am
 ap
 aF
 aI

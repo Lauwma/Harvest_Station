@@ -8,10 +8,6 @@
 "d" = (
 /turf/open/floor/plating,
 /area/centcom/mafia)
-"e" = (
-/obj/effect/landmark/mafia,
-/turf/open/floor/iron/dark,
-/area/centcom/mafia)
 "f" = (
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/plating,
@@ -48,6 +44,10 @@
 /obj/structure/bed{
 	dir = 4
 	},
+/turf/open/floor/holofloor/wood,
+/area/centcom/mafia)
+"m" = (
+/obj/effect/landmark/mafia,
 /turf/open/floor/holofloor/wood,
 /area/centcom/mafia)
 "n" = (
@@ -133,19 +133,26 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/mafia)
+"B" = (
+/obj/effect/landmark/mafia,
+/obj/structure/lattice/catwalk,
+/turf/open/lava/plasma/mafia,
+/area/centcom/mafia)
 "C" = (
 /obj/mafia_game_board,
 /turf/open/floor/holofloor/snow,
 /area/centcom/mafia)
 "D" = (
 /obj/structure/closet/crate/science,
-/obj/item/clothing/suit/hooded/wintercoat/miner,
+/obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/shoes/winterboots,
 /turf/open/floor/holofloor/snow,
 /area/centcom/mafia)
 "E" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/closet/crate/critter,
 /obj/item/clothing/suit/hooded/wintercoat/miner,
+/obj/item/clothing/shoes/winterboots,
 /turf/open/lava/plasma/mafia,
 /area/centcom/mafia)
 "F" = (
@@ -175,15 +182,6 @@
 /area/centcom/mafia)
 "K" = (
 /turf/closed/indestructible/rock/snow,
-/area/centcom/mafia)
-"R" = (
-/obj/effect/landmark/mafia,
-/turf/open/floor/iron,
-/area/centcom/mafia)
-"W" = (
-/obj/structure/lattice/catwalk,
-/obj/effect/landmark/mafia,
-/turf/open/lava/plasma/mafia,
 /area/centcom/mafia)
 
 (1,1,1) = {"
@@ -346,11 +344,11 @@ s
 o
 F
 p
-F
+m
 q
 p
 t
-t
+y
 p
 z
 E
@@ -368,7 +366,7 @@ s
 d
 d
 s
-F
+m
 r
 s
 s
@@ -378,7 +376,7 @@ t
 p
 p
 z
-z
+B
 p
 w
 w
@@ -395,13 +393,13 @@ s
 s
 p
 r
-R
+r
 p
-e
+q
 p
-y
+t
 p
-W
+z
 z
 p
 p
@@ -442,19 +440,19 @@ b
 s
 d
 j
-F
+m
 F
 q
-e
+q
 x
 J
 t
 t
 p
+t
+t
+t
 y
-t
-t
-t
 p
 w
 t
@@ -492,19 +490,19 @@ b
 s
 d
 j
-F
+m
 F
 r
-R
+r
 A
 J
 t
 t
 p
+t
+t
+t
 y
-t
-t
-t
 p
 w
 w
@@ -545,13 +543,13 @@ s
 s
 p
 q
-e
+q
 p
-R
+r
 p
-y
+t
 p
-W
+z
 z
 p
 p
@@ -568,7 +566,7 @@ s
 f
 d
 s
-F
+m
 q
 s
 s
@@ -578,7 +576,7 @@ t
 p
 p
 z
-z
+B
 p
 w
 w
@@ -596,11 +594,11 @@ s
 G
 F
 p
-F
+m
 r
 p
 t
-t
+y
 p
 z
 E

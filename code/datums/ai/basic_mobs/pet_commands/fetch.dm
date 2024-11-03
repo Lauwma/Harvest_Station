@@ -3,7 +3,7 @@
  * If we can't do that, add it to a list of ignored items.
  */
 /datum/ai_behavior/fetch_seek
-	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT|AI_BEHAVIOR_REQUIRE_REACH
+	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT
 
 /datum/ai_behavior/fetch_seek/setup(datum/ai_controller/controller, target_key, delivery_key)
 	. = ..()
@@ -21,8 +21,9 @@
 	if (QDELETED(fetch_thing))
 		finish_action(controller, FALSE, target_key, delivery_key)
 		return
+	var/mob/living/living_pawn = controller.pawn
 	// We can't pick this up
-	if (fetch_thing.anchored)
+	if (fetch_thing.anchored || !isturf(fetch_thing.loc) || !living_pawn.CanReach(fetch_thing))
 		finish_action(controller, FALSE, target_key, delivery_key)
 		return
 
@@ -43,7 +44,7 @@
  * The second half of fetching, deliver the item to a target.
  */
 /datum/ai_behavior/deliver_fetched_item
-	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT|AI_BEHAVIOR_REQUIRE_REACH
+	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT
 
 /datum/ai_behavior/deliver_fetched_item/setup(datum/ai_controller/controller, delivery_key, storage_key)
 	. = ..()
@@ -101,21 +102,17 @@
 /datum/ai_behavior/eat_fetched_snack/perform(seconds_per_tick, datum/ai_controller/controller, target_key, delivery_key)
 	. = ..()
 	var/obj/item/snack = controller.blackboard[target_key]
-	var/is_living_loc = isliving(snack.loc)
-	if(QDELETED(snack) || (!isturf(snack.loc) && !is_living_loc))
+	if(QDELETED(snack) || !isturf(snack.loc) || ishuman(snack.loc))
 		finish_action(controller, FALSE) // Where did it go?
-		return
 
 	var/mob/living/basic/basic_pawn = controller.pawn
-	if(is_living_loc)
-		if(SPT_PROB(10, seconds_per_tick))
-			basic_pawn.manual_emote("Stares at [snack.loc]'s [snack.name] intently.")
+	if(!in_range(basic_pawn, snack))
 		return
 
-	if(!basic_pawn.Adjacent(snack))
-		return
-
-	basic_pawn.melee_attack(snack) // snack attack!
+	if(isturf(snack.loc))
+		basic_pawn.melee_attack(snack) // snack attack!
+	else if(iscarbon(snack.loc) && SPT_PROB(10, seconds_per_tick))
+		basic_pawn.manual_emote("Stares at [snack.loc]'s [snack.name] intently.")
 
 	if(QDELETED(snack)) // we ate it!
 		finish_action(controller, TRUE, target_key, delivery_key)

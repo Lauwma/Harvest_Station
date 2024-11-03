@@ -16,35 +16,22 @@
 	var/mutable_appearance/plastic_overlay
 	var/directional = FALSE
 	var/aim_dir = NORTH
-	var/boom_sizes = list(0, 0, 3)
+	var/boom_sizes = list(0, 0, 4)
 	var/full_damage_on_mobs = FALSE
 	/// Minimum timer for c4 charges
 	var/minimum_timer = 10
 	/// Maximum timer for c4 charges
 	var/maximum_timer = 60000
 
-/obj/item/grenade/c4/apply_grenade_fantasy_bonuses(quality)
-	var/devIncrease = round(quality / 10)
-	var/heavyIncrease = round(quality / 5)
-	var/lightIncrease = round(quality / 2)
-	boom_sizes[1] = modify_fantasy_variable("devIncrease", boom_sizes[1], devIncrease)
-	boom_sizes[2] = modify_fantasy_variable("heavyIncrease", boom_sizes[2], heavyIncrease)
-	boom_sizes[3] = modify_fantasy_variable("lightIncrease", boom_sizes[3], lightIncrease)
-
-/obj/item/grenade/c4/remove_grenade_fantasy_bonuses(quality)
-	boom_sizes[1] = reset_fantasy_variable("devIncrease", boom_sizes[1])
-	boom_sizes[2] = reset_fantasy_variable("heavyIncrease", boom_sizes[2])
-	boom_sizes[3] = reset_fantasy_variable("lightIncrease", boom_sizes[3])
-
 /obj/item/grenade/c4/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/empprotection, EMP_PROTECT_WIRES)
 	plastic_overlay = mutable_appearance(icon, "[inhand_icon_state]2", HIGH_OBJ_LAYER)
-	set_wires(new /datum/wires/explosive/c4(src))
+	wires = new /datum/wires/explosive/c4(src)
 
 /obj/item/grenade/c4/Destroy()
 	qdel(wires)
-	set_wires(null)
+	wires = null
 	target = null
 	return ..()
 
@@ -161,7 +148,7 @@
 	user.visible_message(span_suicide("[user] activates [src] and holds it above [user.p_their()] head! It looks like [user.p_theyre()] going out with a bang!"))
 	shout_syndicate_crap(user)
 	explosion(user, heavy_impact_range = 2, explosion_cause = src) //Cheap explosion imitation because putting detonate() here causes runtimes
-	user.gib(DROP_BODYPARTS)
+	user.gib(1, 1)
 	qdel(src)
 
 // X4 is an upgraded directional variant of c4 which is relatively safe to be standing next to. And much less safe to be standing on the other side of.
@@ -175,4 +162,4 @@
 	inhand_icon_state = "plasticx4"
 	worn_icon_state = "x4"
 	directional = TRUE
-	boom_sizes = list(0, 2, 5)
+	boom_sizes = list(0, 3, 8)

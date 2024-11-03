@@ -54,8 +54,8 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	if(!multitool_check_buffer(user, I)) //make sure it has a data buffer
 		return
 	var/obj/item/multitool/M = I
-	M.set_buffer(src)
-	balloon_alert(user, "saved to multitool buffer")
+	M.buffer = src
+	to_chat(user, span_notice("You store linkage information in [I]'s buffer."))
 	return TRUE
 
 /obj/machinery/bsa/front
@@ -71,8 +71,8 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	if(!multitool_check_buffer(user, I)) //make sure it has a data buffer
 		return
 	var/obj/item/multitool/M = I
-	M.set_buffer(src)
-	balloon_alert(user, "saved to multitool buffer")
+	M.buffer = src
+	to_chat(user, span_notice("You store linkage information in [I]'s buffer."))
 	return TRUE
 
 /obj/machinery/bsa/middle
@@ -94,11 +94,11 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 		if(istype(M.buffer, /obj/machinery/bsa/back))
 			back_ref = WEAKREF(M.buffer)
 			to_chat(user, span_notice("You link [src] with [M.buffer]."))
-			M.set_buffer(null)
+			M.buffer = null
 		else if(istype(M.buffer, /obj/machinery/bsa/front))
 			front_ref = WEAKREF(M.buffer)
 			to_chat(user, span_notice("You link [src] with [M.buffer]."))
-			M.set_buffer(null)
+			M.buffer = null
 	else
 		to_chat(user, span_warning("[I]'s data buffer is empty!"))
 	return TRUE
@@ -147,7 +147,7 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 /obj/machinery/bsa/full
 	name = "Bluespace Artillery"
 	desc = "Long range bluespace artillery."
-	icon = 'icons/obj/machines/cannon.dmi'
+	icon = 'icons/obj/lavaland/cannon.dmi'
 	icon_state = "cannon_west"
 	var/static/mutable_appearance/top_layer
 	var/ex_power = 3
@@ -241,7 +241,6 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	point.Beam(target, icon_state = "bsa_beam", time = 5 SECONDS, maxdistance = world.maxx) //ZZZAP
 	new /obj/effect/temp_visual/bsa_splash(point, dir)
 
-	notify_ghosts("The Bluespace Artillery has been fired!", source = bullseye, header = "KABOOM!")
 	if(!blocker)
 		message_admins("[ADMIN_LOOKUPFLW(user)] has launched an artillery strike targeting [ADMIN_VERBOSEJMP(bullseye)].")
 		user.log_message("has launched an artillery strike targeting [AREACOORD(bullseye)].", LOG_GAME)
@@ -392,8 +391,6 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	return cannon
 /obj/machinery/computer/bsa_control/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
-		return FALSE
+		return
 	obj_flags |= EMAGGED
-	balloon_alert(user, "rigged to explode")
-	to_chat(user, span_warning("You emag [src] and hear the focusing crystal short out. You get the feeling it wouldn't be wise to stand near [src] when the BSA fires..."))
-	return TRUE
+	to_chat(user, span_warning("You emag [src] and hear the focusing crystal short out."))

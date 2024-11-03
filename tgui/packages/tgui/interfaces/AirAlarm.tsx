@@ -13,8 +13,6 @@ type AirAlarmData = {
   dangerLevel: 0 | 1 | 2;
   atmosAlarm: BooleanLike; // fix this
   fireAlarm: BooleanLike;
-  sensor: BooleanLike;
-  allowLinkChange: BooleanLike;
   envData: {
     name: string;
     value: string; // preformatted in backend, shorter code that way.
@@ -169,14 +167,7 @@ const AirAlarmControl = (props, context) => {
 const AirAlarmControlHome = (props, context) => {
   const { act, data } = useBackend<AirAlarmData>(context);
   const [screen, setScreen] = useLocalState<Screen>(context, 'screen', 'home');
-  const {
-    selectedModePath,
-    panicSiphonPath,
-    filteringPath,
-    atmosAlarm,
-    sensor,
-    allowLinkChange,
-  } = data;
+  const { selectedModePath, panicSiphonPath, filteringPath, atmosAlarm } = data;
   const isPanicSiphoning = selectedModePath === panicSiphonPath;
   return (
     <>
@@ -221,16 +212,6 @@ const AirAlarmControlHome = (props, context) => {
         content="Alarm Thresholds"
         onClick={() => setScreen('thresholds')}
       />
-      {!!sensor && !!allowLinkChange && (
-        <Box mt={1}>
-          <Button.Confirm
-            icon="link-slash"
-            content="Disconnect Sensor"
-            color="danger"
-            onClick={() => act('disconnect_sensor')}
-          />
-        </Box>
-      )}
     </>
   );
 };
@@ -383,16 +364,16 @@ const AirAlarmControlThresholds = (props, context) => {
         <Table.Row>
           <Table.Cell bold>Threshold</Table.Cell>
           <Table.Cell bold color="bad">
-            Danger Below
+            Minimum Hazard
           </Table.Cell>
           <Table.Cell bold color="average">
-            Warning Below
+            Minimum Warning
           </Table.Cell>
           <Table.Cell bold color="average">
-            Warning Above
+            Maximum Warning
           </Table.Cell>
           <Table.Cell bold color="bad">
-            Danger Above
+            Maximum Hazard
           </Table.Cell>
           <Table.Cell bold>Actions</Table.Cell>
         </Table.Row>

@@ -6,7 +6,7 @@
 #define PLAYER_NOT_READY 0
 #define PLAYER_READY_TO_PLAY 1
 
-//movement intent defines for the move_intent var
+//movement intent defines for the m_intent var
 #define MOVE_INTENT_WALK "walk"
 #define MOVE_INTENT_RUN "run"
 
@@ -42,36 +42,29 @@
 #define VENTCRAWLER_ALWAYS 2
 
 //Mob bio-types flags
-///The mob is organic, can heal from medical sutures.
 #define MOB_ORGANIC (1 << 0)
-///The mob is of a rocky make, most likely a golem. Iron within, iron without!
 #define MOB_MINERAL (1 << 1)
-///The mob is a synthetic lifeform, like station borgs.
 #define MOB_ROBOTIC (1 << 2)
-///The mob is an shambling undead corpse. Or a halloween species. Pick your poison.
 #define MOB_UNDEAD (1 << 3)
-///The mob is a human-sized human-like human-creature.
 #define MOB_HUMANOID (1 << 4)
-///The mob is a bug/insect/arachnid/some other kind of scuttly thing.
 #define MOB_BUG (1 << 5)
-///The mob is a wild animal. Domestication may apply.
 #define MOB_BEAST (1 << 6)
-///The mob is some kind of a creature that should be exempt from certain **fun** interactions for balance reasons, i.e. megafauna or a headslug.
-#define MOB_SPECIAL (1 << 7)
-///The mob is some kind of a scaly reptile creature
+#define MOB_EPIC (1 << 7) //megafauna
 #define MOB_REPTILE (1 << 8)
-///The mob is a spooky phantasm or an evil ghast of such nature.
 #define MOB_SPIRIT (1 << 9)
-///The mob is a plant-based species, benefitting from light but suffering from darkness and plantkillers.
 #define MOB_PLANT (1 << 10)
-///The mob is a goopy creature, probably coming from xenobiology.
-#define MOB_SLIME (1 << 11)
 
 //Lung respiration type flags
 #define RESPIRATION_OXYGEN (1 << 0)
 #define RESPIRATION_N2 (1 << 1)
 #define RESPIRATION_PLASMA (1 << 2)
-#define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human/bodyparts_greyscale.dmi'
+
+//Organ defines for carbon mobs
+#define ORGAN_ORGANIC 1
+#define ORGAN_ROBOTIC 2
+#define ORGAN_MINERAL 3 // Used for the plasmaman liver
+
+#define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/species/human/bodyparts_greyscale.dmi'
 #define DEFAULT_BODYPART_ICON_ROBOTIC 'icons/mob/augmentation/augments.dmi'
 
 #define MONKEY_BODYPART "monkey"
@@ -85,28 +78,23 @@
 #define BODYTYPE_ROBOTIC (1<<1)
 ///The limb fits the human mold. This is not meant to be literal, if the sprite "fits" on a human, it is "humanoid", regardless of origin.
 #define BODYTYPE_HUMANOID (1<<2)
-///The limb fits the monkey mold.
-#define BODYTYPE_MONKEY (1<<3)
 ///The limb is digitigrade.
-#define BODYTYPE_DIGITIGRADE (1<<4)
+#define BODYTYPE_DIGITIGRADE (1<<3)
+///The limb fits the monkey mold.
+#define BODYTYPE_MONKEY (1<<4)
 ///The limb is snouted.
 #define BODYTYPE_SNOUTED (1<<5)
 ///A placeholder bodytype for xeno larva, so their limbs cannot be attached to anything.
 #define BODYTYPE_LARVA_PLACEHOLDER (1<<6)
 ///The limb is from a xenomorph.
 #define BODYTYPE_ALIEN (1<<7)
-///The limb is from a golem
-#define BODYTYPE_GOLEM (1<<8)
-
-#define BODYTYPE_BIOSCRAMBLE_COMPATIBLE (BODYTYPE_HUMANOID | BODYTYPE_MONKEY | BODYTYPE_ALIEN)
-#define BODYTYPE_CAN_BE_BIOSCRAMBLED(bodytype) (!(bodytype & BODYTYPE_ROBOTIC) && (bodytype & BODYTYPE_BIOSCRAMBLE_COMPATIBLE))
 
 // Defines for Species IDs. Used to refer to the name of a species, for things like bodypart names or species preferences.
 #define SPECIES_ABDUCTOR "abductor"
 #define SPECIES_ANDROID "android"
 #define SPECIES_DULLAHAN "dullahan"
+#define SPECIES_DRONE "drone"
 #define SPECIES_ETHEREAL "ethereal"
-#define SPECIES_ETHEREAL_LUSTROUS "lustrous"
 #define SPECIES_FELINE "felinid"
 #define SPECIES_FLYPERSON "fly"
 #define SPECIES_HUMAN "human"
@@ -120,7 +108,6 @@
 #define SPECIES_NIGHTMARE "nightmare"
 #define SPECIES_MONKEY "monkey"
 #define SPECIES_MONKEY_FREAK "monkey_freak"
-#define SPECIES_MONKEY_HOLODECK "monkey_holodeck"
 #define SPECIES_MONKEY_HUMAN_LEGGED "monkey_human_legged"
 #define SPECIES_MOTH "moth"
 #define SPECIES_MUSHROOM "mush"
@@ -309,6 +296,14 @@
 #define ETHEREAL_CHARGE_OVERLOAD 2500
 #define ETHEREAL_CHARGE_DANGEROUS 3000
 
+//Charge levels for Droness
+#define DRONE_CHARGE_NONE 0
+#define DRONE_CHARGE_LOWPOWER 400
+#define DRONE_CHARGE_NORMAL 1000
+#define DRONE_CHARGE_ALMOSTFULL 1500
+#define DRONE_CHARGE_FULL 2000
+#define DRONE_CHARGE_OVERLOAD 2500
+#define DRONE_CHARGE_DANGEROUS 3000
 
 #define CRYSTALIZE_COOLDOWN_LENGTH (120 SECONDS)
 #define CRYSTALIZE_PRE_WAIT_TIME (40 SECONDS)
@@ -377,8 +372,6 @@
 #define GALOSHES_DONT_HELP (1<<3)
 /// Slip works even if you're already on the ground
 #define SLIP_WHEN_CRAWLING (1<<4)
-/// the mob won't slip if the turf has the TRAIT_TURF_IGNORE_SLIPPERY trait.
-#define SLIPPERY_TURF (1<<5)
 
 #define MAX_CHICKENS 50
 
@@ -394,14 +387,6 @@
 #define SHOCK_NOSTUN (1 << 3)
 /// No default message is sent from the shock
 #define SHOCK_SUPPRESS_MESSAGE (1 << 4)
-/// No skeleton animation if a human was shocked
-#define SHOCK_NO_HUMAN_ANIM (1 << 5)
-/// Ignores TRAIT_STUNIMMUNE
-#define SHOCK_IGNORE_IMMUNITY (1 << 6)
-/// Prevents the immediate stun, instead only gives the delay
-#define SHOCK_DELAY_STUN (1 << 7)
-/// Makes the paralyze into a knockdown
-#define SHOCK_KNOCKDOWN (1 << 8)
 
 #define INCORPOREAL_MOVE_BASIC 1 /// normal movement, see: [/mob/living/var/incorporeal_move]
 #define INCORPOREAL_MOVE_SHADOW 2 /// leaves a trail of shadows
@@ -444,7 +429,6 @@
 #define OFFSET_BACK "back"
 #define OFFSET_SUIT "suit"
 #define OFFSET_NECK "neck"
-#define OFFSET_HELD "held"
 
 //MINOR TWEAKS/MISC
 #define AGE_MIN 17 //youngest a character can be
@@ -459,6 +443,7 @@
 
 #define HUNGER_FACTOR 0.05 //factor at which mob nutrition decreases
 #define ETHEREAL_CHARGE_FACTOR 0.8 //factor at which ethereal's charge decreases per second
+#define DRONE_CHARGE_FACTOR 0.8 //factor at which ethereal's charge decreases per second
 /// How much nutrition eating clothes as moth gives and drains
 #define CLOTHING_NUTRITION_GAIN 15
 #define REAGENTS_METABOLISM 0.2 //How many units of reagent are consumed per second, by default.
@@ -479,6 +464,9 @@
 // AI Toggles
 #define AI_CAMERA_LUMINOSITY 5
 #define AI_VOX // Comment out if you don't want VOX to be enabled and have players download the voice sounds.
+
+// /obj/item/bodypart on_mob_life() retval flag
+#define BODYPART_LIFE_UPDATE_HEALTH (1<<0)
 
 #define MAX_REVIVE_FIRE_DAMAGE 180
 #define MAX_REVIVE_BRUTE_DAMAGE 180
@@ -501,23 +489,20 @@
 #define HUMAN_CARRY_SLOWDOWN 0.35
 
 //Flags that control what things can spawn species (whitelist)
-// These flags unlock the Lepton Violet shuttle, hardcoded in wabbajack()
+//Badmin magic mirror
+#define MIRROR_BADMIN (1<<0)
 //Standard magic mirror (wizard)
 #define MIRROR_MAGIC (1<<1)
 //Pride ruin mirror
 #define MIRROR_PRIDE (1<<2)
 //Race swap wizard event
 #define RACE_SWAP (1<<3)
-//Wabbacjack staff projectiles
-#define WABBAJACK (1<<4)
-
-// These flags do NOT unlock the Lepton Violet shuttle, hardcoded in wabbajack() - use for things like xenobio, admins, etc.
-//Badmin magic mirror
-#define MIRROR_BADMIN (1<<5)
 //ERT spawn template (avoid races that don't function without correct gear)
-#define ERT_SPAWN (1<<6)
+#define ERT_SPAWN (1<<4)
 //xenobio black crossbreed
-#define SLIME_EXTRACT (1<<7)
+#define SLIME_EXTRACT (1<<5)
+//Wabbacjack staff projectiles
+#define WABBAJACK (1<<6)
 
 // Randomization keys for calling wabbajack with.
 // Note the contents of these keys are important, as they're displayed to the player
@@ -592,14 +577,10 @@
 
 ///Squash flags. For squashable element
 
-/// Squashing will not occur if the mob is not lying down (bodyposition is LYING_DOWN)
+///Whether or not the squashing requires the squashed mob to be lying down
 #define SQUASHED_SHOULD_BE_DOWN (1<<0)
-/// If present, outright gibs the squashed mob instead of just dealing damage
-#define SQUASHED_SHOULD_BE_GIBBED (1<<1)
-/// If squashing always passes if the mob is dead
-#define SQUASHED_ALWAYS_IF_DEAD (1<<2)
-/// Don't squash our mob if its not located in a turf
-#define SQUASHED_DONT_SQUASH_IN_CONTENTS (1<<3)
+///Whether or not to gib when the squashed mob is moved over
+#define SQUASHED_SHOULD_BE_GIBBED (1<<0)
 
 /*
  * Defines for "AI emotions", allowing the AI to expression emotions
@@ -622,26 +603,6 @@
 #define AI_EMOTION_DORFY "Dorfy"
 #define AI_EMOTION_BLUE_GLOW "Blue Glow"
 #define AI_EMOTION_RED_GLOW "Red Glow"
-
-///Defines for AI hologram preferences
-#define AI_HOLOGRAM_BEAR "Bear"
-#define AI_HOLOGRAM_CARP "Carp"
-#define AI_HOLOGRAM_CAT "Cat"
-#define AI_HOLOGRAM_CAT_2 "Cat Alternate"
-#define AI_HOLOGRAM_CHICKEN "Chicken"
-#define AI_HOLOGRAM_CORGI "Corgi"
-#define AI_HOLOGRAM_COW "Cow"
-#define AI_HOLOGRAM_CRAB "Crab"
-#define AI_HOLOGRAM_DEFAULT "Default"
-#define AI_HOLOGRAM_FACE "Floating Face"
-#define AI_HOLOGRAM_FOX "Fox"
-#define AI_HOLOGRAM_GOAT "Goat"
-#define AI_HOLOGRAM_NARSIE "Narsie"
-#define AI_HOLOGRAM_PARROT "Parrot"
-#define AI_HOLOGRAM_PUG "Pug"
-#define AI_HOLOGRAM_RATVAR "Ratvar"
-#define AI_HOLOGRAM_SPIDER "Spider"
-#define AI_HOLOGRAM_XENO "Xeno Queen"
 
 /// Icon state to use for ai displays that just turns them off
 #define AI_DISPLAY_DONT_GLOW "ai_off"
@@ -673,8 +634,7 @@
 #define HUMAN_HEIGHT_SHORT 6
 #define HUMAN_HEIGHT_MEDIUM 8
 #define HUMAN_HEIGHT_TALL 10
-#define HUMAN_HEIGHT_TALLER 12
-#define HUMAN_HEIGHT_TALLEST 14
+#define HUMAN_HEIGHT_TALLEST 12
 
 /// Assoc list of all heights, cast to strings, to """"tuples"""""
 /// The first """tuple""" index is the upper body offset
@@ -685,45 +645,42 @@ GLOBAL_LIST_INIT(human_heights_to_offsets, list(
 	"[HUMAN_HEIGHT_SHORT]" = list(-1, -1),
 	"[HUMAN_HEIGHT_MEDIUM]" = list(0, 0),
 	"[HUMAN_HEIGHT_TALL]" = list(1, 1),
-	"[HUMAN_HEIGHT_TALLER]" = list(2, 1),
-	"[HUMAN_HEIGHT_TALLEST]" = list(3, 2),
+	"[HUMAN_HEIGHT_TALLEST]" = list(2, 2),
 ))
 
 // Mob Overlays Indexes
 /// Total number of layers for mob overlays
 /// KEEP THIS UP-TO-DATE OR SHIT WILL BREAK
 /// Also consider updating layers_to_offset
-#define TOTAL_LAYERS 34
+#define TOTAL_LAYERS 33
 /// Mutations layer - Tk headglows, cold resistance glow, etc
-#define MUTATIONS_LAYER 34
+#define MUTATIONS_LAYER 33
 /// Mutantrace features (tail when looking south) that must appear behind the body parts
-#define BODY_BEHIND_LAYER 33
+#define BODY_BEHIND_LAYER 32
 /// Layer for bodyparts that should appear behind every other bodypart - Mostly, legs when facing WEST or EAST
-#define BODYPARTS_LOW_LAYER 32
+#define BODYPARTS_LOW_LAYER 31
 /// Layer for most bodyparts, appears above BODYPARTS_LOW_LAYER and below BODYPARTS_HIGH_LAYER
-#define BODYPARTS_LAYER 31
+#define BODYPARTS_LAYER 30
 /// Mutantrace features (snout, body markings) that must appear above the body parts
-#define BODY_ADJ_LAYER 30
+#define BODY_ADJ_LAYER 29
 /// Underwear, undershirts, socks, eyes, lips(makeup)
-#define BODY_LAYER 29
+#define BODY_LAYER 28
 /// Mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
-#define FRONT_MUTATIONS_LAYER 28
+#define FRONT_MUTATIONS_LAYER 27
 /// Damage indicators (cuts and burns)
-#define DAMAGE_LAYER 27
+#define DAMAGE_LAYER 26
 /// Jumpsuit clothing layer
-#define UNIFORM_LAYER 26
+#define UNIFORM_LAYER 25
 /// ID card layer
-#define ID_LAYER 25
+#define ID_LAYER 24
 /// ID card layer (might be deprecated)
-#define ID_CARD_LAYER 24
+#define ID_CARD_LAYER 23
 /// Layer for bodyparts that should appear above every other bodypart - Currently only used for hands
-#define BODYPARTS_HIGH_LAYER 23
+#define BODYPARTS_HIGH_LAYER 22
 /// Gloves layer
-#define GLOVES_LAYER 22
+#define GLOVES_LAYER 21
 /// Shoes layer
-#define SHOES_LAYER 21
-/// Layer for masks that are worn below ears and eyes (like Balaclavas) (layers below hair, use flagsinv=HIDEHAIR as needed)
-#define LOW_FACEMASK_LAYER 20
+#define SHOES_LAYER 20
 /// Ears layer (Spessmen have ears? Wow)
 #define EARS_LAYER 19
 /// Suit layer (armor, coats, etc.)
@@ -790,7 +747,6 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 	"[ID_CARD_LAYER]" = UPPER_BODY, // unused
 	"[ID_LAYER]" = UPPER_BODY,
 	"[FACEMASK_LAYER]" = UPPER_BODY,
-	"[LOW_FACEMASK_LAYER]" = UPPER_BODY,
 	// These two are cached, and have their appearance shared(?), so it's safer to just not touch it
 	"[MUTATIONS_LAYER]" = NO_MODIFY,
 	"[FRONT_MUTATIONS_LAYER]" = NO_MODIFY,
@@ -862,26 +818,10 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 /// Get the client from the var
 #define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (istype(I, /client) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
 
-// Various flags for carbon mob vomiting
-/// Flag which makes a message send about the vomiting.
-#define MOB_VOMIT_MESSAGE (1<<0)
-/// Flag which makes the mob get stunned upon vomiting.
-#define MOB_VOMIT_STUN (1<<1)
-/// Flag which makes the mob incur damage upon vomiting.
-#define MOB_VOMIT_HARM (1<<2)
-/// Flag which makes the mob vomit blood
-#define MOB_VOMIT_BLOOD (1<<3)
-/// Flag which will cause the mob to fall over when vomiting.
-#define MOB_VOMIT_KNOCKDOWN (1<<4)
-/// Flag which will make the proc skip certain checks when it comes to forcing a vomit.
-#define MOB_VOMIT_FORCE (1<<5)
-
-/// The default. Gives you might typically expect to happen when you vomit.
-#define VOMIT_CATEGORY_DEFAULT (MOB_VOMIT_MESSAGE | MOB_VOMIT_HARM | MOB_VOMIT_STUN)
-/// The vomit you've all come to know and love, but with a little extra "spice" (blood)
-#define VOMIT_CATEGORY_BLOOD (VOMIT_CATEGORY_DEFAULT | MOB_VOMIT_BLOOD)
-/// Another vomit variant that causes you to get knocked down instead of just only getting a stun. Standard otherwise.
-#define VOMIT_CATEGORY_KNOCKDOWN (VOMIT_CATEGORY_DEFAULT | MOB_VOMIT_KNOCKDOWN)
+/// The mob will vomit a green color
+#define VOMIT_TOXIC 1
+/// The mob will vomit a purple color
+#define VOMIT_PURPLE 2
 
 /// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
 #define NO_BUCKLE_LYING -1
@@ -974,6 +914,3 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 #define NO_OBSERVED_ACTIONS (1<<1)
 /// Flag which stops you from attacking while observed
 #define NO_OBSERVED_ATTACKS (1<<2)
-
-/// Types of bullets that mining mobs take full damage from
-#define MINING_MOB_PROJECTILE_VULNERABILITY list(BRUTE)

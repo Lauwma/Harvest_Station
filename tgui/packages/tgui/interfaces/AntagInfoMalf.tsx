@@ -4,7 +4,6 @@ import { GenericUplink, Item } from './Uplink/GenericUplink';
 import { BlockQuote, Button, Section, Stack, Tabs } from '../components';
 import { BooleanLike } from 'common/react';
 import { Window } from '../layouts';
-import { ObjectivePrintout, Objective, ReplaceObjectivesButton } from './common/Objectives';
 
 const allystyle = {
   fontWeight: 'bold',
@@ -21,6 +20,12 @@ const goalstyle = {
   fontWeight: 'bold',
 };
 
+type Objective = {
+  count: number;
+  name: string;
+  explanation: string;
+};
+
 type Info = {
   has_codewords: BooleanLike;
   phrases: string;
@@ -32,29 +37,35 @@ type Info = {
   processingTime: string;
   objectives: Objective[];
   categories: any[];
-  can_change_objective: BooleanLike;
+};
+
+const ObjectivePrintout = (props, context) => {
+  const { data } = useBackend<Info>(context);
+  const { objectives } = data;
+  return (
+    <Stack vertical>
+      <Stack.Item bold>Your prime objectives:</Stack.Item>
+      <Stack.Item>
+        {(!objectives && 'None!') ||
+          objectives.map((objective) => (
+            <Stack.Item key={objective.count}>
+              &#8805-{objective.count}: {objective.explanation}
+            </Stack.Item>
+          ))}
+      </Stack.Item>
+    </Stack>
+  );
 };
 
 const IntroductionSection = (props, context) => {
   const { act, data } = useBackend<Info>(context);
-  const { intro, objectives, can_change_objective } = data;
+  const { intro } = data;
   return (
     <Section fill title="Intro" scrollable>
       <Stack vertical fill>
         <Stack.Item fontSize="25px">{intro}</Stack.Item>
         <Stack.Item grow>
-          <ObjectivePrintout
-            objectives={objectives}
-            titleMessage="Your prime objectives:"
-            objectivePrefix="&#8805-"
-            objectiveFollowup={
-              <ReplaceObjectivesButton
-                can_change_objective={can_change_objective}
-                button_title={'Overwrite Objectives Data'}
-                button_colour={'green'}
-              />
-            }
-          />
+          <ObjectivePrintout />
         </Stack.Item>
       </Stack>
     </Section>

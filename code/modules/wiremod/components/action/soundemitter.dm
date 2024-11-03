@@ -84,10 +84,7 @@
 	else
 		ui_color = initial(ui_color)
 
-	if(!parent.shell)
-		return
-
-	if(TIMER_COOLDOWN_CHECK(parent.shell, COOLDOWN_CIRCUIT_SOUNDEMITTER))
+	if(TIMER_COOLDOWN_CHECK(parent, COOLDOWN_CIRCUIT_SOUNDEMITTER))
 		return
 
 	var/sound_to_play = options_map[sound_file.value]
@@ -102,4 +99,4 @@
 
 	playsound(src, sound_to_play, actual_volume, TRUE, frequency = actual_frequency)
 
-	TIMER_COOLDOWN_START(parent.shell, COOLDOWN_CIRCUIT_SOUNDEMITTER, sound_cooldown)
+	TIMER_COOLDOWN_START(parent, COOLDOWN_CIRCUIT_SOUNDEMITTER, sound_cooldown)

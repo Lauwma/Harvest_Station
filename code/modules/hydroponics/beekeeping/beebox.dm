@@ -11,6 +11,9 @@
 	return 0
 
 
+/mob/living/simple_animal/hostile/bee/bee_friendly()
+	return 1
+
 
 /mob/living/carbon/human/bee_friendly()
 	if(dna && dna.species && dna.species.id == SPECIES_PODPERSON) //bees pollinate plants, duh.
@@ -26,11 +29,11 @@
 /obj/structure/beebox
 	name = "apiary"
 	desc = "Dr. Miles Manners is just your average wasp-themed super hero by day, but by night he becomes DR. BEES!"
-	icon = 'icons/obj/service/hydroponics/equipment.dmi'
+	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "beebox"
 	anchored = TRUE
 	density = TRUE
-	var/mob/living/basic/bee/queen/queen_bee = null
+	var/mob/living/simple_animal/hostile/bee/queen/queen_bee = null
 	var/list/bees = list() //bees owned by the box, not those inside it
 	var/list/honeycombs = list()
 	var/list/honey_frames = list()
@@ -44,10 +47,9 @@
 
 /obj/structure/beebox/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	bees.Cut()
+	honeycombs.Cut()
 	queen_bee = null
-	QDEL_LIST(bees)
-	QDEL_LIST(honey_frames)
-	QDEL_LIST(honeycombs)
 	return ..()
 
 
@@ -75,7 +77,7 @@
 		honey_frames += HF
 
 	for(var/i in 1 to get_max_bees())
-		var/mob/living/basic/bee/B = new(src)
+		var/mob/living/simple_animal/hostile/bee/B = new(src)
 		bees += B
 		B.beehome = src
 		B.assign_reagent(R)
@@ -91,7 +93,7 @@
 		if(bee_resources >= BEE_RESOURCE_HONEYCOMB_COST)
 			if(honeycombs.len < get_max_honeycomb())
 				bee_resources = max(bee_resources-BEE_RESOURCE_HONEYCOMB_COST, 0)
-				var/obj/item/food/honeycomb/HC = new(src)
+				var/obj/item/reagent_containers/honeycomb/HC = new(src)
 				if(queen_bee.beegent)
 					HC.set_reagent(queen_bee.beegent.type)
 				honeycombs += HC
@@ -103,7 +105,7 @@
 			if((bee_resources >= BEE_RESOURCE_NEW_BEE_COST && prob(BEE_PROB_NEW_BEE)) || freebee)
 				if(!freebee)
 					bee_resources = max(bee_resources - BEE_RESOURCE_NEW_BEE_COST, 0)
-				var/mob/living/basic/bee/B = new(get_turf(src))
+				var/mob/living/simple_animal/hostile/bee/B = new(get_turf(src))
 				B.beehome = src
 				B.assign_reagent(queen_bee.beegent)
 				bees += B
@@ -175,7 +177,7 @@
 			visible_message(span_notice("[user] sets [queen_bee] down inside the apiary, making it their new home."))
 			var/relocated = 0
 			for(var/b in bees)
-				var/mob/living/basic/bee/B = b
+				var/mob/living/simple_animal/hostile/bee/B = b
 				if(B.reagent_incompatible(queen_bee))
 					bees -= B
 					B.beehome = null
@@ -196,14 +198,16 @@
 	. = ..()
 	if(!user.bee_friendly())
 		//Time to get stung!
-		var/bees_attack = FALSE
-		for(var/mob/living/basic/bee/worker as anything in bees) //everyone who's ever lived here now instantly hates you, suck it assistant!
-			if(worker.is_queen)
+		var/bees = FALSE
+		for(var/b in bees) //everyone who's ever lived here now instantly hates you, suck it assistant!
+			var/mob/living/simple_animal/hostile/bee/B = b
+			if(B.isqueen)
 				continue
-			if(worker.loc == src)
-				worker.forceMove(drop_location())
-			bees_attack = TRUE
-		if(bees_attack)
+			if(B.loc == src)
+				B.forceMove(drop_location())
+			B.GiveTarget(user)
+			bees = TRUE
+		if(bees)
 			visible_message(span_danger("[user] disturbs the bees!"))
 		else
 			visible_message(span_danger("[user] disturbs the [name] to no effect!"))
@@ -226,7 +230,7 @@
 					var/amtH = HF.honeycomb_capacity
 					var/fallen = 0
 					while(honeycombs.len && amtH) //let's pretend you always grab the frame with the most honeycomb on it
-						var/obj/item/food/honeycomb/HC = pick_n_take(honeycombs)
+						var/obj/item/reagent_containers/honeycomb/HC = pick_n_take(honeycombs)
 						if(HC)
 							HC.forceMove(drop_location())
 							amtH--
@@ -251,27 +255,16 @@
 
 /obj/structure/beebox/deconstruct(disassembled = TRUE)
 	new /obj/item/stack/sheet/mineral/wood (loc, 20)
-	for(var/mob/living/basic/bee/worker as anything in bees)
-		if(worker.loc == src)
-			worker.forceMove(get_turf(src))
-		bees -= worker
-		worker.beehome = null
-	for(var/obj/item/honey_frame/frame as anything in honey_frames)
-		if(frame.loc == src)
-			frame.forceMove(get_turf(src))
-		honey_frames -= frame
+	for(var/mob/living/simple_animal/hostile/bee/B in bees)
+		if(B.loc == src)
+			B.forceMove(drop_location())
+	for(var/obj/item/honey_frame/HF in honey_frames)
+		if(HF.loc == src)
+			HF.forceMove(drop_location())
 	qdel(src)
 
 /obj/structure/beebox/unwrenched
 	anchored = FALSE
-
-/obj/structure/beebox/proc/habitable(mob/living/basic/target)
-	if(!istype(target, /mob/living/basic/bee))
-		return FALSE
-	var/mob/living/basic/bee/citizen = target
-	if(citizen.reagent_incompatible(queen_bee) || bees.len >= get_max_bees())
-		return FALSE
-	return TRUE
 
 #undef BEE_PROB_NEW_BEE
 #undef BEE_RESOURCE_HONEYCOMB_COST

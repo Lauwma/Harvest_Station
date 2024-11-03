@@ -15,17 +15,10 @@
 /obj/item/borg/stun
 	name = "electrically-charged arm"
 	icon_state = "elecarm"
-	var/stamina_damage = 60 //Same as normal batong
 	/// Cost to use the stun arm
-	var/charge_cost = 200
-	var/cooldown_check = 0
-	/// cooldown between attacks
-	var/cooldown = 4 SECONDS // same as baton
+	var/charge_cost = 1000
 
 /obj/item/borg/stun/attack(mob/living/attacked_mob, mob/living/user)
-	if(cooldown_check > world.time)
-		user.balloon_alert(user, "still recharging!")
-		return
 	if(ishuman(attacked_mob))
 		var/mob/living/carbon/human/human = attacked_mob
 		if(human.check_shields(src, 0, "[attacked_mob]'s [name]", MELEE_ATTACK))
@@ -37,20 +30,14 @@
 			return
 
 	user.do_attack_animation(attacked_mob)
-	attacked_mob.adjustStaminaLoss(stamina_damage)
-	attacked_mob.set_confusion_if_lower(5 SECONDS)
-	attacked_mob.adjust_stutter(20 SECONDS)
-	attacked_mob.set_jitter_if_lower(5 SECONDS)
-	if(issilicon(attacked_mob))
-		attacked_mob.emp_act(EMP_HEAVY)
-		attacked_mob.visible_message(span_danger("[user] shocks [attacked_mob] with [src]!"), \
-					span_userdanger("[user] shocks you with [src]!"))
-	else
-		attacked_mob.visible_message(span_danger("[user] prods [attacked_mob] with [src]!"), \
+	attacked_mob.Paralyze(100)
+	attacked_mob.adjust_stutter(10 SECONDS)
+
+	attacked_mob.visible_message(span_danger("[user] prods [attacked_mob] with [src]!"), \
 					span_userdanger("[user] prods you with [src]!"))
 
 	playsound(loc, 'sound/weapons/egloves.ogg', 50, TRUE, -1)
-	cooldown_check = world.time + cooldown
+
 	log_combat(user, attacked_mob, "stunned", src, "(Combat mode: [user.combat_mode ? "On" : "Off"])")
 
 /obj/item/borg/cyborghug
@@ -142,9 +129,7 @@
 			if (!COOLDOWN_FINISHED(src, shock_cooldown))
 				return
 			if(ishuman(attacked_mob))
-				attacked_mob.electrocute_act(5, "[user]", flags = SHOCK_NOGLOVES | SHOCK_NOSTUN)
-				attacked_mob.dropItemToGround(attacked_mob.get_active_held_item())
-				attacked_mob.dropItemToGround(attacked_mob.get_inactive_held_item())
+				attacked_mob.electrocute_act(5, "[user]", flags = SHOCK_NOGLOVES)
 				user.visible_message(span_userdanger("[user] electrocutes [attacked_mob] with [user.p_their()] touch!"), \
 					span_danger("You electrocute [attacked_mob] with your touch!"))
 			else
@@ -313,13 +298,12 @@
 	/// Harm alarm cooldown
 	COOLDOWN_DECLARE(alarm_cooldown)
 
-/obj/item/harmalarm/emag_act(mob/user, obj/item/card/emag/emag_card)
+/obj/item/harmalarm/emag_act(mob/user)
 	obj_flags ^= EMAGGED
 	if(obj_flags & EMAGGED)
-		balloon_alert(user, "safeties shorted")
+		to_chat(user, "<font color='red'>You short out the safeties on [src]!</font>")
 	else
-		balloon_alert(user, "safeties reset")
-	return TRUE
+		to_chat(user, "<font color='red'>You reset the safeties on [src]!</font>")
 
 /obj/item/harmalarm/attack_self(mob/user)
 	var/safety = !(obj_flags & EMAGGED)

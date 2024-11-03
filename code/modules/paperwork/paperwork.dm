@@ -13,7 +13,7 @@
 /obj/item/paperwork
 	name = "paperwork documents"
 	desc = "A disorganized mess of documents, research results, and investigation findings."
-	icon = 'icons/obj/service/bureaucracy.dmi'
+	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "docs_part"
 	inhand_icon_state = "paper"
 	throwforce = 0
@@ -41,25 +41,20 @@
 
 /obj/item/paperwork/attackby(obj/item/attacking_item, mob/user, params)
 	. = ..()
-	if(.)
-		return
 
-	if(stamped || istype(attacking_item, /obj/item/stamp))
-		return
-
-	if(istype(attacking_item, stamp_requested))
-		add_stamp()
-		to_chat(user, span_notice("You skim through the papers until you find a field reading 'STAMP HERE', and complete the paperwork."))
-		return TRUE
-	var/datum/action/item_action/chameleon/change/stamp/stamp_action = locate() in attacking_item.actions
-	if(isnull(stamp_action))
-		to_chat(user, span_warning("You hunt through the papers for somewhere to use [attacking_item], but can't find anything."))
-		return TRUE
-
-	to_chat(user, span_notice("[attacking_item] morphs into the appropriate stamp, which you use to complete the paperwork."))
-	stamp_action.update_look(stamp_requested)
-	add_stamp()
-	return TRUE
+	if(!stamped)
+		if(istype(attacking_item, /obj/item/stamp))
+			if(istype(attacking_item, stamp_requested)) //chameleon stamp does not work, this is a CRITICAL issue
+				add_stamp()
+				to_chat(user, span_notice("You skim through the papers until you find a field reading 'STAMP HERE', and complete the paperwork."))
+			else
+				if(istype(attacking_item, /obj/item/stamp/chameleon))
+					var/obj/item/stamp/chameleon/chameleon_stamp = attacking_item
+					to_chat(user, span_notice("[chameleon_stamp] morphs into the appropriate stamp, which you use to complete the paperwork."))
+					chameleon_stamp.chameleon_action.update_item(stamp_requested)
+					add_stamp()
+				else
+					to_chat(user, span_warning("You hunt through the papers for somewhere to use the [attacking_item], but can't find anything."))
 
 /obj/item/paperwork/examine_more(mob/user)
 	. = ..()
@@ -100,7 +95,7 @@
  * Handled as a proc so that an object may be maked as "stamped" even when a stamp isn't present (like the photocopier)
  */
 /obj/item/paperwork/proc/add_stamp()
-	stamp_overlay = mutable_appearance('icons/obj/service/bureaucracy.dmi', stamp_icon)
+	stamp_overlay = mutable_appearance('icons/obj/bureaucracy.dmi', stamp_icon)
 	add_overlay(stamp_overlay)
 	stamped = TRUE
 
@@ -118,7 +113,7 @@
 //HEAD OF STAFF DOCUMENTS
 
 /obj/item/paperwork/cargo
-	stamp_requested = /obj/item/stamp/head/qm
+	stamp_requested = /obj/item/stamp/qm
 	stamp_job = /datum/job/quartermaster
 	stamp_icon = "paper_stamp-qm"
 
@@ -131,7 +126,7 @@
 	detailed_desc += span_info(" Despite how disorganized the documents are, they're all appropriately filled in. You should probably stamp this.")
 
 /obj/item/paperwork/security
-	stamp_requested = /obj/item/stamp/head/hos
+	stamp_requested = /obj/item/stamp/hos
 	stamp_job = /datum/job/head_of_security
 	stamp_icon = "paper_stamp-hos"
 
@@ -144,7 +139,7 @@
 	detailed_desc += span_info(" What a bunch of crap, the security team were clearly just doing what they had to. You should probably stamp this.")
 
 /obj/item/paperwork/service
-	stamp_requested = /obj/item/stamp/head/hop
+	stamp_requested = /obj/item/stamp/hop
 	stamp_job = /datum/job/head_of_personnel
 	stamp_icon = "paper_stamp-hop"
 
@@ -157,7 +152,7 @@
 	detailed_desc += span_info(" A MAXIMUM priority request like this is nothing to balk at. You should probably stamp this.")
 
 /obj/item/paperwork/medical
-	stamp_requested = /obj/item/stamp/head/cmo
+	stamp_requested = /obj/item/stamp/cmo
 	stamp_job = /datum/job/chief_medical_officer
 	stamp_icon = "paper_stamp-cmo"
 
@@ -171,7 +166,7 @@
 
 
 /obj/item/paperwork/engineering
-	stamp_requested = /obj/item/stamp/head/ce
+	stamp_requested = /obj/item/stamp/ce
 	stamp_job = /datum/job/chief_engineer
 	stamp_icon = "paper_stamp-ce"
 
@@ -184,7 +179,7 @@
 	detailed_desc += span_info(" Damn, that's impressive stuff. You should probably stamp this.")
 
 /obj/item/paperwork/research
-	stamp_requested = /obj/item/stamp/head/rd
+	stamp_requested = /obj/item/stamp/rd
 	stamp_job = /datum/job/research_director
 	stamp_icon = "paper_stamp-rd"
 
@@ -197,7 +192,7 @@
 	detailed_desc += span_info(" Regardless, they're still perfectly usable test results. You should probably stamp this.")
 
 /obj/item/paperwork/captain
-	stamp_requested = /obj/item/stamp/head/captain
+	stamp_requested = /obj/item/stamp/captain
 	stamp_job = /datum/job/captain
 	stamp_icon = "paper_stamp-cap"
 
@@ -237,7 +232,7 @@
 /obj/item/paperwork/photocopy/attackby(obj/item/attacking_item, mob/user, params)
 	if(istype(attacking_item, /obj/item/stamp/void) && !stamped && !voided)
 		to_chat(user, span_notice("You plant the [attacking_item] firmly onto the front of the documents."))
-		stamp_overlay = mutable_appearance('icons/obj/service/bureaucracy.dmi', "paper_stamp-void")
+		stamp_overlay = mutable_appearance('icons/obj/bureaucracy.dmi', "paper_stamp-void")
 		add_overlay(stamp_overlay)
 		voided = TRUE
 		stamped = TRUE //It won't get you any money, but it also can't LOSE you money now.

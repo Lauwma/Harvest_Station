@@ -31,20 +31,17 @@
 	src.use_alpha = use_alpha
 	src.use_anchor = use_anchor
 
+
 ///called when a tile has been covered or uncovered
 /datum/element/undertile/proc/hide(atom/movable/source, underfloor_accessibility)
 	SIGNAL_HANDLER
 
-	if(underfloor_accessibility < UNDERFLOOR_VISIBLE)
-		source.SetInvisibility(invisibility_level, id=type)
-	else
-		source.RemoveInvisibility(type)
+	source.invisibility = underfloor_accessibility < UNDERFLOOR_VISIBLE ? invisibility_level : 0
 
 	var/turf/T = get_turf(source)
 
 	if(underfloor_accessibility < UNDERFLOOR_INTERACTABLE)
 		SET_PLANE_IMPLICIT(source, FLOOR_PLANE) // We do this so that turfs that allow you to see what's underneath them don't have to be on the game plane (which causes ambient occlusion weirdness)
-		ADD_TRAIT(source, TRAIT_UNDERFLOOR, REF(src))
 
 		if(tile_overlay)
 			T.add_overlay(tile_overlay)
@@ -61,7 +58,6 @@
 
 	else
 		SET_PLANE_IMPLICIT(source, initial(source.plane))
-		REMOVE_TRAIT(source, TRAIT_UNDERFLOOR, REF(src))
 
 		if(invisibility_trait)
 			REMOVE_TRAIT(source, invisibility_trait, ELEMENT_TRAIT(type))
@@ -75,10 +71,11 @@
 		if(use_anchor)
 			source.set_anchored(FALSE)
 
+
 /datum/element/undertile/Detach(atom/movable/source, visibility_trait, invisibility_level = INVISIBILITY_MAXIMUM)
 	. = ..()
 
 	hide(source, UNDERFLOOR_INTERACTABLE)
-	source.RemoveInvisibility(type)
+
 
 #undef ALPHA_UNDERTILE

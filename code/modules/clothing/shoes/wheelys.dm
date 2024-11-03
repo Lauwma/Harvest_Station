@@ -1,13 +1,13 @@
 /obj/item/clothing/shoes/wheelys
 	name = "Wheely-Heels"
 	desc = "Uses patented retractable wheel technology. Never sacrifice speed for style - not that this provides much of either." //Thanks Fel
-	icon_state = "sneakers"
 	worn_icon_state = "wheelys"
-	inhand_icon_state = "sneakers_back"
 	greyscale_colors = "#545454#ffffff"
+	icon_state = "sneakers"
 	greyscale_config = /datum/greyscale_config/sneakers_wheelys
-	greyscale_config_inhand_left = /datum/greyscale_config/sneakers/inhand_left
-	greyscale_config_inhand_right = /datum/greyscale_config/sneakers/inhand_right
+	inhand_icon_state = "sneakers_back"
+	greyscale_config_inhand_left = /datum/greyscale_config/sneakers_inhand_left
+	greyscale_config_inhand_right = /datum/greyscale_config/sneakers_inhand_right
 	worn_icon = 'icons/mob/large-worn-icons/64x64/feet.dmi'
 	worn_x_dimension = 64
 	worn_y_dimension = 64
@@ -20,7 +20,7 @@
 
 /obj/item/clothing/shoes/wheelys/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/update_icon_updates_onmob)
+	AddElement(/datum/element/update_icon_updates_onmob, ITEM_SLOT_FEET)
 	wheels = new wheels(null)
 	wheels.link_shoes(src)
 

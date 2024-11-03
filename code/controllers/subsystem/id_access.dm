@@ -258,7 +258,6 @@ SUBSYSTEM_DEF(id_access)
 	desc_by_access["[ACCESS_MEDICAL]"] = "Medical"
 	desc_by_access["[ACCESS_GENETICS]"] = "Genetics Lab"
 	desc_by_access["[ACCESS_MORGUE]"] = "Morgue"
-	desc_by_access["[ACCESS_MORGUE_SECURE]"] = "Coroner"
 	desc_by_access["[ACCESS_SCIENCE]"] = "R&D Lab"
 	desc_by_access["[ACCESS_ORDNANCE]"] = "Ordnance Lab"
 	desc_by_access["[ACCESS_ORDNANCE_STORAGE]"] = "Ordnance Storage"
@@ -329,7 +328,6 @@ SUBSYSTEM_DEF(id_access)
 	desc_by_access["[ACCESS_CENT_SPECOPS]"] = "Code Black"
 	desc_by_access["[ACCESS_CENT_CAPTAIN]"] = "Code Gold"
 	desc_by_access["[ACCESS_CENT_BAR]"] = "Code Scotch"
-	desc_by_access["[ACCESS_BIT_DEN]"] = "Bitrunner Den"
 
 /**
  * Returns the access bitflags associated with any given access level.

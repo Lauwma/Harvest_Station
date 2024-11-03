@@ -26,7 +26,6 @@ const TYPE_ICONS = {
   [Food.Pineapple]: 'apple-alt',
   [Food.Raw]: 'drumstick-bite',
   [Food.Seafood]: 'fish',
-  [Food.Stone]: 'gem',
   [Food.Sugar]: 'candy-cane',
   [Food.Toxic]: 'biohazard',
   [Food.Vegetables]: 'carrot',
@@ -105,7 +104,7 @@ type Material = {
 
 type Recipe = {
   ref: string;
-  icon: string;
+  result: number;
   name: string;
   desc: string;
   category: string;
@@ -131,7 +130,6 @@ type Data = {
   // Dynamic
   busy: BooleanLike;
   mode: BooleanLike;
-  forced_mode: BooleanLike;
   display_compact: BooleanLike;
   display_craftable_only: BooleanLike;
   craftability: Record<string, BooleanLike>;
@@ -142,7 +140,7 @@ type Data = {
   categories: string[];
   material_occurences: Material[];
   foodtypes: string[];
-  complexity: number;
+  nutriments: number;
 };
 
 export const PersonalCrafting = (props, context) => {
@@ -150,7 +148,6 @@ export const PersonalCrafting = (props, context) => {
   const {
     mode,
     busy,
-    forced_mode,
     display_compact,
     display_craftable_only,
     craftability,
@@ -206,9 +203,7 @@ export const PersonalCrafting = (props, context) => {
               recipe.category === activeCategory)))
     ),
     sortBy<Recipe>((recipe) => [
-      activeCategory === 'Can Make'
-        ? 99 - Object.keys(recipe.reqs).length
-        : Number(craftability[recipe.ref]),
+      -Number(craftability[recipe.ref]),
       recipe.name.toLowerCase(),
     ]),
   ])(data.recipes);
@@ -421,56 +416,54 @@ export const PersonalCrafting = (props, context) => {
                     onClick={() => act('toggle_compact')}
                   />
                 </Stack.Item>
-                {!forced_mode && (
-                  <Stack.Item>
-                    <Stack textAlign="center">
-                      <Stack.Item grow>
-                        <Button.Checkbox
-                          fluid
-                          lineHeight={2}
-                          content="Craft"
-                          checked={mode === MODE.crafting}
-                          icon="hammer"
-                          style={{
-                            'border':
-                              '2px solid ' +
-                              (mode === MODE.crafting ? '#20b142' : '#333'),
-                          }}
-                          onClick={() => {
-                            if (mode === MODE.crafting) {
-                              return;
-                            }
-                            setTabMode(TABS.category);
-                            setCategory(DEFAULT_CAT_CRAFTING);
-                            act('toggle_mode');
-                          }}
-                        />
-                      </Stack.Item>
-                      <Stack.Item grow>
-                        <Button.Checkbox
-                          fluid
-                          lineHeight={2}
-                          content="Cook"
-                          checked={mode === MODE.cooking}
-                          icon="utensils"
-                          style={{
-                            'border':
-                              '2px solid ' +
-                              (mode === MODE.cooking ? '#20b142' : '#333'),
-                          }}
-                          onClick={() => {
-                            if (mode === MODE.cooking) {
-                              return;
-                            }
-                            setTabMode(TABS.category);
-                            setCategory(DEFAULT_CAT_COOKING);
-                            act('toggle_mode');
-                          }}
-                        />
-                      </Stack.Item>
-                    </Stack>
-                  </Stack.Item>
-                )}
+                <Stack.Item>
+                  <Stack textAlign="center">
+                    <Stack.Item grow>
+                      <Button.Checkbox
+                        fluid
+                        lineHeight={2}
+                        content="Craft"
+                        checked={mode === MODE.crafting}
+                        icon="hammer"
+                        style={{
+                          'border':
+                            '2px solid ' +
+                            (mode === MODE.crafting ? '#20b142' : '#333'),
+                        }}
+                        onClick={() => {
+                          if (mode === MODE.crafting) {
+                            return;
+                          }
+                          setTabMode(TABS.category);
+                          setCategory(DEFAULT_CAT_CRAFTING);
+                          act('toggle_mode');
+                        }}
+                      />
+                    </Stack.Item>
+                    <Stack.Item grow>
+                      <Button.Checkbox
+                        fluid
+                        lineHeight={2}
+                        content="Cook"
+                        checked={mode === MODE.cooking}
+                        icon="utensils"
+                        style={{
+                          'border':
+                            '2px solid ' +
+                            (mode === MODE.cooking ? '#20b142' : '#333'),
+                        }}
+                        onClick={() => {
+                          if (mode === MODE.cooking) {
+                            return;
+                          }
+                          setTabMode(TABS.category);
+                          setCategory(DEFAULT_CAT_COOKING);
+                          act('toggle_mode');
+                        }}
+                      />
+                    </Stack.Item>
+                  </Stack>
+                </Stack.Item>
               </Stack>
             </Section>
           </Stack.Item>
@@ -612,7 +605,12 @@ const RecipeContentCompact = ({ item, craftable, busy, mode }, context) => {
     <Section>
       <Stack my={-0.75}>
         <Stack.Item>
-          <Box className={item.icon} />
+          <Box
+            className={classes([
+              mode ? 'cooking32x32' : 'crafting32x32',
+              'a' + item.result,
+            ])}
+          />
         </Stack.Item>
         <Stack.Item grow>
           <Stack>
@@ -726,11 +724,16 @@ const RecipeContent = ({ item, craftable, busy, mode, diet }, context) => {
         <Stack.Item>
           <Box width={'64px'} height={'64px'} mr={1}>
             <Box
+              width={'32px'}
+              height={'32px'}
               style={{
-                'transform': 'scale(1.5)',
+                'transform': 'scale(2)',
               }}
               m={'16px'}
-              className={item.icon}
+              className={classes([
+                mode ? 'cooking32x32' : 'crafting32x32',
+                'a' + item.result,
+              ])}
             />
           </Box>
         </Stack.Item>
@@ -834,14 +837,14 @@ const RecipeContent = ({ item, craftable, busy, mode, diet }, context) => {
                   }
                 />
               )}
-              {!!item.complexity && (
+              {item.nutriments > 0 && (
                 <Box color={'gray'} width={'104px'} lineHeight={1.5} mt={1}>
-                  Complexity: {item.complexity}
+                  Nutrition: {item.nutriments}
+                  <Divider />
                 </Box>
               )}
               {item.foodtypes?.length > 0 && (
                 <Box color={'gray'} width={'104px'} lineHeight={1.5} mt={1}>
-                  <Divider />
                   {item.foodtypes.map((foodtype) => (
                     <FoodtypeContent
                       key={item.ref}
@@ -892,7 +895,7 @@ const ToolContent = ({ tool }) => {
         inline
         my={-1}
         mr={0.5}
-        className={classes(['crafting32x32', tool.replace(/ /g, '')])}
+        className={classes(['crafting32x32', tool])}
       />
       <Box inline verticalAlign="middle">
         {tool}

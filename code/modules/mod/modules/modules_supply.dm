@@ -118,7 +118,7 @@
 		your drill is surely the one that both pierces and creates the heavens."
 	icon_state = "drill"
 	module_type = MODULE_ACTIVE
-	complexity = 1
+	complexity = 2
 	use_power_cost = DEFAULT_CHARGE_DRAIN
 	incompatible_modules = list(/obj/item/mod/module/drill)
 	cooldown_time = 0.5 SECONDS
@@ -158,12 +158,6 @@
 	if(!ismineralturf(bumped_into) || !drain_power(use_power_cost))
 		return
 	var/turf/closed/mineral/mineral_turf = bumped_into
-	var/turf/closed/mineral/gibtonite/giberal_turf = mineral_turf
-	if(istype(giberal_turf) && giberal_turf.stage != GIBTONITE_UNSTRUCK)
-		playsound(bumper, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
-		to_chat(bumper, span_warning("[icon2html(src, bumper)] Unstable gibtonite ore deposit detected! Drills disabled."))
-		on_deactivation()
-		return
 	mineral_turf.gets_drilled(mod.wearer)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -539,7 +533,7 @@
 	. = ..()
 	if(!.)
 		return
-	var/obj/projectile/bomb = new /obj/projectile/bullet/mining_bomb(mod.wearer.loc)
+	var/obj/projectile/bomb = new /obj/projectile/bullet/reusable/mining_bomb(mod.wearer.loc)
 	bomb.preparePixelProjectile(target, mod.wearer)
 	bomb.firer = mod.wearer
 	playsound(src, 'sound/weapons/gun/general/grenade_launch.ogg', 75, TRUE)
@@ -559,7 +553,7 @@
 		return
 	on_deactivation()
 
-/obj/projectile/bullet/mining_bomb
+/obj/projectile/bullet/reusable/mining_bomb
 	name = "mining bomb"
 	desc = "A bomb. Why are you examining this?"
 	icon_state = "mine_bomb"
@@ -572,16 +566,13 @@
 	light_range = 1
 	light_power = 1
 	light_color = COLOR_LIGHT_ORANGE
-	embedding = null
+	ammo_type = /obj/structure/mining_bomb
 
-/obj/projectile/bullet/mining_bomb/Initialize(mapload)
-	. = ..()
-	AddElement(/datum/element/projectile_drop, /obj/structure/mining_bomb)
-	RegisterSignal(src, COMSIG_PROJECTILE_ON_SPAWN_DROP, PROC_REF(handle_drop))
-
-/obj/projectile/bullet/mining_bomb/proc/handle_drop(datum/source, obj/structure/mining_bomb/mining_bomb)
-	SIGNAL_HANDLER
-	addtimer(CALLBACK(mining_bomb, TYPE_PROC_REF(/obj/structure/mining_bomb, prime), firer), mining_bomb.prime_time)
+/obj/projectile/bullet/reusable/mining_bomb/handle_drop()
+	if(dropped)
+		return
+	dropped = TRUE
+	new ammo_type(get_turf(src), firer)
 
 /obj/structure/mining_bomb
 	name = "mining bomb"
@@ -608,6 +599,7 @@
 /obj/structure/mining_bomb/Initialize(mapload, atom/movable/firer)
 	. = ..()
 	generate_image()
+	addtimer(CALLBACK(src, PROC_REF(prime), firer), prime_time)
 
 /obj/structure/mining_bomb/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
 	if(same_z_layer)

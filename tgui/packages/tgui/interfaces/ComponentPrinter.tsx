@@ -12,17 +12,16 @@ import { MaterialAccessBar } from './Fabrication/MaterialAccessBar';
 type ComponentPrinterData = {
   designs: Record<string, Design>;
   materials: Material[];
-  SHEET_MATERIAL_AMOUNT: number;
 };
 
 export const ComponentPrinter = (props, context) => {
   const { act, data } = useBackend<ComponentPrinterData>(context);
-  const { materials, designs, SHEET_MATERIAL_AMOUNT } = data;
+  const { designs, materials } = data;
 
   // Reduce the material count array to a map of actually available materials.
   const availableMaterials: MaterialMap = {};
 
-  for (const material of materials) {
+  for (const material of data.materials) {
     availableMaterials[material.name] = material.amount;
   }
 
@@ -38,20 +37,13 @@ export const ComponentPrinter = (props, context) => {
                 design,
                 availableMaterials,
                 _onPrintDesign
-              ) => (
-                <Recipe
-                  design={design}
-                  available={availableMaterials}
-                  SHEET_MATERIAL_AMOUNT={SHEET_MATERIAL_AMOUNT}
-                />
-              )}
+              ) => <Recipe design={design} available={availableMaterials} />}
             />
           </Stack.Item>
           <Stack.Item>
             <Section>
               <MaterialAccessBar
-                availableMaterials={materials ?? []}
-                SHEET_MATERIAL_AMOUNT={SHEET_MATERIAL_AMOUNT}
+                availableMaterials={data.materials ?? []}
                 onEjectRequested={(material, amount) =>
                   act('remove_mat', { ref: material.ref, amount })
                 }
@@ -64,15 +56,9 @@ export const ComponentPrinter = (props, context) => {
   );
 };
 
-type RecipeProps = {
-  design: Design;
-  available: MaterialMap;
-  SHEET_MATERIAL_AMOUNT: number;
-};
-
-const Recipe = (props: RecipeProps, context) => {
-  const { act } = useBackend<ComponentPrinterData>(context);
-  const { design, available, SHEET_MATERIAL_AMOUNT } = props;
+const Recipe = (props: { design: Design; available: MaterialMap }, context) => {
+  const { act, data } = useBackend<ComponentPrinterData>(context);
+  const { design, available } = props;
 
   const canPrint = !Object.entries(design.cost).some(
     ([material, amount]) =>
@@ -96,7 +82,6 @@ const Recipe = (props: RecipeProps, context) => {
           <MaterialCostSequence
             design={design}
             amount={1}
-            SHEET_MATERIAL_AMOUNT={SHEET_MATERIAL_AMOUNT}
             available={available}
           />
         }>
@@ -105,9 +90,7 @@ const Recipe = (props: RecipeProps, context) => {
             'FabricatorRecipe__Title',
             !canPrint && 'FabricatorRecipe__Title--disabled',
           ])}
-          onClick={() =>
-            canPrint && act('print', { designId: design.id, amount: 1 })
-          }>
+          onClick={() => act('print', { designId: design.id, amount: 1 })}>
           <div className="FabricatorRecipe__Icon">
             <Box
               width={'32px'}

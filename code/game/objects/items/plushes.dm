@@ -108,10 +108,10 @@
 
 	return ..()
 
-/obj/item/toy/plush/Exited(atom/movable/gone, direction)
-	. = ..()
-	if(gone == grenade)
+/obj/item/toy/plush/handle_atom_del(atom/A)
+	if(A == grenade)
 		grenade = null
+	..()
 
 /obj/item/toy/plush/attack_self(mob/user)
 	. = ..()
@@ -148,6 +148,7 @@
 		else
 			to_chat(user, span_notice("You remove the grenade from [src]."))
 			user.put_in_hands(grenade)
+			grenade = null
 		return
 	if(isgrenade(I))
 		if(stuffed)
@@ -385,9 +386,7 @@
 /obj/item/toy/plush/carpplushie
 	name = "space carp plushie"
 	desc = "An adorable stuffed toy that resembles a space carp."
-	icon_state = "map_plushie_carp"
-	greyscale_config = /datum/greyscale_config/plush_carp
-	greyscale_colors = "#cc99ff#000000"
+	icon_state = "carpplush"
 	inhand_icon_state = "carp_plushie"
 	attack_verb_continuous = list("bites", "eats", "fin slaps")
 	attack_verb_simple = list("bite", "eat", "fin slap")
@@ -530,25 +529,20 @@
 	desc = "An adorable stuffed toy that resembles a green lizardperson. This one fills you with nostalgia and soul."
 	greyscale_colors = "#66ff33#000000"
 
-/obj/item/toy/plush/lizard_plushie/space
+/obj/item/toy/plush/space_lizard_plushie
 	name = "space lizard plushie"
 	desc = "An adorable stuffed toy that resembles a very determined spacefaring lizardperson. To infinity and beyond, little guy."
-	icon_state = "map_plushie_spacelizard"
-	greyscale_config = /datum/greyscale_config/plush_spacelizard
+	icon_state = "plushie_spacelizard"
+	inhand_icon_state = null
 	// space lizards can't hit people with their tail, it's stuck in their suit
 	attack_verb_continuous = list("claws", "hisses", "bops")
 	attack_verb_simple = list("claw", "hiss", "bops")
-
-/obj/item/toy/plush/lizard_plushie/space/green
-	desc = "An adorable stuffed toy that resembles a very determined spacefaring green lizardperson. To infinity and beyond, little guy. This one fills you with nostalgia and soul."
-	greyscale_colors = "#66ff33#000000"
+	squeak_override = list('sound/weapons/slash.ogg' = 1)
 
 /obj/item/toy/plush/snakeplushie
 	name = "snake plushie"
 	desc = "An adorable stuffed toy that resembles a snake. Not to be mistaken for the real thing."
-	icon_state = "map_plushie_snake"
-	greyscale_config = /datum/greyscale_config/plush_snake
-	greyscale_colors = "#99ff99#000000"
+	icon_state = "plushie_snake"
 	inhand_icon_state = null
 	attack_verb_continuous = list("bites", "hisses", "tail slaps")
 	attack_verb_simple = list("bite", "hiss", "tail slap")
@@ -575,16 +569,13 @@
 /obj/item/toy/plush/slimeplushie
 	name = "slime plushie"
 	desc = "An adorable stuffed toy that resembles a slime. It is practically just a hacky sack."
-	icon_state = "map_plushie_slime"
-	greyscale_config = /datum/greyscale_config/plush_slime
-	greyscale_colors = "#aaaaff#000000"
+	icon_state = "plushie_slime"
 	inhand_icon_state = null
 	attack_verb_continuous = list("blorbles", "slimes", "absorbs")
 	attack_verb_simple = list("blorble", "slime", "absorb")
 	squeak_override = list('sound/effects/blobattack.ogg' = 1)
 	gender = FEMALE //given all the jokes and drawings, I'm not sure the xenobiologists would make a slimeboy
 
-// This is supposed to be only in the bus ruin, don't spawn it elsewhere
 /obj/item/toy/plush/awakenedplushie
 	name = "awakened plushie"
 	desc = "An ancient plushie that has grown enlightened to the true nature of reality."
@@ -777,12 +768,14 @@
 		'sound/weapons/cablecuff.ogg' = 1,
 	)
 
-/obj/item/toy/plush/shark
-	name = "shark plushie"
-	desc = "A plushie depicting a somewhat cartoonish shark. The tag calls it a 'hákarl', noting that it was made by an obscure furniture manufacturer in old Scandinavia."
-	lefthand_file = 'icons/mob/inhands/items/plushes_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/items/plushes_righthand.dmi'
-	icon_state = "blahaj"
-	inhand_icon_state = "blahaj"
-	attack_verb_continuous = list("gnaws", "gnashes", "chews")
-	attack_verb_simple = list("gnaw", "gnash", "chew")
+/obj/item/toy/plush/greek_cucumber
+	name = "greek cucumber"
+	desc = "A plushie depicting a large cucumber with eyes, it seems that according to the manufacturer of the toy, the human race will look like in the future."
+	icon_state = "cucumber"
+	inhand_icon_state = null
+	attack_verb_continuous = list("squishes", "creaks", "crunches")
+	attack_verb_simple = list("squish", "creak", "crunch")
+	squeak_override = list(
+		'sound/effects/slosh.ogg' = 1,
+		'sound/effects/splat.ogg' = 2
+	)

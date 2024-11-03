@@ -75,10 +75,10 @@
 		// Multiz is shitcode welcome home
 		var/turf/current_turf = (direction & (UP|DOWN)) ? \
 			(direction & UP) ? \
-				(z_traits[Z_LEVEL_UP]) ? \
+				(z_traits["16"]) ? \
 					(get_step(locate(x, y, z + 1), NONE)) : \
 				(null) : \
-				(z_traits[Z_LEVEL_DOWN]) ? \
+				(z_traits["32"]) ? \
 					(get_step(locate(x, y, z - 1), NONE)) : \
 				(null) : \
 			(get_step(src, direction))
@@ -172,8 +172,6 @@
 	return adjacent_turfs
 
 /atom/proc/air_update_turf(update = FALSE, remove = FALSE)
-	if(!SSair.initialized) // I'm sorry for polutting user code, I'll do 10 hail giacom's
-		return
 	var/turf/local_turf = get_turf(loc)
 	if(!local_turf)
 		return
@@ -189,8 +187,6 @@
  * * remove - Are you removing an active turf (Read wall), or adding one
 */
 /turf/air_update_turf(update = FALSE, remove = FALSE)
-	if(!SSair.initialized) // I'm sorry for polutting user code, I'll do 10 hail giacom's
-		return
 	if(update)
 		immediate_calculate_adjacent_turfs()
 	if(remove)

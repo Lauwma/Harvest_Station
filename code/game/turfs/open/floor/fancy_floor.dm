@@ -74,9 +74,6 @@
 /turf/open/floor/wood/airless
 	initial_gas_mix = AIRLESS_ATMOS
 
-/turf/open/floor/wood/lavaland
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-
 /turf/open/floor/wood/tile
 	icon_state = "wood_tile"
 	floor_tile = /obj/item/stack/tile/wood/tile
@@ -136,7 +133,7 @@
 /turf/open/floor/grass
 	name = "grass patch"
 	desc = "You can't tell if this is real grass or just cheap plastic imitation."
-	icon_state = "grass"
+	icon_state = "grass0"
 	floor_tile = /obj/item/stack/tile/grass
 	flags_1 = NONE
 	bullet_bounce_sound = null
@@ -147,7 +144,7 @@
 	tiled_dirt = FALSE
 
 /turf/open/floor/grass/broken_states()
-	return list("[initial(icon_state)]_damaged")
+	return list("sand")
 
 /turf/open/floor/grass/Initialize(mapload)
 	. = ..()
@@ -164,7 +161,6 @@
 	icon_state = "sand"
 	broken = TRUE
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-	damaged_dmi = 'icons/turf/damaged.dmi'
 
 /turf/open/floor/grass/lavaland/spawniconchange()
 	return
@@ -172,7 +168,7 @@
 /turf/open/floor/grass/fairy //like grass but fae-er
 	name = "fairygrass patch"
 	desc = "Something about this grass makes you want to frolic. Or get high."
-	icon_state = "fairygrass"
+	icon_state = "fairygrass0"
 	floor_tile = /obj/item/stack/tile/fairygrass
 	light_range = 2
 	light_power = 0.80
@@ -185,7 +181,6 @@
 	gender = PLURAL
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
-	damaged_dmi = 'icons/turf/snow.dmi'
 	desc = "Looks cold."
 	icon_state = "snow"
 	flags_1 = NONE
@@ -203,7 +198,7 @@
 
 /turf/open/floor/fake_snow/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/diggable, /obj/item/stack/tile/mineral/snow, 1, worm_chance = 0)
+	AddElement(/datum/element/diggable, /obj/item/stack/tile/mineral/snow, 2, worm_chance = 0)
 
 /turf/open/floor/fake_snow/broken_states()
 	return list("snow_dug")
@@ -277,9 +272,6 @@
 	icon_state = "carpetsymbol"
 	smoothing_flags = NONE
 	floor_tile = /obj/item/stack/tile/carpet/symbol
-
-/turf/open/floor/carpet/lone/lavaland
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 
 /turf/open/floor/carpet/lone/star
 	icon_state = "carpetstar"
@@ -476,7 +468,7 @@
 /turf/open/floor/carpet/neon/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/decal, neon_icon || icon, neon_icon_state || base_icon_state, dir, null, null, alpha, neon_color, smoothing_junction)
-	AddElement(/datum/element/decal, neon_icon || icon, neon_icon_state || base_icon_state, dir, EMISSIVE_PLANE, null, emissive_alpha, GLOB.emissive_color, smoothing_junction)
+	AddElement(/datum/element/decal, neon_icon || icon, neon_icon_state || base_icon_state, dir, EMISSIVE_PLANE, null, emissive_alpha, EMISSIVE_COLOR, smoothing_junction)
 
 /turf/open/floor/carpet/neon/simple
 	name = "simple neon carpet"
@@ -831,7 +823,6 @@
 	floor_tile = /obj/item/stack/tile/fakespace
 	plane = PLANE_SPACE
 	tiled_dirt = FALSE
-	damaged_dmi = 'icons/turf/space.dmi'
 
 /turf/open/floor/fakespace/broken_states()
 	return list("damaged")

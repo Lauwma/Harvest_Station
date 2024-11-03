@@ -215,7 +215,7 @@
 	pixel_y = -4;
 	pixel_x = -7
 	},
-/obj/item/computer_disk/syndicate/camera_app{
+/obj/item/camera_bug{
 	pixel_x = -5;
 	pixel_y = 9
 	},
@@ -237,11 +237,6 @@
 	pixel_y = 5
 	},
 /turf/open/floor/mineral/plastitanium/red/airless,
-/area/ruin/space/unpowered)
-"pv" = (
-/obj/effect/turf_decal/bot_red,
-/obj/machinery/suit_storage_unit/nuke_med,
-/turf/open/floor/iron/dark/airless,
 /area/ruin/space/unpowered)
 "qL" = (
 /obj/machinery/door/window/brigdoor/left/directional/west{
@@ -276,6 +271,11 @@
 /obj/effect/turf_decal/syndicateemblem/middle/middle,
 /turf/open/floor/mineral/plastitanium/red/airless,
 /area/ruin/space/unpowered)
+"ur" = (
+/obj/structure/lattice,
+/obj/machinery/status_display/ai/directional/north,
+/turf/template_noop,
+/area/template_noop)
 "us" = (
 /obj/effect/spawner/random/engineering/tool,
 /obj/machinery/light/directional/west,
@@ -718,6 +718,12 @@
 "Yj" = (
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/unpowered)
+"YL" = (
+/obj/structure/rack,
+/obj/item/clothing/suit/space/syndicate/black/red,
+/obj/item/clothing/head/helmet/space/syndicate/black/red,
+/turf/open/floor/mineral/plastitanium/red/airless,
+/area/ruin/space/unpowered)
 "YN" = (
 /obj/structure/table,
 /obj/item/reagent_containers/pill/morphine{
@@ -930,7 +936,7 @@ la
 Da
 LP
 Nv
-pv
+Da
 Pq
 uE
 vK
@@ -1227,8 +1233,8 @@ la
 Pq
 zg
 yL
-KM
-KM
+YL
+Pq
 sL
 KM
 DM
@@ -1254,8 +1260,8 @@ la
 Pq
 Pq
 Pq
-KM
-la
+Pq
+Pq
 KM
 la
 DM
@@ -1282,8 +1288,8 @@ la
 la
 la
 la
-la
-KM
+Pq
+ur
 Jd
 KM
 KJ
@@ -1309,7 +1315,7 @@ la
 la
 la
 la
-la
+Pq
 KM
 KM
 KM

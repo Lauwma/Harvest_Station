@@ -6,8 +6,7 @@
 	wires = list(
 		WIRE_POWER,
 		WIRE_IDSCAN, WIRE_AI,
-		WIRE_PANIC, WIRE_ALARM,
-		WIRE_SPEAKER
+		WIRE_PANIC, WIRE_ALARM
 	)
 	add_duds(3)
 	..()
@@ -52,7 +51,7 @@
 				A.danger_level = AIR_ALARM_ALERT_NONE
 			A.update_appearance()
 
-/datum/wires/airalarm/on_cut(wire, mend, source)
+/datum/wires/airalarm/on_cut(wire, mend)
 	var/obj/machinery/airalarm/A = holder
 	switch(wire)
 		if(WIRE_POWER) // Short out forever.
@@ -71,5 +70,3 @@
 			if(A.alarm_manager.send_alarm(ALARM_ATMOS))
 				A.danger_level = AIR_ALARM_ALERT_HAZARD
 			A.update_appearance()
-		if(WIRE_SPEAKER)
-			A.speaker_enabled = mend

@@ -24,7 +24,7 @@
 /turf/closed/wall/rust,
 /area/ruin/space/has_grav/powered/aesthetic)
 "h" = (
-/obj/structure/flora/tree/palm,
+/obj/effect/overlay/palmtree_r,
 /turf/open/floor/holofloor/beach,
 /area/ruin/space/has_grav/powered/aesthetic)
 "i" = (
@@ -61,6 +61,10 @@
 /obj/structure/window/spawner/directional/east,
 /turf/open/floor/iron/vaporwave,
 /area/ruin/space/has_grav/powered/aesthetic)
+"p" = (
+/obj/effect/overlay/palmtree_l,
+/turf/open/floor/holofloor/beach,
+/area/ruin/space/has_grav/powered/aesthetic)
 "q" = (
 /turf/open/floor/holofloor/beach,
 /area/ruin/space/has_grav/powered/aesthetic)
@@ -80,14 +84,14 @@
 /turf/open/floor/holofloor/beach,
 /area/ruin/space/has_grav/powered/aesthetic)
 "u" = (
-/turf/open/floor/holofloor/beach/coast,
+/turf/open/floor/holofloor/beach/coast_t,
 /area/ruin/space/has_grav/powered/aesthetic)
 "v" = (
 /obj/item/statuebust,
 /turf/open/floor/iron/vaporwave,
 /area/ruin/space/has_grav/powered/aesthetic)
 "w" = (
-/mob/living/basic/butterfly,
+/mob/living/simple_animal/butterfly,
 /turf/open/floor/iron/vaporwave,
 /area/ruin/space/has_grav/powered/aesthetic)
 "x" = (
@@ -97,7 +101,7 @@
 /turf/open/misc/asteroid/airless,
 /area/ruin/space)
 "y" = (
-/turf/open/floor/holofloor/beach/water,
+/turf/open/floor/holofloor/beach/coast_b,
 /area/ruin/space/has_grav/powered/aesthetic)
 "z" = (
 /obj/structure/fans/tiny,
@@ -156,7 +160,7 @@
 	},
 /area/ruin/space)
 "H" = (
-/obj/structure/flora/tree/palm,
+/obj/effect/overlay/palmtree_l,
 /turf/open/misc/asteroid/airless,
 /area/ruin/space)
 "I" = (
@@ -181,6 +185,10 @@
 /turf/open/floor/iron/airless{
 	icon_state = "stairs-r"
 	},
+/area/ruin/space)
+"M" = (
+/obj/effect/overlay/palmtree_r,
+/turf/open/misc/asteroid/airless,
 /area/ruin/space)
 "O" = (
 /obj/structure/chair/comfy/black{
@@ -423,7 +431,7 @@ o
 o
 f
 G
-H
+M
 d
 d
 "}
@@ -433,9 +441,9 @@ a
 d
 d
 g
-h
+p
 t
-h
+p
 u
 y
 g
